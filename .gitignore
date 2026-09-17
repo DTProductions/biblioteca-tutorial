@@ -44,3 +44,6 @@ data/*.csv
 
 # Material de origem, nao versionado
 .docs/chat.md
+
+# Saida do ai-distiller
+.aid/
