@@ -105,6 +105,9 @@ filtra esse contexto. O nome do projeto continua sendo `biblioteca-tutorial`.
 ## Atividades da turma: 22 casos de uso
 
 Abra o [índice dos tutoriais](.docs/use-cases/index.html) no navegador.
+O [painel de andamento](.docs/use-cases/painel.html) mostra os 22 casos em ordem
+de implementação, com pré-requisitos imediatos e quatro estados editáveis.
+Cabe em 1280 × 800, salva neste navegador e permite exportar/importar o progresso.
 Cada documento inclui os pré-requisitos, código completo de backend e React,
 testes e o fluxo de entrega por PR. Os alunos trabalham em forks pessoais,
 em branches `uc01` a `uc22`, com destino a `saas-evolution/fase01`.
