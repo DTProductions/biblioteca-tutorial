@@ -22,9 +22,14 @@ export function getFieldAsPositiveInt(
   body: Record<string, unknown>,
   field: string,
 ): number {
-  const value = Number(body[field]);
+  const raw = body[field];
+  if ((typeof raw !== "number" && typeof raw !== "string") ||
+      (typeof raw === "string" && !/^\d+$/.test(raw))) {
+    throw new InvalidInput(`campo inválido: ${field}`);
+  }
+  const value = Number(raw);
 
-  if (!Number.isInteger(value) || value <= 0) {
+  if (!Number.isSafeInteger(value) || value <= 0) {
     throw new InvalidInput(`campo inválido: ${field}`);
   }
 
