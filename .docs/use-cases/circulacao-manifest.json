@@ -1,0 +1,336 @@
+{
+  "uc09": {
+    "backendPrerequisites": [],
+    "files": [
+      "backend/src/adapters/circulacaoHttp.ts",
+      "backend/src/modules/leitores/domain/Leitor.ts",
+      "backend/src/modules/leitores/domain/RepositorioLeitores.ts",
+      "backend/src/modules/leitores/domain/CadastrarLeitor.ts",
+      "backend/src/modules/leitores/infrastructure/schema.ts",
+      "backend/src/modules/leitores/infrastructure/LeitoresPostgres.ts",
+      "backend/src/use-cases/uc09.ts",
+      "backend/tests/uc09.test.ts",
+      "backend/tests/leitoresDouble.ts",
+      "backend/tests/leitoresApiFixture.ts"
+    ],
+    "criteria": [
+      "Nome, CPF, e-mail e telefone são obrigatórios.",
+      "O CPF deve ter dígitos verificadores válidos, ser armazenado com 11 números e ser único, com ou sem pontuação.",
+      "O cadastro retorna 201; entradas inválidas retornam 400 e CPF duplicado retorna 409. Nenhuma alteração parcial deve ser persistida."
+    ],
+    "steps": [
+      "Defina os tipos e as validações dos dados do leitor.",
+      "Crie a tabela leitores de forma idempotente, com uma restrição UNIQUE para o CPF.",
+      "Implemente a porta do repositório e seu adaptador PostgreSQL.",
+      "Implemente CadastrarLeitor, verificando a duplicidade do CPF antes da inserção.",
+      "Registre POST /leitores dentro da transação compartilhada.",
+      "Execute os testes dos campos obrigatórios, da validação e da duplicidade de CPF."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/leitores",
+        "body": {
+          "nome": "Ana Silva",
+          "cpf": "529.982.247-25",
+          "email": "ana@exemplo.com",
+          "telefone": "(27)99999-1234"
+        }
+      }
+    ]
+  },
+  "uc10": {
+    "backendPrerequisites": [
+      "uc09"
+    ],
+    "files": [
+      "backend/src/modules/leitores/domain/BuscarLeitores.ts",
+      "backend/src/use-cases/uc10.ts",
+      "backend/tests/uc10.test.ts"
+    ],
+    "criteria": [
+      "Uma busca sem resultados retorna 200 e um array vazio.",
+      "A busca aceita parte do nome, do e-mail ou do CPF, inclusive CPF com pontuação.",
+      "A consulta de um identificador inexistente retorna 404."
+    ],
+    "steps": [
+      "Reutilize a porta e o repositório definidos no UC09.",
+      "Crie BuscarLeitores com métodos para a busca e a consulta individual.",
+      "Registre as duas rotas GET em um novo arquivo, sem alterar o UC09.",
+      "Teste os filtros, a lista vazia e a consulta de um leitor inexistente."
+    ],
+    "apiExamples": [
+      {
+        "method": "GET",
+        "path": "/api/leitores?q=Ana"
+      },
+      {
+        "method": "GET",
+        "path": "/api/leitores/1"
+      }
+    ]
+  },
+  "uc11": {
+    "backendPrerequisites": [
+      "uc09"
+    ],
+    "files": [
+      "backend/src/modules/leitores/domain/AtualizarLeitor.ts",
+      "backend/src/use-cases/uc11.ts",
+      "backend/tests/uc11.test.ts"
+    ],
+    "criteria": [
+      "A edição exige os mesmos campos obrigatórios e as mesmas validações do cadastro.",
+      "O leitor pode manter seu próprio CPF.",
+      "Usar o CPF de outro leitor retorna 409 e preserva os dados anteriores.",
+      "Um leitor inexistente retorna 404."
+    ],
+    "steps": [
+      "Crie AtualizarLeitor, verificando primeiro se o leitor existe.",
+      "Valide os dados e procure CPF duplicado, excetuando o próprio identificador.",
+      "Registre PUT /leitores/:id usando emTransacao.",
+      "Teste uma atualização válida, a manutenção do próprio CPF, o conflito de CPF e a ausência do leitor."
+    ],
+    "apiExamples": [
+      {
+        "method": "PUT",
+        "path": "/api/leitores/1",
+        "body": {
+          "nome": "Ana Atualizada",
+          "cpf": "52998224725",
+          "email": "ana@exemplo.com",
+          "telefone": "27999991234"
+        }
+      }
+    ]
+  },
+  "uc12": {
+    "backendPrerequisites": [
+      "uc09"
+    ],
+    "files": [
+      "backend/src/modules/leitores/domain/HistoricoDoLeitor.ts",
+      "backend/src/modules/leitores/domain/ExcluirLeitor.ts",
+      "backend/src/adapters/LeitorHistoricoPostgres.ts",
+      "backend/src/use-cases/uc12.ts",
+      "backend/tests/uc12.test.ts"
+    ],
+    "criteria": [
+      "A exclusão de um leitor sem histórico retorna 204 e remove o registro fisicamente.",
+      "Qualquer reserva ou empréstimo impede a exclusão, inclusive reservas canceladas, expiradas ou atendidas e empréstimos devolvidos.",
+      "Um leitor inexistente retorna 404.",
+      "O adaptador deve funcionar antes da implementação da circulação, detectando a existência de suas tabelas com to_regclass."
+    ],
+    "steps": [
+      "Crie a porta HistoricoDoLeitor.",
+      "Implemente o adaptador que consulta os dois históricos, sem filtrar pela situação.",
+      "Crie ExcluirLeitor, com a verificação do histórico e a remoção na mesma transação.",
+      "Registre DELETE /leitores/:id e teste a exclusão permitida e a preservação do histórico."
+    ],
+    "apiExamples": [
+      {
+        "method": "DELETE",
+        "path": "/api/leitores/1"
+      }
+    ]
+  },
+  "uc17": {
+    "backendPrerequisites": [
+      "uc09",
+      "uc13"
+    ],
+    "files": [
+      "backend/src/modules/circulacao/domain/modelo.ts",
+      "backend/src/modules/circulacao/domain/BaseCirculacao.ts",
+      "backend/src/modules/circulacao/domain/ReservarExemplar.ts",
+      "backend/src/modules/circulacao/infrastructure/schema.ts",
+      "backend/src/modules/circulacao/infrastructure/CirculacaoPostgres.ts",
+      "backend/src/adapters/ConsultaCirculacaoPostgres.ts",
+      "backend/src/adapters/criarCirculacao.ts",
+      "backend/src/use-cases/uc17.ts",
+      "backend/tests/uc17.test.ts",
+      "backend/tests/circulacaoDouble.ts"
+    ],
+    "criteria": [
+      "A reserva começa sempre no dia corrente, no fuso America/Sao_Paulo, sem agendamento para uma data futura.",
+      "Somente um exemplar disponível e sem empréstimo aberto pode ser reservado.",
+      "O limite é de duas reservas ativas por leitor e uma por exemplar, inclusive em requisições simultâneas.",
+      "O último dia de retirada é a data da reserva mais seis dias. A reserva expira no início da data da reserva mais sete dias.",
+      "Reservas expiradas, canceladas ou atendidas deixam de contar no limite. A expiração é calculada sem uma tarefa agendada.",
+      "Leitor ou exemplar inexistente retorna 404."
+    ],
+    "steps": [
+      "Crie os tipos, as portas e as funções de datas civis, com um relógio injetável nos testes.",
+      "Crie BaseCirculacao para consultar vínculos e apresentar os dados dos resultados.",
+      "Crie as tabelas reservas e emprestimos e seus índices de forma idempotente.",
+      "Implemente o repositório do módulo e o adaptador de integração fora de modules.",
+      "Implemente ReservarExemplar com as verificações de limite e disponibilidade.",
+      "Registre POST /reservas em uma transação que use o advisory lock compartilhado.",
+      "Execute os testes dos limites, da janela de retirada, da expiração e dos vínculos."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/reservas",
+        "body": {
+          "leitorId": 1,
+          "exemplarId": 1
+        }
+      }
+    ]
+  },
+  "uc18": {
+    "backendPrerequisites": [
+      "uc17"
+    ],
+    "files": [
+      "backend/src/modules/circulacao/domain/CancelarReserva.ts",
+      "backend/src/use-cases/uc18.ts",
+      "backend/tests/uc18.test.ts"
+    ],
+    "criteria": [
+      "Somente uma reserva ativa pode ser cancelada.",
+      "O cancelamento libera o exemplar e uma vaga no limite de reservas do leitor.",
+      "Um cancelamento repetido ou uma reserva expirada retorna 409. Uma reserva inexistente retorna 404."
+    ],
+    "steps": [
+      "Crie CancelarReserva, verificando a situação efetiva da reserva na data corrente.",
+      "Altere somente a situação para cancelada, preservando o histórico.",
+      "Registre POST /reservas/:id/cancelamento em uma transação.",
+      "Teste a liberação da cópia e do limite, além da rejeição de cancelamento repetido ou de uma reserva expirada."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/reservas/1/cancelamento"
+      }
+    ]
+  },
+  "uc19": {
+    "backendPrerequisites": [
+      "uc17"
+    ],
+    "files": [
+      "backend/src/modules/circulacao/domain/RegistrarEmprestimo.ts",
+      "backend/src/use-cases/uc19.ts",
+      "backend/tests/uc19.test.ts"
+    ],
+    "criteria": [
+      "Um leitor pode ter no máximo três empréstimos não devolvidos, incluindo os atrasados.",
+      "O prazo de devolução é fixo: 14 dias corridos após o empréstimo.",
+      "O exemplar deve estar disponível ou reservado para o próprio leitor.",
+      "Uma reserva do próprio leitor é atendida na mesma transação do empréstimo.",
+      "Um exemplar nunca pode ter dois empréstimos abertos simultaneamente."
+    ],
+    "steps": [
+      "Crie RegistrarEmprestimo, verificando os vínculos, o limite do leitor e a disponibilidade do exemplar.",
+      "Atenda uma reserva do próprio leitor quando existir e recuse uma reserva de outro leitor.",
+      "Insira o empréstimo com a devolução prevista para a data corrente mais 14 dias.",
+      "Registre POST /emprestimos na transação compartilhada.",
+      "Teste o limite de três empréstimos, a inclusão dos atrasados nesse limite, as reservas próprias e alheias e a duplicidade de empréstimo do exemplar."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/emprestimos",
+        "body": {
+          "leitorId": 1,
+          "exemplarId": 1
+        }
+      }
+    ]
+  },
+  "uc20": {
+    "backendPrerequisites": [
+      "uc19"
+    ],
+    "files": [
+      "backend/src/modules/circulacao/domain/RegistrarDevolucao.ts",
+      "backend/src/use-cases/uc20.ts",
+      "backend/tests/uc20.test.ts"
+    ],
+    "criteria": [
+      "A devolução registra a data efetiva calculada pelo servidor e preserva o histórico.",
+      "O exemplar e uma vaga no limite de empréstimos do leitor são liberados.",
+      "Uma segunda devolução retorna 409. Um empréstimo inexistente retorna 404.",
+      "Os dias de atraso usam a data efetiva da devolução e não continuam aumentando após o encerramento."
+    ],
+    "steps": [
+      "Crie RegistrarDevolucao, buscando o empréstimo pelo identificador.",
+      "Recuse uma devolução repetida e registre a data corrente.",
+      "Registre POST /emprestimos/:id/devolucao na transação compartilhada.",
+      "Teste a repetição, a liberação do exemplar e do limite e o cálculo do atraso."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/emprestimos/1/devolucao"
+      }
+    ]
+  },
+  "uc21": {
+    "backendPrerequisites": [
+      "uc19"
+    ],
+    "files": [
+      "backend/src/modules/circulacao/domain/ConsultarEmprestimos.ts",
+      "backend/src/use-cases/uc21.ts",
+      "backend/tests/uc21.test.ts"
+    ],
+    "criteria": [
+      "A consulta inclui o histórico e permite filtrar por leitor, exemplar e situação.",
+      "A situação retornada é em_aberto até o prazo, atrasado depois do prazo e devolvido quando existe uma data de devolução.",
+      "Os resultados incluem nome e CPF do leitor, título do livro e número de registro do exemplar.",
+      "Uma situação desconhecida retorna 400. Um identificador inexistente retorna 404.",
+      "O filtro em_aberto inclui todos os empréstimos não devolvidos, inclusive atrasados. O filtro atrasado seleciona somente os vencidos."
+    ],
+    "steps": [
+      "Crie ConsultarEmprestimos, apresentando as datas, a situação e os dias de atraso.",
+      "Aplique os filtros de leitor e exemplar no repositório e o filtro de situação após a apresentação dos dados.",
+      "Registre as rotas GET da lista e da consulta individual.",
+      "Teste o dia do vencimento, o primeiro dia de atraso, o histórico de devoluções e os filtros."
+    ],
+    "apiExamples": [
+      {
+        "method": "GET",
+        "path": "/api/emprestimos?leitorId=1&situacao=atrasado"
+      },
+      {
+        "method": "GET",
+        "path": "/api/emprestimos/1"
+      }
+    ]
+  },
+  "uc22": {
+    "backendPrerequisites": [
+      "uc17"
+    ],
+    "files": [
+      "backend/src/modules/circulacao/domain/ConsultarReservas.ts",
+      "backend/src/use-cases/uc22.ts",
+      "backend/tests/uc22.test.ts"
+    ],
+    "criteria": [
+      "A consulta inclui reservas ativas, canceladas, atendidas e expiradas, sem apagar o histórico.",
+      "É possível filtrar por leitor, exemplar e situação.",
+      "A expiração é calculada na consulta, a partir do início do oitavo dia.",
+      "Uma situação desconhecida retorna 400. Um identificador inexistente retorna 404."
+    ],
+    "steps": [
+      "Crie ConsultarReservas, reutilizando a apresentação dos dados com expiração calculada.",
+      "Aplique os filtros de leitor, exemplar e situação.",
+      "Registre as rotas GET da lista e da consulta individual.",
+      "Teste o histórico, os filtros e a expiração usando um relógio controlado."
+    ],
+    "apiExamples": [
+      {
+        "method": "GET",
+        "path": "/api/reservas?leitorId=1&situacao=ativa"
+      },
+      {
+        "method": "GET",
+        "path": "/api/reservas/1"
+      }
+    ]
+  }
+}

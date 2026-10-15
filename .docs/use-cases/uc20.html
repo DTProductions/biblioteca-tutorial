@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UC20 · Registrar devolução · Biblioteca</title><style>
+:root{--bg:#f6f7f9;--paper:#fff;--ink:#162235;--muted:#536174;--line:#dbe2eb;--blue:#1d4ed8;--code:#101a2c;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;scroll-behavior:smooth}
+*{box-sizing:border-box}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #e8a72b;outline-offset:4px}::selection{background:#c7dbff;color:#101a2c}.layout{display:grid;grid-template-columns:244px minmax(0,1fr);max-width:1500px;margin:auto}.nav{position:sticky;top:0;height:100vh;overflow:auto;padding:26px 16px;background:var(--paper);border-right:1px solid var(--line)}.nav strong{display:block;margin-bottom:16px}.nav a{display:block;padding:5px 8px;font-size:13px;text-decoration:none;border-radius:5px}.nav a[aria-current]{background:#e9efff;font-weight:700}.nav .indice{font-weight:700;margin-bottom:16px}.nav small{display:block;margin:20px 8px 6px;color:var(--muted)}main{min-width:0;padding:42px 44px 90px}.capa{padding:0 0 30px;border-bottom:1px solid var(--line);margin-bottom:32px}h1,h2,h3{line-height:1.25;text-wrap:balance}h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,4vw,46px);margin:0 0 18px}h2{font-family:Georgia,'Times New Roman',serif;font-size:28px;margin:0 0 16px}h3{font-size:19px;margin:28px 0 12px}p,li{max-width:76ch}p{margin:0 0 16px}li{margin:6px 0}.meta{color:var(--muted);font-size:14px}.secao{margin:36px 0;padding:28px;background:var(--paper);border:1px solid var(--line);border-radius:12px}.nota{background:#edf3ff;padding:16px 20px;border:1px solid #ccdafa;border-radius:8px;margin:18px 0}.aviso{background:#fff8e8;border-color:#e9d9a7}.ok{background:#edf8f2;border-color:#b9dcc9}code{font:0.87em ui-monospace,'SF Mono',Menlo,Consolas,monospace;background:#edf0f5;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}.bloco{margin:18px 0 24px;background:var(--code);border:1px solid #27354c;border-radius:8px;overflow:hidden}.barra{padding:9px 14px;color:#d2dff3;display:flex;gap:14px;align-items:center;justify-content:space-between;font-size:12px;border-bottom:1px solid #2b3b56}.barra span{overflow-wrap:anywhere}.barra button{cursor:pointer;border:1px solid #6c7c98;background:#22344f;color:#fff;padding:6px 12px;border-radius:5px;font:inherit;flex-shrink:0}.barra button:hover{background:#344f76}pre{margin:0;padding:18px;overflow:auto;tab-size:2;line-height:1.6}pre code{display:block;padding:0;background:none;color:#edf3fc;font-size:12.5px;white-space:pre;overflow-wrap:normal}.tabela{overflow:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#edf1f7}.tag{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:5px;font-size:12px;margin:3px 5px 3px 0}.etapas{padding-left:22px}.etapas li{margin-bottom:12px}details>summary{cursor:pointer;font-weight:650;padding:12px 0}details[open]>summary{margin-bottom:12px}.checkboxes{list-style:none;padding-left:0}.checkboxes li{padding:6px 0}.checkboxes input{margin-right:9px;accent-color:var(--blue)}footer{color:var(--muted);font-size:13px;margin-top:36px}.ondas li{max-width:none}.grid-links{display:flex;flex-wrap:wrap;gap:9px}.grid-links a{padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:white}.voltar{display:inline-block;margin-bottom:22px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.nav{position:static;height:auto;max-height:230px;border-right:0;border-bottom:1px solid var(--line)}main{padding:28px 16px 70px}.secao{padding:20px 16px}.barra{align-items:flex-start}h2{font-size:25px}}@media print{.nav,.barra button{display:none}.layout{display:block}main{padding:0}.secao{border:0;padding:0;break-before:auto}pre{white-space:pre-wrap}pre code{white-space:pre-wrap;color:#111}.bloco{background:#f2f3f5;border-color:#bbb}.barra{color:#111}a{color:inherit}}
+</style></head><body><div class="layout"><aside class="nav"><strong>Biblioteca · casos de uso</strong><a class="indice" href="index.html">Índice e ordem de integração</a><a href="uc01.html">UC01 · Cadastrar livro</a><a href="uc02.html">UC02 · Buscar livros</a><a href="uc03.html">UC03 · Atualizar livro</a><a href="uc04.html">UC04 · Excluir livro</a><a href="uc05.html">UC05 · Cadastrar autor</a><a href="uc06.html">UC06 · Buscar autores</a><a href="uc07.html">UC07 · Atualizar autor</a><a href="uc08.html">UC08 · Excluir autor</a><a href="uc09.html">UC09 · Cadastrar leitor</a><a href="uc10.html">UC10 · Buscar leitores</a><a href="uc11.html">UC11 · Atualizar leitor</a><a href="uc12.html">UC12 · Excluir leitor</a><a href="uc13.html">UC13 · Cadastrar exemplar</a><a href="uc14.html">UC14 · Buscar exemplares</a><a href="uc15.html">UC15 · Atualizar exemplar</a><a href="uc16.html">UC16 · Excluir exemplar</a><a href="uc17.html">UC17 · Reservar exemplar</a><a href="uc18.html">UC18 · Cancelar reserva de exemplar</a><a href="uc19.html">UC19 · Registrar empréstimo</a><a href="uc20.html" aria-current="page">UC20 · Registrar devolução</a><a href="uc21.html">UC21 · Consultar empréstimos</a><a href="uc22.html">UC22 · Consultar reservas</a></aside><main><header class="capa"><h1>UC20 · Registrar devolução</h1><p>Implemente esta funcionalidade completa no banco, na API e na interface React. Entregue somente esta atividade, com seus testes, em uma branch <code>uc20</code> do seu fork pessoal.</p><p class="meta">Tela: <code>/emprestimos/devolver</code> · PR: <code>seu-fork:uc20</code> → <code>maroquio/biblioteca-tutorial:saas-evolution/fase01</code></p></header><section class="secao" id="prerequisitos"><h2>Pré-requisitos e momento de começar</h2><ul><li><a href="uc19.html">UC19 — Registrar empréstimo</a></li><li><a href="uc21.html">UC21 — Consultar empréstimos</a></li></ul><div class="nota aviso"><strong>Aguarde a integração pelo professor.</strong> Um PR aberto ou aprovado ainda não basta: os pré-requisitos precisam estar na branch central <code>saas-evolution/fase01</code>. Nunca comece a partir da branch de outro aluno. O comando de preparação abaixo confere o código integrado no remoto central antes de criar sua branch.</div><p>Ambiente: Git, Bun 1.4 ou mais novo e Docker Desktop em execução. Os comandos de terminal usam shell compatível com Bash; no Windows, use Git Bash. Use os lockfiles existentes e o PostgreSQL do Compose.</p></section><section class="secao" id="regras"><h2>Contrato e critérios de aceite</h2><ul><li>A devolução registra a data efetiva calculada pelo servidor e preserva o histórico.</li><li>O exemplar e uma vaga no limite de empréstimos do leitor são liberados.</li><li>Uma segunda devolução retorna 409. Um empréstimo inexistente retorna 404.</li><li>Os dias de atraso usam a data efetiva da devolução e não continuam aumentando após o encerramento.</li></ul><p>Reserva criada no dia 15 permite retirada nos dias 15 a 21 e expira no início do dia 22, no calendário de São Paulo. Reserva cancelada, atendida ou expirada deixa de ocupar uma das duas vagas do leitor. O empréstimo tem prazo de 14 dias corridos a partir da retirada e conta no limite de três até a devolução, mesmo se estiver atrasado.</p><p>Respostas de erro usam <code>{"error":"mensagem"}</code>: <strong>400</strong> para entrada inválida, <strong>404</strong> para registro ausente e <strong>409</strong> para conflito de regra ou vínculo. Cadastros retornam <strong>201</strong>; atualizações e ações retornam <strong>200</strong>; exclusões retornam <strong>204</strong>.</p><div class="bloco"><div class="barra"><span>Exemplo de requisição HTTP</span><button type="button" data-copy aria-label="Copiar Exemplo de requisição HTTP">Copiar</button></div><pre><code>curl --fail-with-body -sS -X POST http://localhost:3000/api/emprestimos/1/devolucao</code></pre></div><p>Nos exemplos de ação sobre um registro, substitua o identificador pelo devolvido no cadastro da sua base. O teste automatizado abaixo cria seus próprios registros e não depende de IDs fixos.</p></section><section class="secao" id="branch"><h2>Preparar o fork e criar a branch</h2><ol class="etapas"><li>No GitHub, crie seu fork de <a href="https://github.com/maroquio/biblioteca-tutorial">maroquio/biblioteca-tutorial</a> e clone o fork usando o endereço exibido pelo GitHub. O remote <code>origin</code> deve apontar para seu fork.</li><li>Na primeira atividade, dentro da pasta clonada, obtenha a base de aula e seus tutoriais:</li></ol><div class="bloco"><div class="barra"><span>Terminal · primeira atividade</span><button type="button" data-copy aria-label="Copiar Terminal · primeira atividade">Copiar</button></div><pre><code>git fetch https://github.com/maroquio/biblioteca-tutorial.git saas-evolution/fase01
+git switch --detach FETCH_HEAD</code></pre></div><p>Agora execute a preparação da atividade. Ela configura <code>upstream</code>, atualiza a base, verifica todos os pré-requisitos transitivos e cria a branch sem configurar o repositório do professor como destino de push.</p><div class="bloco"><div class="barra"><span>Terminal · criar a branch correta</span><button type="button" data-copy aria-label="Copiar Terminal · criar a branch correta">Copiar</button></div><pre><code>bun .docs/use-cases/preparar.ts uc20
+git branch --show-current
+git remote -v</code></pre></div><p>O nome exibido deve ser <code>uc20</code>. Se a preparação informar atividade bloqueada, aguarde os merges indicados e repita o comando. Se a branch já existir, preserve seu trabalho; atualize-a com <code>git fetch upstream</code> e <code>git merge upstream/saas-evolution/fase01</code>.</p></section><section class="secao" id="base"><h2>Preparação compartilhada</h2><p>Estes arquivos são <strong>idênticos nas 22 atividades</strong>. Eles preservam os dois casos legados enquanto as evoluções não são integradas e descobrem os novos arquivos automaticamente. Assim, dois PRs não precisam adicionar linhas ao mesmo registro central. Copie uma vez; se os pré-requisitos já trouxeram esta preparação, confira e mantenha o conteúdo existente.</p><p>A transação PostgreSQL usa um advisory lock compartilhado. A consulta de disponibilidade/limites e sua alteração ocorrem na mesma transação, incluindo requisições simultâneas de processos diferentes. Os testes legados recebem limpeza restrita a bancos cujo nome termina em <code>_test</code>.</p><details><summary>Mostrar todos os arquivos da preparação compartilhada</summary><h3>Atualize <code>backend/src/shared/validation.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/shared/validation.ts"><div class="barra"><span>backend/src/shared/validation.ts</span><button type="button" data-copy aria-label="Copiar backend/src/shared/validation.ts">Copiar</button></div><pre><code>import { InvalidInput } from &quot;./errors&quot;;
+
+export function getBodyAsObject(body: unknown): Record&lt;string, unknown&gt; {
+  if (typeof body !== &quot;object&quot; || body === null) {
+    throw new InvalidInput(&quot;o corpo da requisição deve ser um objeto JSON&quot;);
+  }
+
+  return body as Record&lt;string, unknown&gt;;
+}
+
+export function getFieldAsText(body: Record&lt;string, unknown&gt;, field: string): string {
+  const value = body[field];
+
+  if (typeof value !== &quot;string&quot; || value.trim() === &quot;&quot;) {
+    throw new InvalidInput(`campo obrigatório: ${field}`);
+  }
+
+  return value.trim();
+}
+
+export function getFieldAsPositiveInt(
+  body: Record&lt;string, unknown&gt;,
+  field: string,
+): number {
+  const raw = body[field];
+  if ((typeof raw !== &quot;number&quot; &amp;&amp; typeof raw !== &quot;string&quot;) ||
+      (typeof raw === &quot;string&quot; &amp;&amp; !/^\d+$/.test(raw))) {
+    throw new InvalidInput(`campo inválido: ${field}`);
+  }
+  const value = Number(raw);
+
+  if (!Number.isSafeInteger(value) || value &lt;= 0) {
+    throw new InvalidInput(`campo inválido: ${field}`);
+  }
+
+  return value;
+}
+</code></pre></div><h3>Crie <code>backend/src/infrastructure/transaction.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/infrastructure/transaction.ts"><div class="barra"><span>backend/src/infrastructure/transaction.ts</span><button type="button" data-copy aria-label="Copiar backend/src/infrastructure/transaction.ts">Copiar</button></div><pre><code>import type { TransactionSQL } from &quot;bun&quot;;
+import { sql } from &quot;./postgres&quot;;
+
+/**
+ * Serializa as escritas desta versão didática na mesma transação PostgreSQL.
+ * A verificação de um limite e sua alteração nunca ficam separadas por COMMIT.
+ * O lock é compartilhado entre processos; um mutex JavaScript não bastaria.
+ */
+export async function emTransacao&lt;T&gt;(
+  executar: (tx: TransactionSQL) =&gt; Promise&lt;T&gt;,
+): Promise&lt;T&gt; {
+  return await sql.begin(async (tx) =&gt; {
+    await tx`SELECT pg_advisory_xact_lock(22001)`;
+    return await executar(tx);
+  }) as T;
+}
+</code></pre></div><h3>Crie <code>backend/src/use-cases/types.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/use-cases/types.ts"><div class="barra"><span>backend/src/use-cases/types.ts</span><button type="button" data-copy aria-label="Copiar backend/src/use-cases/types.ts">Copiar</button></div><pre><code>import type { Hono } from &quot;hono&quot;;
+
+/** Um ponto de composição por atividade: adicionar uma UC não altera as demais. */
+export type CasoDeUso = {
+  id: string;
+  preparar?: () =&gt; Promise&lt;void&gt;;
+  registrar: (api: Hono) =&gt; void;
+};
+</code></pre></div><h3>Crie <code>backend/src/use-cases/loader.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/use-cases/loader.ts"><div class="barra"><span>backend/src/use-cases/loader.ts</span><button type="button" data-copy aria-label="Copiar backend/src/use-cases/loader.ts">Copiar</button></div><pre><code>import { Glob } from &quot;bun&quot;;
+import type { CasoDeUso } from &quot;./types&quot;;
+
+/** Os arquivos de cada aluno são descobertos sem um registro central concorrente. */
+export async function carregarCasosDeUso(): Promise&lt;CasoDeUso[]&gt; {
+  const arquivos = Array.from(
+    new Glob(&quot;uc[0-9][0-9].ts&quot;).scanSync({ cwd: import.meta.dir }),
+  ).sort();
+  const casos: CasoDeUso[] = [];
+  for (const arquivo of arquivos) {
+    const modulo = await import(new URL(arquivo, import.meta.url).href);
+    const caso = modulo.default as CasoDeUso;
+    if (!caso || caso.id !== arquivo.slice(0, 4) || typeof caso.registrar !== &quot;function&quot;) {
+      throw new Error(`Caso de uso inválido: ${arquivo}`);
+    }
+    casos.push(caso);
+  }
+  return casos;
+}
+</code></pre></div><h3>Atualize <code>backend/src/server.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/server.ts"><div class="barra"><span>backend/src/server.ts</span><button type="button" data-copy aria-label="Copiar backend/src/server.ts">Copiar</button></div><pre><code>import { Hono } from &quot;hono&quot;;
+import { serveStatic } from &quot;hono/bun&quot;;
+import type { UseCases } from &quot;./composition&quot;;
+import { DomainError, InvalidValue } from &quot;./shared/domain-errors&quot;;
+import { register as registerCadastrarLegado } from &quot;./modules/acervo/features/cadastrar-livro/route&quot;;
+import { register as registerBuscarLegado } from &quot;./modules/acervo/features/buscar-livro/route&quot;;
+import { InvalidInput, NotFound, RuleConflict } from &quot;./shared/errors&quot;;
+import type { CasoDeUso } from &quot;./use-cases/types&quot;;
+
+/** O build do React (`bun run build` em frontend/), relativo à pasta backend/. */
+const FRONTEND = &quot;../frontend/dist&quot;;
+
+function errorResponse(error: unknown): Response {
+  if (error instanceof InvalidInput || error instanceof InvalidValue || error instanceof SyntaxError) {
+    return Response.json({ error: error.message }, { status: 400 });
+  }
+
+  if (error instanceof NotFound) {
+    return Response.json({ error: error.message }, { status: 404 });
+  }
+
+  if (error instanceof RuleConflict || error instanceof DomainError) {
+    return Response.json({ error: error.message }, { status: 409 });
+  }
+
+  console.error(error);
+
+  return Response.json({ error: &quot;Erro interno&quot; }, { status: 500 });
+}
+
+export function createApp(useCases: UseCases, casos: CasoDeUso[] = []) {
+  const api = new Hono();
+
+  api.get(&quot;/&quot;, (contexto) =&gt; contexto.json({ message: &quot;API da Biblioteca&quot; }));
+
+  // Mantém os dois casos originais até suas atividades de evolução serem integradas.
+  const ids = new Set(casos.map((caso) =&gt; caso.id));
+  if (!ids.has(&quot;uc01&quot;)) registerCadastrarLegado(api, useCases);
+  if (!ids.has(&quot;uc01&quot;) &amp;&amp; !ids.has(&quot;uc02&quot;)) registerBuscarLegado(api, useCases);
+  for (const caso of casos) caso.registrar(api);
+
+  const app = new Hono();
+
+  // toda a API mora sob /api: o resto dos endereços fica livre para o frontend
+  app.route(&quot;/api&quot;, api);
+  app.all(&quot;/api/*&quot;, (contexto) =&gt; contexto.notFound());
+
+  // arquivos do build: index.html, JS, CSS, ícone
+  app.use(&quot;*&quot;, serveStatic({ root: FRONTEND }));
+
+  // qualquer outro endereço (/cadastrar, por exemplo) é rota do React Router:
+  // devolve o index.html e o roteador do navegador decide o que mostrar
+  app.get(&quot;*&quot;, serveStatic({ path: `${FRONTEND}/index.html` }));
+
+  app.notFound((contexto) =&gt;
+    contexto.json({ error: &quot;Recurso não encontrado&quot; }, 404),
+  );
+
+  app.onError((error) =&gt; errorResponse(error));
+
+  return app;
+}
+
+export function createServer(
+  useCases: UseCases,
+  porta = Number(process.env.PORT ?? 3000),
+  casos: CasoDeUso[] = [],
+) {
+  return Bun.serve({ port: porta, fetch: createApp(useCases, casos).fetch });
+}
+</code></pre></div><h3>Atualize <code>backend/src/main.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/main.ts"><div class="barra"><span>backend/src/main.ts</span><button type="button" data-copy aria-label="Copiar backend/src/main.ts">Copiar</button></div><pre><code>import { buildUseCases } from &quot;./composition&quot;;
+import { createAcervoTablesPostgres } from &quot;./modules/acervo&quot;;
+import { createAutoriaTablesPostgres } from &quot;./modules/autoria&quot;;
+import { createServer } from &quot;./server&quot;;
+import { carregarCasosDeUso } from &quot;./use-cases/loader&quot;;
+
+await createAutoriaTablesPostgres();
+await createAcervoTablesPostgres();
+
+const casos = await carregarCasosDeUso();
+for (const caso of casos) await caso.preparar?.();
+
+const server = createServer(buildUseCases(), Number(process.env.PORT ?? 3000), casos);
+
+console.log(`Servidor executando em http://localhost:${server.port}`);
+</code></pre></div><h3>Atualize <code>backend/scripts/check-boundaries.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/scripts/check-boundaries.ts"><div class="barra"><span>backend/scripts/check-boundaries.ts</span><button type="button" data-copy aria-label="Copiar backend/scripts/check-boundaries.ts">Copiar</button></div><pre><code>import { Glob } from &quot;bun&quot;;
+import { dirname, join, normalize } from &quot;node:path&quot;;
+
+const problems: string[] = [];
+
+/** Quem é o dono de cada tabela. Nenhum módulo cita uma tabela que não é dele. */
+const TABELAS: Record&lt;string, string&gt; = {
+  livros: &quot;acervo&quot;,
+  autores: &quot;autoria&quot;,
+};
+
+for await (const rawFile of new Glob(&quot;src/modules/**/*.ts&quot;).scan(&quot;.&quot;)) {
+  const file = rawFile.replaceAll(&quot;\\&quot;, &quot;/&quot;);
+  const module = file.split(&quot;/&quot;)[2]!;
+  const code = await Bun.file(file).text();
+
+  for (const found of code.matchAll(/from\s+&quot;(\.[^&quot;]+)&quot;/g)) {
+    const target = normalize(join(dirname(file), found[1]!)).replaceAll(&quot;\\&quot;, &quot;/&quot;);
+
+    if (!target.startsWith(&quot;src/modules/&quot;)) continue;
+
+    const otherModule = target.split(&quot;/&quot;)[2]!;
+    if (otherModule === module) continue;
+
+    if (target !== `src/modules/${otherModule}`) {
+      problems.push(`${file}\n      importa ${target}`);
+    }
+  }
+
+  for (const [tabela, dono] of Object.entries(TABELAS)) {
+    if (dono === module) continue;
+
+    if (new RegExp(`\\b(FROM|JOIN|INTO|UPDATE|TABLE|EXISTS)\\s+${tabela}\\b`, &quot;i&quot;).test(code)) {
+      problems.push(
+        `${file}\n      toca a tabela &quot;${tabela}&quot;, que pertence a ${dono}`,
+      );
+    }
+  }
+}
+
+if (problems.length &gt; 0) {
+  console.error(&quot;Importações que furam a fronteira de módulo:\n&quot;);
+  for (const problema of problems) console.error(`  ${problema}\n`);
+  process.exit(1);
+}
+
+console.log(&quot;Fronteiras de módulo respeitadas.&quot;);
+</code></pre></div><h3>Crie <code>backend/tests/suporte-api.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/tests/suporte-api.ts"><div class="barra"><span>backend/tests/suporte-api.ts</span><button type="button" data-copy aria-label="Copiar backend/tests/suporte-api.ts">Copiar</button></div><pre><code>import { createApp } from &quot;../src/server&quot;;
+import { buildUseCases } from &quot;../src/composition&quot;;
+import { createAcervoTablesPostgres } from &quot;../src/modules/acervo&quot;;
+import { createAutoriaTablesPostgres } from &quot;../src/modules/autoria&quot;;
+import { carregarCasosDeUso } from &quot;../src/use-cases/loader&quot;;
+
+// Cada suíte usa um banco de TESTES. Os fixtures são próprios: nenhuma tabela é apagada.
+await createAutoriaTablesPostgres();
+await createAcervoTablesPostgres();
+const casos = await carregarCasosDeUso();
+for (const caso of casos) await caso.preparar?.();
+const app = createApp(buildUseCases(), casos);
+
+// O contrato JSON é verificado pelos expects de cada atividade.
+export interface RespostaDeTeste extends Response { json&lt;T = any&gt;(): Promise&lt;T&gt; }
+export async function api(metodo: string, caminho: string, body?: unknown): Promise&lt;RespostaDeTeste&gt; {
+  return app.request(`/api${caminho}`, {
+    method: metodo,
+    ...(body === undefined ? {} : { headers: { &quot;Content-Type&quot;: &quot;application/json&quot; }, body: JSON.stringify(body) }),
+  }) as Promise&lt;RespostaDeTeste&gt;;
+}
+
+export function nomeDeTeste(prefixo: string): string {
+  return `${prefixo} ${crypto.randomUUID()}`;
+}
+
+export function isbnDeTeste(): string {
+  const numeros = crypto.getRandomValues(new Uint8Array(9));
+  const doze = &quot;978&quot; + Array.from(numeros, (n) =&gt; n % 10).join(&quot;&quot;);
+  const soma = [...doze].reduce((total, n, i) =&gt; total + Number(n) * (i % 2 ? 3 : 1), 0);
+  return doze + (10 - soma % 10) % 10;
+}
+
+export async function autorDeTeste(tipo = &quot;literatura&quot;): Promise&lt;{ id: number; nome: string }&gt; {
+  const response = await api(&quot;POST&quot;, &quot;/autores&quot;, { nome: nomeDeTeste(&quot;Autor&quot;), tipo });
+  if (response.status !== 201) throw new Error(`Fixture autor: ${await response.text()}`);
+  return response.json();
+}
+
+export async function livroDeTeste(): Promise&lt;{ id: number; isbn: string; titulo: string; autorId: number; dataCatalogacao: string }&gt; {
+  const autor = await autorDeTeste();
+  const response = await api(&quot;POST&quot;, &quot;/livros&quot;, { isbn: isbnDeTeste(), titulo: nomeDeTeste(&quot;Livro&quot;), autorId: autor.id });
+  if (response.status !== 201) throw new Error(`Fixture livro: ${await response.text()}`);
+  return response.json();
+}
+
+export async function exemplarDeTeste(): Promise&lt;{ id: number; livroId: number; numeroRegistro: string }&gt; {
+  const livro = await livroDeTeste();
+  const response = await api(&quot;POST&quot;, &quot;/exemplares&quot;, { livroId: livro.id, localizacao: &quot;Estante T&quot;, estadoConservacao: &quot;bom&quot; });
+  if (response.status !== 201) throw new Error(`Fixture exemplar: ${await response.text()}`);
+  return response.json();
+}
+</code></pre></div><h3>Crie <code>backend/tests/limpar-acervo-teste.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/tests/limpar-acervo-teste.ts"><div class="barra"><span>backend/tests/limpar-acervo-teste.ts</span><button type="button" data-copy aria-label="Copiar backend/tests/limpar-acervo-teste.ts">Copiar</button></div><pre><code>import { emTransacao } from &quot;../src/infrastructure/transaction&quot;;
+
+/** Só a suíte legada precisa zerar o acervo; jamais permita executar isso no banco da aula. */
+export async function limparAcervoDeTeste(): Promise&lt;void&gt; {
+  const url = new URL(process.env.DATABASE_URL ?? &quot;postgres://sem-banco/nao-configurado&quot;);
+  if (!decodeURIComponent(url.pathname).endsWith(&quot;_test&quot;)) {
+    throw new Error(&quot;A limpeza dos testes exige DATABASE_URL apontando para um banco com nome terminado em _test.&quot;);
+  }
+  await emTransacao(async tx =&gt; {
+    // A aplicação pode estar em uma etapa anterior: as tabelas novas ainda podem não existir.
+    for (const tabela of [&quot;reservas&quot;, &quot;emprestimos&quot;, &quot;exemplares&quot;] as const) {
+      const [row] = await tx`SELECT to_regclass(${tabela}) AS tabela`;
+      if (row?.tabela) await tx.unsafe(`DELETE FROM ${tabela}`);
+    }
+    await tx`DELETE FROM livros`;
+  });
+}
+</code></pre></div><h3>Atualize <code>backend/tests/cadastro.e2e.test.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/tests/cadastro.e2e.test.ts"><div class="barra"><span>backend/tests/cadastro.e2e.test.ts</span><button type="button" data-copy aria-label="Copiar backend/tests/cadastro.e2e.test.ts">Copiar</button></div><pre><code>import { afterAll, beforeAll, beforeEach, expect, test } from &quot;bun:test&quot;;
+import { limparAcervoDeTeste } from &quot;./limpar-acervo-teste&quot;;
+
+const BASE = &quot;http://localhost:3999&quot;;
+const AUSTEN = 4;
+const LIVROS = [
+  { isbn: &quot;9780141439518&quot;, titulo: &quot;Orgulho e Preconceito&quot; },
+  { isbn: &quot;9780141439662&quot;, titulo: &quot;Razão e Sensibilidade&quot; },
+  { isbn: &quot;9780141439587&quot;, titulo: &quot;Emma&quot; },
+  { isbn: &quot;9780141439761&quot;, titulo: &quot;Persuasão&quot; },
+  { isbn: &quot;9780141439563&quot;, titulo: &quot;A Abadia de Northanger&quot; },
+  { isbn: &quot;9780141199689&quot;, titulo: &quot;Lady Susan&quot; },
+];
+const EVANS = 1;
+
+/** ISBN-13 sintético com dígito verificador correto — a fase 34 vai conferir. */
+function isbnSintetico(seq: number): string {
+  const doze = `97800000${String(seq).padStart(4, &quot;0&quot;)}`;
+  let soma = 0;
+
+  for (let i = 0; i &lt; 12; i++) soma += Number(doze[i]!) * (i % 2 === 0 ? 1 : 3);
+
+  return doze + ((10 - (soma % 10)) % 10);
+}
+
+const LIVROS_DE_EVANS = Array.from({ length: 11 }, (_, i) =&gt; ({
+  isbn: isbnSintetico(i),
+  titulo: `Título didático ${i + 1}`,
+}));
+
+let server: ReturnType&lt;typeof Bun.spawn&gt;;
+
+beforeAll(async () =&gt; {
+  // não há como exercitar a regra sem subir a aplicação inteira
+  server = Bun.spawn([&quot;bun&quot;, &quot;src/main.ts&quot;], {
+    stdout: &quot;ignore&quot;,
+    // porta própria: a sonda abaixo só passa quando ESTE servidor subir
+    env: { ...process.env, PORT: &quot;3999&quot; },
+  });
+
+  // ... e sem esperar a porta abrir
+  for (let tentativa = 0; tentativa &lt; 50; tentativa++) {
+    try {
+      await fetch(BASE);
+      return;
+    } catch {
+      await Bun.sleep(100);
+    }
+  }
+
+  throw new Error(&quot;o servidor não subiu&quot;);
+});
+
+afterAll(() =&gt; {
+  server.kill();
+});
+
+beforeEach(async () =&gt; {
+  // ... e sem limpar o banco de verdade entre um teste e outro
+  await limparAcervoDeTeste();
+});
+
+function cadastrar(n: number, autorId = AUSTEN, livros = LIVROS) {
+  return fetch(`${BASE}/api/livros`, {
+    method: &quot;POST&quot;,
+    headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+    body: JSON.stringify({ ...livros[n], autorId }),
+  });
+}
+
+const cadastrarDeEvans = (n: number) =&gt; cadastrar(n, EVANS, LIVROS_DE_EVANS);
+
+test(&quot;uma rota inexistente da API responde 404 em JSON&quot;, async () =&gt; {
+  const response = await fetch(`${BASE}/api/nada`);
+
+  expect(response.status).toBe(404);
+  expect(response.headers.get(&quot;Content-Type&quot;)).toContain(&quot;application/json&quot;);
+  expect(await response.json()).toEqual({ error: &quot;Recurso não encontrado&quot; });
+});
+
+test(&quot;uma rota do frontend pode ser aberta diretamente&quot;, async () =&gt; {
+  const response = await fetch(`${BASE}/cadastrar`);
+
+  expect(response.status).toBe(200);
+  expect(response.headers.get(&quot;Content-Type&quot;)).toContain(&quot;text/html&quot;);
+  expect(await response.text()).toContain(&#x27;&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;&#x27;);
+});
+
+test(&quot;RF05: um autor de literatura vai até 5 livros no acervo&quot;, async () =&gt; {
+  for (let i = 0; i &lt; 5; i++) {
+    const response = await cadastrar(i);
+    expect(response.status).toBe(201);
+  }
+
+  const sexto = await cadastrar(5);
+
+  expect(sexto.status).toBe(409);
+});
+
+test(&quot;RF05′: um autor didático vai até 10 livros no acervo&quot;, async () =&gt; {
+  for (let i = 0; i &lt; 10; i++) {
+    const response = await cadastrarDeEvans(i);
+    expect(response.status).toBe(201);
+  }
+
+  const decimoPrimeiro = await cadastrarDeEvans(10);
+
+  expect(decimoPrimeiro.status).toBe(409);
+});
+</code></pre></div><h3>Atualize <code>backend/tests/importacao.test.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/tests/importacao.test.ts"><div class="barra"><span>backend/tests/importacao.test.ts</span><button type="button" data-copy aria-label="Copiar backend/tests/importacao.test.ts">Copiar</button></div><pre><code>import { beforeEach, expect, test } from &quot;bun:test&quot;;
+import { sql } from &quot;../src/infrastructure/postgres&quot;;
+import { createAcervoTablesPostgres } from &quot;../src/modules/acervo&quot;;
+import { createAutoriaTablesPostgres } from &quot;../src/modules/autoria&quot;;
+import { limparAcervoDeTeste } from &quot;./limpar-acervo-teste&quot;;
+
+const AUSTEN = 4;
+const LIVROS = [
+  { isbn: &quot;9780141439518&quot;, titulo: &quot;Orgulho e Preconceito&quot; },
+  { isbn: &quot;9780141439662&quot;, titulo: &quot;Razão e Sensibilidade&quot; },
+  { isbn: &quot;9780141439587&quot;, titulo: &quot;Emma&quot; },
+  { isbn: &quot;9780141439761&quot;, titulo: &quot;Persuasão&quot; },
+  { isbn: &quot;9780141439563&quot;, titulo: &quot;A Abadia de Northanger&quot; },
+  { isbn: &quot;9780141199689&quot;, titulo: &quot;Lady Susan&quot; },
+];
+
+await createAutoriaTablesPostgres();
+await createAcervoTablesPostgres();
+
+beforeEach(async () =&gt; {
+  await limparAcervoDeTeste();
+});
+
+async function importar(csv: string): Promise&lt;void&gt; {
+  await Bun.write(&quot;data/importacao-teste.csv&quot;, csv);
+
+  const processo = Bun.spawn(
+    [&quot;bun&quot;, &quot;src/importar.ts&quot;, &quot;data/importacao-teste.csv&quot;],
+    { stdout: &quot;ignore&quot; },
+  );
+
+  await processo.exited;
+}
+
+async function noAcervo(autorId: number): Promise&lt;number&gt; {
+  const [row] = (await sql`
+    SELECT COUNT(*)::int AS total FROM livros WHERE autor_id = ${autorId}
+  `) as { total: number }[];
+
+  return row!.total;
+}
+
+function linhasCsv(livros: typeof LIVROS, autorId: number): string {
+  return (
+    &quot;isbn,titulo,autorId\n&quot; +
+    livros.map((l) =&gt; `${l.isbn},${l.titulo},${autorId}`).join(&quot;\n&quot;) +
+    &quot;\n&quot;
+  );
+}
+
+test(&quot;RF05 também vale para a importação em lote&quot;, async () =&gt; {
+  const csv = linhasCsv(LIVROS, AUSTEN);
+
+  await importar(csv);
+
+  expect(await noAcervo(AUSTEN)).toBe(5);
+});
+</code></pre></div><h3>Atualize <code>frontend/src/api.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/api.ts"><div class="barra"><span>frontend/src/api.ts</span><button type="button" data-copy aria-label="Copiar frontend/src/api.ts">Copiar</button></div><pre><code>/** Contrato público da API. Livro é o catálogo; exemplar é a cópia física. */
+export type Livro = {
+  id: number;
+  isbn: string;
+  titulo: string;
+  autorId: number;
+  autor: string;
+  livrosDoAutor: number;
+  dataCatalogacao: string;
+  totalExemplares: number;
+  exemplaresDisponiveis: number;
+};
+
+export type NovoLivro = { isbn: string; titulo: string; autorId: number };
+export type Autor = { id: number; nome: string; tipo: &quot;literatura&quot; | &quot;didatico&quot;; livrosNoAcervo: number };
+export type Leitor = { id: number; nome: string; cpf: string; email: string; telefone: string };
+export type Exemplar = {
+  id: number;
+  livroId: number;
+  numeroRegistro: string;
+  localizacao: string;
+  estadoConservacao: string;
+  dataCatalogacao: string;
+  situacao: &quot;disponivel&quot; | &quot;reservado&quot; | &quot;emprestado&quot;;
+  titulo: string;
+  isbn: string;
+};
+export type Reserva = {
+  id: number;
+  leitorId: number;
+  exemplarId: number;
+  dataReserva: string;
+  dataLimiteRetirada: string;
+  dataExpiracao: string;
+  situacao: &quot;ativa&quot; | &quot;cancelada&quot; | &quot;atendida&quot; | &quot;expirada&quot;;
+  leitorNome: string;
+  leitorCpf: string;
+  livroTitulo: string;
+  numeroRegistro: string;
+};
+export type Emprestimo = {
+  id: number;
+  leitorId: number;
+  exemplarId: number;
+  dataEmprestimo: string;
+  dataPrevistaDevolucao: string;
+  dataDevolucao: string | null;
+  situacao: &quot;em_aberto&quot; | &quot;atrasado&quot; | &quot;devolvido&quot;;
+  diasDeAtraso: number;
+  leitorNome: string;
+  leitorCpf: string;
+  livroTitulo: string;
+  numeroRegistro: string;
+};
+
+/** Centraliza JSON e mensagens de regra de negócio (400, 404 e 409). */
+export async function api&lt;T&gt;(caminho: string, opcoes: RequestInit = {}): Promise&lt;T&gt; {
+  let resposta: Response;
+  try {
+    resposta = await fetch(caminho, opcoes);
+  } catch {
+    throw new Error(&quot;Não foi possível conectar à biblioteca. Verifique a conexão e tente novamente.&quot;);
+  }
+  if (resposta.status === 204) return undefined as T;
+  const corpo = await resposta.json().catch(() =&gt; ({}));
+  if (!resposta.ok) {
+    throw new Error(typeof corpo.error === &quot;string&quot; ? corpo.error : `Não foi possível concluir a operação (HTTP ${resposta.status}).`);
+  }
+  return corpo as T;
+}
+
+export function enviar&lt;T&gt;(caminho: string, metodo: &quot;POST&quot; | &quot;PUT&quot;, dados?: unknown): Promise&lt;T&gt; {
+  return api&lt;T&gt;(caminho, {
+    method: metodo,
+    headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+    body: JSON.stringify(dados ?? {}),
+  });
+}
+
+export function buscarLivros(termo: string): Promise&lt;Livro[]&gt; {
+  return api&lt;Livro[]&gt;(`/api/livros/${encodeURIComponent(termo)}`);
+}
+
+export function cadastrarLivro(livro: NovoLivro): Promise&lt;Livro&gt; {
+  return enviar&lt;Livro&gt;(&quot;/api/livros&quot;, &quot;POST&quot;, livro);
+}
+
+/** Não converte a data civil para UTC, evitando mudança de dia por fuso. */
+export function formatarData(iso: string | null): string {
+  return iso ? iso.slice(0, 10).split(&quot;-&quot;).reverse().join(&quot;/&quot;) : &quot;—&quot;;
+}
+
+export function formatarCpf(cpf: string): string {
+  return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, &quot;$1.$2.$3-$4&quot;);
+}
+
+export function parametros(dados: Record&lt;string, string&gt;): string {
+  const query = new URLSearchParams();
+  for (const [chave, valor] of Object.entries(dados)) if (valor) query.set(chave, valor);
+  const resultado = query.toString();
+  return resultado ? `?${resultado}` : &quot;&quot;;
+}
+</code></pre></div><h3>Crie <code>frontend/src/components/biblioteca.tsx</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/components/biblioteca.tsx"><div class="barra"><span>frontend/src/components/biblioteca.tsx</span><button type="button" data-copy aria-label="Copiar frontend/src/components/biblioteca.tsx">Copiar</button></div><pre><code>/* oxlint-disable react/only-export-components -- O registro de cada UC exporta metadados e componente para o carregamento automático. */
+import { useEffect, useState, type ComponentType, type FormEvent, type ReactNode } from &quot;react&quot;;
+import { Link, useSearchParams } from &quot;react-router-dom&quot;;
+import { api, enviar } from &quot;../api.ts&quot;;
+
+export type PaginaCasoUso = { id: string; titulo: string; caminho: string; Componente: ComponentType };
+
+/** Ignora respostas antigas quando a URL muda ou a página é desmontada. */
+export function useDados&lt;T&gt;(caminho: string | null, revisao = 0) {
+  const [resultado, setResultado] = useState&lt;{ caminho: string | null; revisao: number; dados: T | null; erro: string } | null&gt;(null);
+  useEffect(() =&gt; {
+    if (!caminho) return;
+    let ignorar = false;
+    api&lt;T&gt;(caminho).then(
+      (dados) =&gt; { if (!ignorar) setResultado({ caminho, revisao, dados, erro: &quot;&quot; }); },
+      (erro: Error) =&gt; { if (!ignorar) setResultado({ caminho, revisao, dados: null, erro: erro.message }); },
+    );
+    return () =&gt; { ignorar = true; };
+  }, [caminho, revisao]);
+  const atual = resultado?.caminho === caminho &amp;&amp; resultado?.revisao === revisao;
+  return { dados: atual ? resultado.dados : null, erro: atual ? resultado.erro : &quot;&quot;, carregando: Boolean(caminho) &amp;&amp; !atual };
+}
+
+export function Pagina({ titulo, descricao, children }: { titulo: string; descricao: string; children: ReactNode }) {
+  return &lt;section&gt;
+    &lt;title&gt;{titulo} · Biblioteca&lt;/title&gt;
+    &lt;div className=&quot;cabecalho-pagina&quot;&gt;&lt;h1&gt;{titulo}&lt;/h1&gt;&lt;p&gt;{descricao}&lt;/p&gt;&lt;/div&gt;
+    {children}
+  &lt;/section&gt;;
+}
+
+export function Avisos({ erro = &quot;&quot;, sucesso = &quot;&quot; }: { erro?: string; sucesso?: string }) {
+  return &lt;&gt;
+    {erro &amp;&amp; &lt;p className=&quot;erro&quot; role=&quot;alert&quot;&gt;{erro}&lt;/p&gt;}
+    {sucesso &amp;&amp; &lt;p className=&quot;sucesso&quot; role=&quot;status&quot;&gt;{sucesso}&lt;/p&gt;}
+  &lt;/&gt;;
+}
+
+export function Situacao({ valor }: { valor: string }) {
+  const rotulos: Record&lt;string, string&gt; = { disponivel: &quot;Disponível&quot;, reservado: &quot;Reservado&quot;, emprestado: &quot;Emprestado&quot;, ativa: &quot;Ativa&quot;, cancelada: &quot;Cancelada&quot;, atendida: &quot;Atendida&quot;, expirada: &quot;Expirada&quot;, em_aberto: &quot;Em aberto&quot;, atrasado: &quot;Atrasado&quot;, devolvido: &quot;Devolvido&quot; };
+  return &lt;span className={`situacao situacao-${valor}`}&gt;{rotulos[valor] ?? valor}&lt;/span&gt;;
+}
+
+export function Campo({ nome, titulo, children, dica }: { nome: string; titulo: string; children: ReactNode; dica?: string }) {
+  return &lt;div className=&quot;campo&quot;&gt;&lt;label htmlFor={nome}&gt;{titulo}&lt;/label&gt;{children}{dica &amp;&amp; &lt;small id={`${nome}-dica`}&gt;{dica}&lt;/small&gt;}&lt;/div&gt;;
+}
+
+export function Seletor&lt;T extends { id: number }&gt;({ nome, titulo, itens, rotulo, valor, padrao = &quot;&quot;, aoMudar, obrigatorio = true, vazio = &quot;Selecione uma opção&quot; }: {
+  nome: string; titulo: string; itens: T[]; rotulo: (item: T) =&gt; string; valor?: string; padrao?: string; aoMudar?: (valor: string) =&gt; void; obrigatorio?: boolean; vazio?: string;
+}) {
+  return &lt;Campo nome={nome} titulo={titulo}&gt;
+    &lt;select id={nome} name={nome} required={obrigatorio} value={valor} onChange={aoMudar ? (e) =&gt; aoMudar(e.target.value) : undefined} defaultValue={valor === undefined ? padrao : undefined}&gt;
+      &lt;option value=&quot;&quot;&gt;{vazio}&lt;/option&gt;
+      {itens.map((item) =&gt; &lt;option key={item.id} value={item.id}&gt;{rotulo(item)}&lt;/option&gt;)}
+    &lt;/select&gt;
+  &lt;/Campo&gt;;
+}
+
+export function Carregamento({ carregando, erro }: { carregando: boolean; erro: string }) {
+  return &lt;&gt;{carregando &amp;&amp; &lt;p className=&quot;dica&quot; role=&quot;status&quot;&gt;Carregando…&lt;/p&gt;}&lt;Avisos erro={erro} /&gt;&lt;/&gt;;
+}
+
+export function Tabela({ titulo, children }: { titulo: string; children: ReactNode }) {
+  return &lt;div className=&quot;resultado-busca&quot; role=&quot;region&quot; aria-label={titulo} tabIndex={0}&gt;&lt;table&gt;{children}&lt;/table&gt;&lt;/div&gt;;
+}
+
+/** O termo fica na URL: recarregar ou voltar preserva a consulta. */
+export function Busca({ dica, titulo = &quot;Termo de busca&quot; }: { dica: string; titulo?: string }) {
+  const [params, setParams] = useSearchParams();
+  const termo = params.get(&quot;q&quot;) ?? &quot;&quot;;
+  function buscar(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault();
+    const q = String(new FormData(evento.currentTarget).get(&quot;q&quot;) ?? &quot;&quot;).trim();
+    setParams(q ? { q } : {});
+  }
+  return &lt;form className=&quot;busca&quot; onSubmit={buscar}&gt;
+    &lt;Campo nome=&quot;q&quot; titulo={titulo}&gt;&lt;input key={termo} id=&quot;q&quot; name=&quot;q&quot; defaultValue={termo} placeholder={dica} /&gt;&lt;/Campo&gt;
+    &lt;button type=&quot;submit&quot;&gt;Buscar&lt;/button&gt;
+  &lt;/form&gt;;
+}
+
+export function Acoes({ editar, excluir }: { editar?: string; excluir?: string }) {
+  return &lt;span className=&quot;acoes&quot;&gt;{editar &amp;&amp; &lt;Link to={editar}&gt;Editar&lt;/Link&gt;}{excluir &amp;&amp; &lt;Link to={excluir}&gt;Excluir&lt;/Link&gt;}&lt;/span&gt;;
+}
+
+/** Edição sempre escolhe um registro existente; nenhum ID precisa ser digitado. */
+export function FormularioRegistro&lt;T extends { id: number }&gt;({ endpoint, editar = false, rotulo, campos, montar, sucesso, retorno, acao, aviso }: {
+  endpoint: string; editar?: boolean; rotulo: (item: T) =&gt; string; campos: (item: T | null) =&gt; ReactNode; montar: (dados: FormData) =&gt; unknown; sucesso: (item: T) =&gt; string; retorno: string; acao: string; aviso?: string;
+}) {
+  const [params, setParams] = useSearchParams();
+  const id = params.get(&quot;id&quot;) ?? &quot;&quot;;
+  const [revisao, setRevisao] = useState(0);
+  const consulta = useDados&lt;T[]&gt;(editar ? endpoint : null, revisao);
+  const escolhido = consulta.dados?.find((item) =&gt; String(item.id) === id) ?? null;
+  const [erro, setErro] = useState(&quot;&quot;);
+  const [mensagem, setMensagem] = useState(&quot;&quot;);
+  const [enviando, setEnviando] = useState(false);
+  async function gravar(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault();
+    const formulario = evento.currentTarget;
+    const dados = new FormData(formulario);
+    setEnviando(true); setErro(&quot;&quot;); setMensagem(&quot;&quot;);
+    try {
+      const item = await enviar&lt;T&gt;(editar ? `${endpoint}/${id}` : endpoint, editar ? &quot;PUT&quot; : &quot;POST&quot;, montar(dados));
+      setMensagem(sucesso(item));
+      if (editar) setRevisao((valor) =&gt; valor + 1); else formulario.reset();
+    } catch (e) { setErro((e as Error).message); }
+    finally { setEnviando(false); }
+  }
+  return &lt;&gt;
+    {editar &amp;&amp; &lt;&gt;
+      &lt;Carregamento carregando={consulta.carregando} erro={consulta.erro} /&gt;
+      {consulta.dados &amp;&amp; &lt;div className=&quot;selecao-registro&quot;&gt;&lt;Seletor nome=&quot;registroSelecionado&quot; titulo=&quot;Registro para editar&quot; itens={consulta.dados} rotulo={rotulo} valor={id} aoMudar={(valor) =&gt; { setParams(valor ? { id: valor } : {}); setErro(&quot;&quot;); setMensagem(&quot;&quot;); }} /&gt;{!consulta.dados.length &amp;&amp; &lt;p className=&quot;dica&quot;&gt;Nenhum registro cadastrado.&lt;/p&gt;}&lt;/div&gt;}
+    &lt;/&gt;}
+    {(!editar || escolhido) &amp;&amp; &lt;form key={`${id}-${revisao}`} className=&quot;cadastro&quot; onSubmit={gravar}&gt;
+      {campos(escolhido)}
+      {aviso &amp;&amp; &lt;p className=&quot;nota&quot;&gt;{aviso}&lt;/p&gt;}
+      &lt;button disabled={enviando} type=&quot;submit&quot;&gt;{enviando ? &quot;Salvando…&quot; : acao}&lt;/button&gt;
+    &lt;/form&gt;}
+    &lt;Avisos erro={erro} sucesso={mensagem} /&gt;
+    &lt;p className=&quot;rodape-formulario&quot;&gt;&lt;Link to={retorno}&gt;Voltar à consulta&lt;/Link&gt;&lt;/p&gt;
+  &lt;/&gt;;
+}
+
+export function ExclusaoRegistro&lt;T extends { id: number }&gt;({ endpoint, rotulo, retorno, aviso }: { endpoint: string; rotulo: (item: T) =&gt; string; retorno: string; aviso: string }) {
+  const [params, setParams] = useSearchParams();
+  const id = params.get(&quot;id&quot;) ?? &quot;&quot;;
+  const [revisao, setRevisao] = useState(0);
+  const consulta = useDados&lt;T[]&gt;(endpoint, revisao);
+  const escolhido = consulta.dados?.find((item) =&gt; String(item.id) === id);
+  const [erro, setErro] = useState(&quot;&quot;);
+  const [mensagem, setMensagem] = useState(&quot;&quot;);
+  const [enviando, setEnviando] = useState(false);
+  async function excluir(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault();
+    setEnviando(true); setErro(&quot;&quot;); setMensagem(&quot;&quot;);
+    try {
+      await api&lt;void&gt;(`${endpoint}/${id}`, { method: &quot;DELETE&quot; });
+      setMensagem(&quot;Registro excluído com sucesso.&quot;); setParams({}); setRevisao((valor) =&gt; valor + 1);
+    } catch (e) { setErro((e as Error).message); }
+    finally { setEnviando(false); }
+  }
+  return &lt;&gt;
+    &lt;Carregamento carregando={consulta.carregando} erro={consulta.erro} /&gt;
+    {consulta.dados &amp;&amp; &lt;div className=&quot;selecao-registro&quot;&gt;&lt;Seletor nome=&quot;registroSelecionado&quot; titulo=&quot;Registro para excluir&quot; itens={consulta.dados} rotulo={rotulo} valor={id} aoMudar={(valor) =&gt; { setParams(valor ? { id: valor } : {}); setErro(&quot;&quot;); setMensagem(&quot;&quot;); }} /&gt;{!consulta.dados.length &amp;&amp; &lt;p className=&quot;dica&quot;&gt;Nenhum registro cadastrado.&lt;/p&gt;}&lt;/div&gt;}
+    {escolhido &amp;&amp; &lt;form key={id} className=&quot;cadastro&quot; onSubmit={excluir}&gt;
+      &lt;p className=&quot;nota&quot;&gt;{aviso}&lt;/p&gt;
+      &lt;label className=&quot;confirmacao&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;confirmacao&quot; required /&gt; Confirmo a exclusão de {rotulo(escolhido)}.&lt;/label&gt;
+      &lt;button className=&quot;perigo&quot; type=&quot;submit&quot; disabled={enviando}&gt;{enviando ? &quot;Excluindo…&quot; : &quot;Excluir definitivamente&quot;}&lt;/button&gt;
+    &lt;/form&gt;}
+    &lt;Avisos erro={erro} sucesso={mensagem} /&gt;
+    &lt;p className=&quot;rodape-formulario&quot;&gt;&lt;Link to={retorno}&gt;Voltar à consulta&lt;/Link&gt;&lt;/p&gt;
+  &lt;/&gt;;
+}
+</code></pre></div><h3>Crie <code>frontend/src/components/circulacao.tsx</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/components/circulacao.tsx"><div class="barra"><span>frontend/src/components/circulacao.tsx</span><button type="button" data-copy aria-label="Copiar frontend/src/components/circulacao.tsx">Copiar</button></div><pre><code>import { useState, type FormEvent, type ReactNode } from &quot;react&quot;;
+import { Link, useSearchParams } from &quot;react-router-dom&quot;;
+import { enviar, formatarCpf, type Exemplar, type Leitor } from &quot;../api.ts&quot;;
+import { Avisos, Campo, Carregamento, Seletor, useDados } from &quot;./biblioteca.tsx&quot;;
+
+export function FiltrosCirculacao({ situacoes }: { situacoes: { valor: string; nome: string }[] }) {
+  const [params, setParams] = useSearchParams();
+  const leitores = useDados&lt;Leitor[]&gt;(&quot;/api/leitores&quot;);
+  const exemplares = useDados&lt;Exemplar[]&gt;(&quot;/api/exemplares&quot;);
+  function filtrar(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault();
+    const dados = new FormData(evento.currentTarget);
+    const novos = new URLSearchParams();
+    for (const chave of [&quot;leitorId&quot;, &quot;exemplarId&quot;, &quot;situacao&quot;]) { const valor = String(dados.get(chave) ?? &quot;&quot;); if (valor) novos.set(chave, valor); }
+    setParams(novos);
+  }
+  return &lt;&gt;
+    &lt;form className=&quot;filtros&quot; onSubmit={filtrar} key={params.toString()}&gt;
+      {leitores.dados &amp;&amp; &lt;Seletor nome=&quot;leitorId&quot; titulo=&quot;Leitor&quot; itens={leitores.dados} rotulo={(leitor) =&gt; `${leitor.nome} · ${formatarCpf(leitor.cpf)}`} padrao={params.get(&quot;leitorId&quot;) ?? &quot;&quot;} obrigatorio={false} vazio=&quot;Todos os leitores&quot; /&gt;}
+      {exemplares.dados &amp;&amp; &lt;Seletor nome=&quot;exemplarId&quot; titulo=&quot;Exemplar&quot; itens={exemplares.dados} rotulo={(exemplar) =&gt; `${exemplar.numeroRegistro} · ${exemplar.titulo}`} padrao={params.get(&quot;exemplarId&quot;) ?? &quot;&quot;} obrigatorio={false} vazio=&quot;Todos os exemplares&quot; /&gt;}
+      &lt;Campo nome=&quot;situacao&quot; titulo=&quot;Situação&quot;&gt;&lt;select id=&quot;situacao&quot; name=&quot;situacao&quot; defaultValue={params.get(&quot;situacao&quot;) ?? &quot;&quot;}&gt;&lt;option value=&quot;&quot;&gt;Todas&lt;/option&gt;{situacoes.map((situacao) =&gt; &lt;option key={situacao.valor} value={situacao.valor}&gt;{situacao.nome}&lt;/option&gt;)}&lt;/select&gt;&lt;/Campo&gt;
+      &lt;button type=&quot;submit&quot;&gt;Filtrar&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;Avisos erro={leitores.erro || exemplares.erro} /&gt;
+  &lt;/&gt;;
+}
+
+/** Cancelamento e devolução trabalham com operações existentes, nunca com IDs digitados. */
+export function AcaoCirculacao&lt;T extends { id: number }&gt;({ endpoint, sufixo, rotulo, detalhes, acao, sucesso, retorno, vazio }: {
+  endpoint: string; sufixo: string; rotulo: (item: T) =&gt; string; detalhes: (item: T) =&gt; ReactNode; acao: string; sucesso: (item: T) =&gt; string; retorno: string; vazio: string;
+}) {
+  const [params, setParams] = useSearchParams();
+  const id = params.get(&quot;id&quot;) ?? &quot;&quot;;
+  const [revisao, setRevisao] = useState(0);
+  const consulta = useDados&lt;T[]&gt;(sufixo === &quot;cancelamento&quot; ? `${endpoint}?situacao=ativa` : endpoint, revisao);
+  // Um empréstimo atrasado continua aberto e também precisa permitir devolução.
+  const itens = consulta.dados?.filter((item) =&gt; sufixo === &quot;cancelamento&quot; || (&quot;dataDevolucao&quot; in item &amp;&amp; item.dataDevolucao === null));
+  const escolhido = itens?.find((item) =&gt; String(item.id) === id);
+  const [erro, setErro] = useState(&quot;&quot;);
+  const [mensagem, setMensagem] = useState(&quot;&quot;);
+  const [enviando, setEnviando] = useState(false);
+  async function executar(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault(); setEnviando(true); setErro(&quot;&quot;); setMensagem(&quot;&quot;);
+    try {
+      const item = await enviar&lt;T&gt;(`${endpoint}/${id}/${sufixo}`, &quot;POST&quot;);
+      setMensagem(sucesso(item)); setParams({}); setRevisao((valor) =&gt; valor + 1);
+    } catch (e) { setErro((e as Error).message); }
+    finally { setEnviando(false); }
+  }
+  return &lt;&gt;
+    &lt;Carregamento carregando={consulta.carregando} erro={consulta.erro} /&gt;
+    {itens &amp;&amp; (itens.length ? &lt;div className=&quot;selecao-registro&quot;&gt;&lt;Seletor nome=&quot;operacaoSelecionada&quot; titulo={sufixo === &quot;cancelamento&quot; ? &quot;Reserva ativa&quot; : &quot;Empréstimo em aberto&quot;} itens={itens} rotulo={rotulo} valor={id} aoMudar={(valor) =&gt; { setParams(valor ? { id: valor } : {}); setErro(&quot;&quot;); setMensagem(&quot;&quot;); }} /&gt;&lt;/div&gt; : &lt;p className=&quot;vazio&quot;&gt;{vazio}&lt;/p&gt;)}
+    {escolhido &amp;&amp; &lt;form className=&quot;cadastro&quot; onSubmit={executar} key={id}&gt;
+      &lt;div className=&quot;resumo-operacao&quot;&gt;{detalhes(escolhido)}&lt;/div&gt;
+      &lt;label className=&quot;confirmacao&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;confirmacao&quot; required /&gt; Confirmo os dados desta operação.&lt;/label&gt;
+      &lt;button type=&quot;submit&quot; disabled={enviando}&gt;{enviando ? &quot;Registrando…&quot; : acao}&lt;/button&gt;
+    &lt;/form&gt;}
+    &lt;Avisos erro={erro} sucesso={mensagem} /&gt;
+    &lt;p className=&quot;rodape-formulario&quot;&gt;&lt;Link to={retorno}&gt;Voltar à consulta&lt;/Link&gt;&lt;/p&gt;
+  &lt;/&gt;;
+}
+</code></pre></div><h3>Atualize <code>frontend/src/App.tsx</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/App.tsx"><div class="barra"><span>frontend/src/App.tsx</span><button type="button" data-copy aria-label="Copiar frontend/src/App.tsx">Copiar</button></div><pre><code>import { Link, NavLink, Navigate, Route, Routes, useLocation } from &quot;react-router-dom&quot;;
+import BuscarLivros from &quot;./pages/BuscarLivros.tsx&quot;;
+import CadastrarLivro from &quot;./pages/CadastrarLivro.tsx&quot;;
+import type { PaginaCasoUso } from &quot;./components/biblioteca.tsx&quot;;
+
+// Cada aluno acrescenta seu arquivo ucXX.tsx; não há menu ou roteador para disputar.
+const modulos = import.meta.glob&lt;{ default: PaginaCasoUso }&gt;(&quot;./use-cases/uc[0-9][0-9].tsx&quot;, { eager: true });
+const paginas = Object.values(modulos).map((modulo) =&gt; modulo.default).sort((a, b) =&gt; a.id.localeCompare(b.id));
+const grupos = [
+  { caminho: &quot;/livros&quot;, titulo: &quot;Livros&quot; },
+  { caminho: &quot;/autores&quot;, titulo: &quot;Autores&quot; },
+  { caminho: &quot;/leitores&quot;, titulo: &quot;Leitores&quot; },
+  { caminho: &quot;/exemplares&quot;, titulo: &quot;Exemplares&quot; },
+  { caminho: &quot;/reservas&quot;, titulo: &quot;Reservas&quot; },
+  { caminho: &quot;/emprestimos&quot;, titulo: &quot;Empréstimos&quot; },
+];
+
+export default function App() {
+  const localizacao = useLocation();
+  const caminhoAtual = localizacao.pathname === &quot;/&quot; || localizacao.pathname === &quot;/cadastrar&quot; ? &quot;/livros&quot; : localizacao.pathname;
+  const grupoAtual = grupos.find((grupo) =&gt; caminhoAtual.startsWith(grupo.caminho));
+  const atividades = paginas.filter((pagina) =&gt; pagina.caminho.startsWith(grupoAtual?.caminho ?? &quot;/livros&quot;));
+  const temBuscaLivros = paginas.some((pagina) =&gt; pagina.id === &quot;uc02&quot;);
+  const temCadastroLivro = paginas.some((pagina) =&gt; pagina.id === &quot;uc01&quot;);
+  return (
+    &lt;&gt;
+      &lt;a className=&quot;pular-conteudo&quot; href=&quot;#conteudo&quot;&gt;Ir para o conteúdo&lt;/a&gt;
+      &lt;header className=&quot;topo&quot;&gt;
+        &lt;div className=&quot;identidade&quot;&gt;&lt;Link className=&quot;marca&quot; to=&quot;/&quot;&gt;Biblioteca&lt;/Link&gt;&lt;span&gt;Acervo e circulação&lt;/span&gt;&lt;/div&gt;
+        &lt;nav aria-label=&quot;Áreas da biblioteca&quot;&gt;
+          {grupos.filter((grupo) =&gt; grupo.caminho === &quot;/livros&quot; || paginas.some((pagina) =&gt; pagina.caminho.startsWith(grupo.caminho))).map((grupo) =&gt; {
+            const inicio = paginas.find((pagina) =&gt; pagina.caminho === grupo.caminho)?.caminho ?? paginas.find((pagina) =&gt; pagina.caminho.startsWith(grupo.caminho))?.caminho ?? &quot;/&quot;;
+            return &lt;Link key={grupo.caminho} to={inicio} className={grupoAtual?.caminho === grupo.caminho ? &quot;active&quot; : &quot;&quot;} aria-current={grupoAtual?.caminho === grupo.caminho ? &quot;true&quot; : undefined}&gt;{grupo.titulo}&lt;/Link&gt;;
+          })}
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;div className=&quot;faixa-atividades&quot;&gt;
+        &lt;nav className=&quot;atividades&quot; aria-label={`Atividades de ${grupoAtual?.titulo ?? &quot;livros&quot;}`}&gt;
+          {atividades.map((pagina) =&gt; &lt;NavLink key={pagina.id} to={pagina.caminho} end&gt;{pagina.titulo}&lt;/NavLink&gt;)}
+          {!temBuscaLivros &amp;&amp; grupoAtual?.caminho === &quot;/livros&quot; &amp;&amp; &lt;NavLink to=&quot;/&quot; end&gt;Buscar livros&lt;/NavLink&gt;}
+          {!temCadastroLivro &amp;&amp; grupoAtual?.caminho === &quot;/livros&quot; &amp;&amp; &lt;NavLink to=&quot;/cadastrar&quot;&gt;Cadastrar livro&lt;/NavLink&gt;}
+        &lt;/nav&gt;
+      &lt;/div&gt;
+      &lt;main className=&quot;conteudo&quot; id=&quot;conteudo&quot;&gt;
+        &lt;Routes&gt;
+          {paginas.map(({ id, caminho, Componente }) =&gt; &lt;Route key={id} path={caminho} element={&lt;Componente /&gt;} /&gt;)}
+          &lt;Route path=&quot;/&quot; element={temBuscaLivros ? &lt;Navigate to={`/livros${localizacao.search}`} replace /&gt; : &lt;BuscarLivros /&gt;} /&gt;
+          &lt;Route path=&quot;/cadastrar&quot; element={temCadastroLivro ? &lt;Navigate to={`/livros/cadastrar${localizacao.search}`} replace /&gt; : &lt;CadastrarLivro /&gt;} /&gt;
+          &lt;Route path=&quot;*&quot; element={&lt;&gt;&lt;h1&gt;Página não encontrada&lt;/h1&gt;&lt;p&gt;Use o menu para escolher uma atividade disponível.&lt;/p&gt;&lt;Link to=&quot;/&quot;&gt;Voltar ao acervo&lt;/Link&gt;&lt;/&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/main&gt;
+      &lt;footer className=&quot;rodape&quot;&gt;Biblioteca · Gestão do acervo e atendimento ao leitor&lt;/footer&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre></div><h3>Atualize <code>frontend/src/index.css</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/index.css"><div class="barra"><span>frontend/src/index.css</span><button type="button" data-copy aria-label="Copiar frontend/src/index.css">Copiar</button></div><pre><code>:root {
+  --fundo: #f5f7fa;
+  --cartao: #fff;
+  --texto: #1e293b;
+  --suave: #536174;
+  --linha: #dce3ec;
+  --destaque: #1d4ed8;
+  --erro: #a61d24;
+  --sucesso: #065f46;
+  font-family: system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fundo);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  accent-color: var(--destaque);
+  caret-color: var(--destaque);
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+::selection { background: #c8d9ff; color: #102354; }
+:focus-visible { outline: 3px solid #2563eb; outline-offset: 4px; }
+a { color: #194abf; text-underline-offset: .18em; }
+a:hover { color: #0f2f83; }
+.pular-conteudo { position: fixed; left: 1rem; top: -5rem; background: white; padding: .7rem 1rem; z-index: 2; }
+.pular-conteudo:focus { top: 1rem; }
+.topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding: 1rem max(1.5rem, calc((100vw - 1200px) / 2)); background: #0f172a; color: #fff; }
+.identidade { display: grid; gap: .05rem; }
+.marca { color: white; text-decoration: none; font-weight: 750; font-size: 1.35rem; letter-spacing: -.025em; }
+.marca:hover { color: white; }
+.identidade &gt; span { color: #b9c7dd; font-size: .8rem; }
+.topo nav { display: flex; flex-wrap: wrap; gap: .25rem; }
+.topo nav a { color: #cdd8e9; text-decoration: none; padding: .55rem .8rem; border-radius: 6px; font-size: .9rem; font-weight: 550; }
+.topo nav a:hover { background: #25334e; color: white; }
+.topo nav a.active { background: #1d4ed8; color: #fff; }
+.faixa-atividades { background: #fff; border-bottom: 1px solid var(--linha); }
+.atividades { max-width: 1200px; margin: 0 auto; display: flex; gap: 1.75rem; overflow-x: auto; padding: 0 1.5rem; }
+.atividades a { display: block; flex-shrink: 0; padding: .9rem 0; text-decoration: none; border-bottom: 3px solid transparent; color: var(--suave); font-size: .9rem; }
+.atividades a:hover { color: var(--destaque); }
+.atividades a.active { border-color: var(--destaque); color: var(--destaque); font-weight: 650; }
+.conteudo { max-width: 1200px; margin: 2rem auto 1rem; padding: 2rem; background: var(--cartao); border: 1px solid var(--linha); border-radius: 12px; min-height: 420px; }
+h1 { margin: 0; font-size: clamp(1.5rem, 3vw, 1.9rem); line-height: 1.2; letter-spacing: -.025em; font-weight: 700; text-wrap: balance; }
+.cabecalho-pagina { margin-bottom: 1.8rem; }
+.cabecalho-pagina p { max-width: 72ch; margin: .65rem 0 0; color: var(--suave); }
+input, select, button { font: inherit; padding: .65rem .8rem; border: 1px solid #aab8ca; border-radius: 6px; line-height: 1.4; min-height: 44px; }
+input, select { color: var(--texto); background: #fff; min-width: 0; width: 100%; }
+input::placeholder { color: #657389; opacity: 1; }
+input:hover, select:hover { border-color: #74859d; }
+button { background: var(--destaque); color: #fff; border-color: var(--destaque); cursor: pointer; font-weight: 600; }
+button:hover { background: #153faa; border-color: #153faa; }
+button:disabled { opacity: .6; cursor: wait; }
+button.perigo { background: #ab2029; border-color: #ab2029; }
+button.perigo:hover { background: #861721; }
+.campo { display: grid; gap: .35rem; }
+.campo &gt; label { font-size: .92rem; font-weight: 650; }
+.campo small { color: var(--suave); font-weight: 400; }
+.cadastro { display: grid; gap: 1.1rem; max-width: 560px; }
+.cadastro &gt; button { justify-self: start; margin-top: .25rem; min-width: 170px; }
+.cadastro label:not(.confirmacao) { display: grid; gap: .35rem; font-weight: 600; }
+.cadastro small { font-weight: 400; color: var(--suave); }
+.selecao-registro { max-width: 620px; margin-bottom: 1.75rem; }
+.busca { display: flex; align-items: flex-end; gap: .75rem; margin-bottom: 1.7rem; max-width: 760px; }
+.busca .campo { flex: 1; min-width: 0; }
+.filtros { display: flex; flex-wrap: wrap; gap: .75rem; align-items: flex-end; padding-bottom: 1.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--linha); }
+.filtros .campo { flex: 1 1 180px; min-width: 0; }
+.filtros select { max-width: 100%; }
+.filtros button { flex-shrink: 0; }
+.resultado-busca { width: 100%; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: .9rem .75rem; border-bottom: 1px solid var(--linha); vertical-align: top; }
+th { font-size: .76rem; letter-spacing: .035em; text-transform: uppercase; color: #526176; background: #f7f9fc; white-space: nowrap; }
+td strong { font-weight: 650; }
+tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #f9fbff; }
+.segunda-linha { display: block; margin-top: .25rem; color: var(--suave); font-size: .83rem; }
+.acoes { display: flex; flex-wrap: wrap; gap: .45rem .8rem; }
+.acoes .acoes { display: contents; }
+.acoes a { white-space: nowrap; }
+.contagem, .dica { color: var(--suave); font-size: .92rem; }
+.vazio { background: #f7f9fc; padding: 1.25rem; color: var(--suave); border: 1px dashed #b8c4d4; border-radius: 6px; }
+.nota { margin: .25rem 0; font-size: .9rem; color: var(--suave); }
+.erro { color: var(--erro); font-weight: 600; max-width: 75ch; }
+.sucesso { margin-top: 1.5rem; padding: 1rem 1.25rem; border: 1px solid #9cd5bb; border-radius: 8px; background: #edf9f2; color: var(--sucesso); max-width: 75ch; }
+.sucesso p { margin: 0 0 .5rem; }
+.sucesso p:last-child { margin-bottom: 0; }
+.confirmacao { display: flex; gap: .7rem; align-items: flex-start; font-weight: 500; font-size: .95rem; }
+.confirmacao input { width: 19px; height: 19px; min-height: 19px; flex-shrink: 0; margin: .15rem 0 0; }
+.resumo-operacao { padding: 1rem 1.25rem; border: 1px solid var(--linha); border-radius: 8px; }
+.resumo-operacao p { margin: 0 0 .4rem; }
+.resumo-operacao p:last-child { margin-bottom: 0; }
+.situacao { display: inline-block; white-space: nowrap; font-size: .78rem; font-weight: 650; line-height: 1.3; padding: .28rem .5rem; background: #edf1f7; color: #40516b; border-radius: 4px; }
+.situacao-disponivel, .situacao-devolvido, .situacao-atendida { background: #e5f4eb; color: #146c43; }
+.situacao-reservado, .situacao-ativa { background: #e9f0ff; color: #214bb0; }
+.situacao-emprestado, .situacao-em_aberto { background: #fff2d6; color: #775113; }
+.situacao-atrasado { background: #ffe7e9; color: #a22431; }
+.rodape-formulario { margin-top: 1.7rem; }
+.rodape { max-width: 1200px; padding: .7rem 1.5rem 1.5rem; margin: 0 auto; color: var(--suave); font-size: .78rem; }
+@media (max-width: 760px) {
+  .topo { padding: 1rem; gap: .85rem; }
+  .topo nav { width: 100%; gap: .1rem; }
+  .topo nav a { font-size: .85rem; padding: .5rem .6rem; }
+  .atividades { gap: 1.3rem; padding: 0 1rem; }
+  .conteudo { margin: 1rem; padding: 1.5rem 1.1rem; min-height: 400px; }
+  .filtros .campo { flex-basis: 100%; }
+  .filtros button { width: 100%; }
+  .busca { gap: .5rem; }
+  th, td { padding: .7rem .6rem; }
+  .cadastro &gt; button { width: 100%; }
+  .rodape { padding: .5rem 1.2rem 1rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  button, a { transition: background-color 120ms ease-out, color 120ms ease-out; }
+}
+</code></pre></div><h3>Atualize <code>frontend/src/pages/BuscarLivros.tsx</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/pages/BuscarLivros.tsx"><div class="barra"><span>frontend/src/pages/BuscarLivros.tsx</span><button type="button" data-copy aria-label="Copiar frontend/src/pages/BuscarLivros.tsx">Copiar</button></div><pre><code>import { useEffect, useState, type FormEvent } from &quot;react&quot;;
+import { useSearchParams } from &quot;react-router-dom&quot;;
+import { buscarLivros, formatarData, type Livro } from &quot;../api.ts&quot;;
+
+/** A resposta da API, junto com o termo que a produziu. */
+type Resultado = {
+  termo: string;
+  livros: Livro[];
+  erro: string;
+};
+
+export default function BuscarLivros() {
+  // o termo mora na URL (/?q=...): recarregar a página repete a busca
+  const [params, setParams] = useSearchParams();
+  const termo = params.get(&quot;q&quot;) ?? &quot;&quot;;
+
+  const [resultado, setResultado] = useState&lt;Resultado | null&gt;(null);
+
+  useEffect(() =&gt; {
+    if (termo === &quot;&quot;) return;
+
+    // se o termo mudar antes da resposta chegar, a resposta antiga é ignorada
+    let ignorar = false;
+
+    buscarLivros(termo)
+      .then((livros) =&gt; {
+        if (!ignorar) setResultado({ termo, livros, erro: &quot;&quot; });
+      })
+      .catch((e: Error) =&gt; {
+        if (!ignorar) setResultado({ termo, livros: [], erro: e.message });
+      });
+
+    return () =&gt; {
+      ignorar = true;
+    };
+  }, [termo]);
+
+  // ainda não chegou resposta para o termo que está na URL
+  const carregando = resultado?.termo !== termo;
+
+  function buscar(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault();
+
+    const q = String(new FormData(evento.currentTarget).get(&quot;q&quot;)).trim();
+
+    setParams(q === &quot;&quot; ? {} : { q });
+  }
+
+  return (
+    &lt;section&gt;
+      {/* React 19: &lt;title&gt; dentro do componente vai parar no &lt;head&gt; */}
+      &lt;title&gt;Buscar livros · Biblioteca&lt;/title&gt;
+
+      &lt;h1&gt;Buscar livros&lt;/h1&gt;
+
+      &lt;form className=&quot;busca&quot; onSubmit={buscar}&gt;
+        &lt;input
+          // key: quando a URL muda (menu, voltar), o campo recomeça com o termo dela
+          key={termo}
+          name=&quot;q&quot;
+          defaultValue={termo}
+          placeholder=&quot;ISBN, título ou nome do autor&quot;
+          aria-label=&quot;Termo de busca&quot;
+        /&gt;
+        &lt;button type=&quot;submit&quot;&gt;Buscar&lt;/button&gt;
+      &lt;/form&gt;
+
+      {termo === &quot;&quot; ? (
+        &lt;p className=&quot;dica&quot;&gt;Digite um ISBN, parte do título ou o nome do autor.&lt;/p&gt;
+      ) : carregando ? (
+        &lt;p className=&quot;dica&quot;&gt;Buscando…&lt;/p&gt;
+      ) : resultado.erro !== &quot;&quot; ? (
+        &lt;p className=&quot;erro&quot;&gt;{resultado.erro}&lt;/p&gt;
+      ) : resultado.livros.length === 0 ? (
+        &lt;p className=&quot;dica&quot;&gt;Nenhum livro encontrado para “{termo}”.&lt;/p&gt;
+      ) : (
+        &lt;div
+          className=&quot;resultado-busca&quot;
+          role=&quot;region&quot;
+          aria-label=&quot;Livros encontrados&quot;
+          tabIndex={0}
+        &gt;
+          &lt;table&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;ISBN&lt;/th&gt;
+                &lt;th&gt;Título&lt;/th&gt;
+                &lt;th&gt;Autor&lt;/th&gt;
+                &lt;th&gt;Catalogado em&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              {resultado.livros.map((livro) =&gt; (
+                &lt;tr key={livro.id}&gt;
+                  &lt;td&gt;{livro.isbn}&lt;/td&gt;
+                  &lt;td&gt;{livro.titulo}&lt;/td&gt;
+                  &lt;td&gt;{livro.autor}&lt;/td&gt;
+                  &lt;td&gt;{formatarData(livro.dataCatalogacao)}&lt;/td&gt;
+                &lt;/tr&gt;
+              ))}
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/section&gt;
+  );
+}
+</code></pre></div><h3>Atualize <code>frontend/src/pages/CadastrarLivro.tsx</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/pages/CadastrarLivro.tsx"><div class="barra"><span>frontend/src/pages/CadastrarLivro.tsx</span><button type="button" data-copy aria-label="Copiar frontend/src/pages/CadastrarLivro.tsx">Copiar</button></div><pre><code>import { useState, type FormEvent } from &quot;react&quot;;
+import { Link } from &quot;react-router-dom&quot;;
+import { cadastrarLivro, formatarData, type Livro } from &quot;../api.ts&quot;;
+
+export default function CadastrarLivro() {
+  const [salvo, setSalvo] = useState&lt;Livro | null&gt;(null);
+  const [erro, setErro] = useState(&quot;&quot;);
+  const [enviando, setEnviando] = useState(false);
+
+  async function cadastrar(evento: FormEvent&lt;HTMLFormElement&gt;) {
+    evento.preventDefault();
+
+    const formulario = evento.currentTarget;
+    const dados = new FormData(formulario);
+
+    setEnviando(true);
+    setErro(&quot;&quot;);
+    setSalvo(null);
+
+    try {
+      const livro = await cadastrarLivro({
+        isbn: String(dados.get(&quot;isbn&quot;)),
+        titulo: String(dados.get(&quot;titulo&quot;)),
+        autorId: Number(dados.get(&quot;autorId&quot;)),
+      });
+
+      setSalvo(livro);
+      formulario.reset();
+    } catch (e) {
+      // as regras continuam no backend: aqui só mostramos o que ele respondeu
+      setErro((e as Error).message);
+    } finally {
+      setEnviando(false);
+    }
+  }
+
+  return (
+    &lt;section&gt;
+      &lt;title&gt;Cadastrar livro · Biblioteca&lt;/title&gt;
+
+      &lt;h1&gt;Cadastrar livro&lt;/h1&gt;
+
+      &lt;form className=&quot;cadastro&quot; onSubmit={cadastrar}&gt;
+        &lt;label&gt;
+          ISBN
+          &lt;input name=&quot;isbn&quot; required placeholder=&quot;9780321125217&quot; /&gt;
+        &lt;/label&gt;
+
+        &lt;label&gt;
+          Título
+          &lt;input name=&quot;titulo&quot; required /&gt;
+        &lt;/label&gt;
+
+        &lt;label&gt;
+          Autor (id)
+          &lt;input name=&quot;autorId&quot; type=&quot;number&quot; min=&quot;1&quot; required /&gt;
+          &lt;small&gt;
+            Carga inicial: 1 Eric Evans · 2 Robert C. Martin · 3 Harper Lee · 4 Jane
+            Austen
+          &lt;/small&gt;
+        &lt;/label&gt;
+
+        &lt;button type=&quot;submit&quot; disabled={enviando}&gt;
+          {enviando ? &quot;Cadastrando…&quot; : &quot;Cadastrar&quot;}
+        &lt;/button&gt;
+      &lt;/form&gt;
+
+      {erro !== &quot;&quot; &amp;&amp; &lt;p className=&quot;erro&quot;&gt;{erro}&lt;/p&gt;}
+
+      {salvo !== null &amp;&amp; (
+        &lt;div className=&quot;sucesso&quot;&gt;
+          &lt;p&gt;
+            &lt;strong&gt;{salvo.titulo}&lt;/strong&gt; entrou no catálogo em {formatarData(salvo.dataCatalogacao)}.
+          &lt;/p&gt;
+          &lt;Link to={`/?q=${salvo.isbn}`}&gt;Ver no acervo&lt;/Link&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/section&gt;
+  );
+}
+</code></pre></div></details></section><section class="secao" id="backend"><h2>Implementar domínio, persistência e API</h2><ol class="etapas"><li>Crie RegistrarDevolucao, buscando o empréstimo pelo identificador.</li><li>Recuse uma devolução repetida e registre a data corrente.</li><li>Registre POST /emprestimos/:id/devolucao na transação compartilhada.</li><li>Teste a repetição, a liberação do exemplar e do limite e o cálculo do atraso.</li></ol><p>Crie os arquivos na ordem apresentada. Regras de negócio ficam no módulo responsável; os adapters de integração ficam fora dos módulos e traduzem suas consultas. O arquivo <code>backend/src/use-cases/uc20.ts</code> compõe as dependências e registra as rotas desta atividade.</p><h3>Crie <code>backend/src/modules/circulacao/domain/RegistrarDevolucao.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/modules/circulacao/domain/RegistrarDevolucao.ts"><div class="barra"><span>backend/src/modules/circulacao/domain/RegistrarDevolucao.ts</span><button type="button" data-copy aria-label="Copiar backend/src/modules/circulacao/domain/RegistrarDevolucao.ts">Copiar</button></div><pre><code>import { NotFound, RuleConflict } from &quot;../../../shared/errors&quot;;
+import { hoje } from &quot;./modelo&quot;;
+import { BaseCirculacao } from &quot;./BaseCirculacao&quot;;
+
+export class RegistrarDevolucao extends BaseCirculacao {
+  async executar(id: number) {
+    const emprestimo = (await this.repositorio.emprestimos()).find(e =&gt; e.id === id);
+    if (!emprestimo) throw new NotFound(&quot;Empréstimo não encontrado.&quot;);
+    if (emprestimo.dataDevolucao) throw new RuleConflict(&quot;Este empréstimo já foi devolvido.&quot;);
+    const dataDevolucao = hoje(this.clock);
+    await this.repositorio.devolverEmprestimo(id, dataDevolucao);
+    return this.apresentarEmprestimo({ ...emprestimo, dataDevolucao });
+  }
+
+}
+</code></pre></div><h3>Crie <code>backend/src/use-cases/uc20.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/src/use-cases/uc20.ts"><div class="barra"><span>backend/src/use-cases/uc20.ts</span><button type="button" data-copy aria-label="Copiar backend/src/use-cases/uc20.ts">Copiar</button></div><pre><code>import { RegistrarDevolucao } from &quot;../modules/circulacao/domain/RegistrarDevolucao&quot;;
+import { idPositivo } from &quot;../adapters/circulacaoHttp&quot;;
+import { dependenciasCirculacao } from &quot;../adapters/criarCirculacao&quot;;
+import { emTransacao } from &quot;../infrastructure/transaction&quot;;
+import type { CasoDeUso } from &quot;./types&quot;;
+
+export default {
+  id: &quot;uc20&quot;,
+  registrar(api) {
+    api.post(&quot;/emprestimos/:id/devolucao&quot;, async c =&gt; {
+      const id = idPositivo(c.req.param(&quot;id&quot;));
+      return c.json(await emTransacao(tx =&gt; new RegistrarDevolucao(...dependenciasCirculacao(tx)).executar(id)));
+    });
+  },
+} satisfies CasoDeUso;
+</code></pre></div></section><section class="secao" id="frontend"><h2>Implementar a interface React</h2><p>Esta página usa os componentes e a função HTTP da preparação compartilhada. O App a encontra pelo nome <code>ucXX.tsx</code>. As consultas usadas nos seletores explicam os pré-requisitos de interface; não substitua seletores por IDs internos digitados pelo usuário.</p><h3>Crie <code>frontend/src/use-cases/uc20.tsx</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="frontend/src/use-cases/uc20.tsx"><div class="barra"><span>frontend/src/use-cases/uc20.tsx</span><button type="button" data-copy aria-label="Copiar frontend/src/use-cases/uc20.tsx">Copiar</button></div><pre><code>/* oxlint-disable react/only-export-components -- O registro de cada UC exporta metadados e componente para o carregamento automático. */
+import { formatarData, type Emprestimo } from &quot;../api.ts&quot;;
+import { Pagina } from &quot;../components/biblioteca.tsx&quot;;
+import { AcaoCirculacao } from &quot;../components/circulacao.tsx&quot;;
+
+function RegistrarDevolucao() {
+  return &lt;Pagina titulo=&quot;Registrar devolução&quot; descricao=&quot;Encerre um empréstimo em aberto e torne o exemplar disponível novamente.&quot;&gt;
+    &lt;AcaoCirculacao&lt;Emprestimo&gt; endpoint=&quot;/api/emprestimos&quot; sufixo=&quot;devolucao&quot; rotulo={(emprestimo) =&gt; `${emprestimo.numeroRegistro} · ${emprestimo.livroTitulo} · ${emprestimo.leitorNome}`} detalhes={(emprestimo) =&gt; &lt;&gt;&lt;p&gt;&lt;strong&gt;{emprestimo.livroTitulo}&lt;/strong&gt; · {emprestimo.numeroRegistro}&lt;/p&gt;&lt;p&gt;Leitor: {emprestimo.leitorNome}&lt;/p&gt;&lt;p&gt;Devolução prevista: {formatarData(emprestimo.dataPrevistaDevolucao)}&lt;/p&gt;{emprestimo.diasDeAtraso &gt; 0 &amp;&amp; &lt;p className=&quot;erro&quot;&gt;{emprestimo.diasDeAtraso} dia(s) de atraso.&lt;/p&gt;}&lt;/&gt;} acao=&quot;Confirmar devolução&quot; sucesso={(emprestimo) =&gt; `Devolução do exemplar ${emprestimo.numeroRegistro} registrada em ${formatarData(emprestimo.dataDevolucao)}.`} retorno=&quot;/emprestimos&quot; vazio=&quot;Não há empréstimos em aberto para devolver.&quot; /&gt;
+  &lt;/Pagina&gt;;
+}
+
+export default { id: &quot;uc20&quot;, titulo: &quot;Registrar devolução&quot;, caminho: &quot;/emprestimos/devolver&quot;, Componente: RegistrarDevolucao };
+</code></pre></div><p>Depois do build, abra <a href="http://localhost:3000/emprestimos/devolver">http://localhost:3000/emprestimos/devolver</a>. Confirme envio, carregamento, resultado, entrada inválida e mensagem de erro. Recarregue a página diretamente para conferir a rota do navegador.</p></section><section class="secao" id="testes"><h2>Escrever e executar os testes</h2><p>Os fixtures usam registros próprios e retornam os IDs reais criados durante o teste. As regras de datas e limites também são exercitadas com relógio ou repositórios controlados quando aplicável. Copie os arquivos completos:</p><h3>Crie <code>backend/tests/uc20.test.ts</code></h3><p>Copie o conteúdo integral abaixo para esse arquivo. Crie as pastas necessárias. Se o arquivo já estiver idêntico por uma atividade anterior, mantenha-o.</p><div class="bloco" data-source="backend/tests/uc20.test.ts"><div class="barra"><span>backend/tests/uc20.test.ts</span><button type="button" data-copy aria-label="Copiar backend/tests/uc20.test.ts">Copiar</button></div><pre><code>import { ReservarExemplar } from &quot;../src/modules/circulacao/domain/ReservarExemplar&quot;;
+import { RegistrarEmprestimo } from &quot;../src/modules/circulacao/domain/RegistrarEmprestimo&quot;;
+import { RegistrarDevolucao } from &quot;../src/modules/circulacao/domain/RegistrarDevolucao&quot;;
+import { expect, test } from &quot;bun:test&quot;;
+import { cenario } from &quot;./circulacaoDouble&quot;;
+import { api, exemplarDeTeste } from &quot;./suporte-api&quot;;
+import { leitorDeTeste } from &quot;./leitoresApiFixture&quot;;
+import { hoje } from &quot;../src/modules/circulacao/domain/modelo&quot;;
+
+test(&quot;UC20 devolução libera exemplar e vaga e só pode ocorrer uma vez&quot;, async () =&gt; {
+  const { criar, tempo } = cenario();
+  const reservar = criar(ReservarExemplar);
+  const emprestar = criar(RegistrarEmprestimo);
+  const devolver = criar(RegistrarDevolucao);
+  const primeiro = await emprestar.executar(1, 1);
+  await emprestar.executar(1, 2); await emprestar.executar(1, 3);
+  tempo.agora = &quot;2026-11-01T12:00:00Z&quot;;
+  const devolvido = await devolver.executar(primeiro.id);
+  expect(devolvido).toMatchObject({ dataDevolucao: &quot;2026-11-01&quot;, situacao: &quot;devolvido&quot;, diasDeAtraso: 3 });
+  await expect(devolver.executar(primeiro.id)).rejects.toThrow(&quot;já foi devolvido&quot;);
+  await emprestar.executar(1, 4); await reservar.executar(2, 1);
+});
+
+test(&quot;UC20 API: devolução única libera a cópia para novo empréstimo&quot;, async () =&gt; {
+  const leitor = await leitorDeTeste(); const exemplar = await exemplarDeTeste();
+  const emprestimo = await (await api(&quot;POST&quot;, &quot;/emprestimos&quot;, { leitorId: leitor.id, exemplarId: exemplar.id })).json();
+  const resposta = await api(&quot;POST&quot;, `/emprestimos/${emprestimo.id}/devolucao`);
+  expect(resposta.status).toBe(200);
+  expect(await resposta.json()).toMatchObject({ id: emprestimo.id, dataDevolucao: hoje(), situacao: &quot;devolvido&quot; });
+  expect((await api(&quot;POST&quot;, `/emprestimos/${emprestimo.id}/devolucao`)).status).toBe(409);
+  expect((await api(&quot;POST&quot;, &quot;/emprestimos&quot;, { leitorId: leitor.id, exemplarId: exemplar.id })).status).toBe(201);
+  expect((await api(&quot;POST&quot;, &quot;/emprestimos/2147483647/devolucao&quot;)).status).toBe(404);
+});
+</code></pre></div><div class="bloco"><div class="barra"><span>Terminal · verificações e teste desta atividade</span><button type="button" data-copy aria-label="Copiar Terminal · verificações e teste desta atividade">Copiar</button></div><pre><code># Execute na raiz do repositório.
+cd backend
+bun install --frozen-lockfile
+bun run typecheck
+bun run verificar
+cd ../frontend
+bun install --frozen-lockfile
+bun run lint
+bun run build
+cd ..
+
+# Compila a interface e inicia aplicação + PostgreSQL.
+docker compose -f infra/compose.yaml up -d --build
+
+# Cria o banco exclusivo de testes se ainda não existir.
+docker compose -f infra/compose.yaml exec -T db psql -U biblioteca -d postgres &lt;&lt;&#x27;SQL&#x27;
+SELECT &#x27;CREATE DATABASE biblioteca_test&#x27;
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = &#x27;biblioteca_test&#x27;)
+\gexec
+SQL
+
+# A implementação deste caso é exercitada contra biblioteca_test.
+docker compose -f infra/compose.yaml run --rm --build test bun test tests/uc20.test.ts</code></pre></div><p>Resultado esperado: typecheck, fronteiras, lint e build sem erros; todos os testes do arquivo desta atividade aprovados. O teste SQL usa <code>biblioteca_test</code>, separado do banco da aplicação. Ao remover o volume do Compose, recrie esse banco com o comando acima.</p><div class="bloco"><div class="barra"><span>Terminal · comparar com o código de referência</span><button type="button" data-copy aria-label="Copiar Terminal · comparar com o código de referência">Copiar</button></div><pre><code>bun .docs/use-cases/codigo.ts uc20</code></pre></div><p>A comparação é de conteúdo, não uma prova de comportamento: uma solução própria pode diferir e estar correta. Os testes e os critérios de aceite são a verificação funcional.</p></section><section class="secao" id="pr"><h2>Revisar e solicitar o pull request</h2><ul class="checkboxes"><li><label><input type="checkbox">A devolução registra a data efetiva calculada pelo servidor e preserva o histórico.</label></li><li><label><input type="checkbox">O exemplar e uma vaga no limite de empréstimos do leitor são liberados.</label></li><li><label><input type="checkbox">Uma segunda devolução retorna 409. Um empréstimo inexistente retorna 404.</label></li><li><label><input type="checkbox">Os dias de atraso usam a data efetiva da devolução e não continuam aumentando após o encerramento.</label></li><li><label><input type="checkbox">Testes, build, lint e verificador de fronteiras aprovados.</label></li><li><label><input type="checkbox">Tela exercitada no navegador e arquivos temporários fora do commit.</label></li></ul><div class="bloco"><div class="barra"><span>Terminal · commit e push no fork</span><button type="button" data-copy aria-label="Copiar Terminal · commit e push no fork">Copiar</button></div><pre><code>git status --short
+git diff --check
+git add backend/src backend/tests backend/scripts frontend/src
+git diff --cached --stat
+git commit -m &quot;feat(uc20): registrar devolução&quot;
+git push -u origin uc20</code></pre></div><ol class="etapas"><li>Abra seu fork no GitHub e use <strong>Contribute → Open pull request</strong>.</li><li>Selecione base repository <code>maroquio/biblioteca-tutorial</code>, base <code>saas-evolution/fase01</code>, head repository <strong>seu fork</strong> e compare <code>uc20</code>.</li><li>Use o título <strong>UC20 — Registrar devolução</strong>. Na descrição, informe pré-requisitos integrados, arquivos alterados, regras implementadas, comandos executados e resultados dos testes. Inclua uma captura da tela.</li><li>Solicite a revisão do professor. Somente <code>maroquio</code> pode integrar na branch central; a autoria dos seus commits é preservada.</li><li>Se a base avançar e houver conflito, atualize sua branch com <code>git fetch upstream</code> e <code>git merge upstream/saas-evolution/fase01</code>, resolva os conflitos preservando os outros UCs, repita os testes e faça outro push para o fork.</li></ol><p><a href="index.html">Voltar ao índice e às ondas de integração</a></p></section><footer>TEES II · Ifes 2026.2. Base de integração: <code>saas-evolution/fase01</code>. Referência executável: <code>saas-evolution/fase01-teste</code>. Código completo reproduzido a partir dos arquivos da implementação de referência.</footer></main></div><script>
+document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const value=button.closest('.bloco').querySelector('code').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value)}else{const field=document.createElement('textarea');field.value=value;field.style.position='fixed';field.style.opacity='0';document.body.append(field);field.select();if(!document.execCommand('copy'))throw new Error('copy');field.remove()}button.textContent='Copiado';setTimeout(()=>button.textContent='Copiar',1600)}catch{button.textContent='Selecione o código e copie'}}));
+</script></body></html>

@@ -101,3 +101,22 @@ monólito modular. Os estados anteriores estão nas branches
 O Compose usa a raiz do repositório como contexto de build para incluir
 `backend/` e `frontend/`. O ignore específico `infra/Dockerfile.dockerignore`
 filtra esse contexto. O nome do projeto continua sendo `biblioteca-tutorial`.
+
+## Atividades da turma: 22 casos de uso
+
+Abra o [índice dos tutoriais](.docs/use-cases/index.html) no navegador.
+Cada documento inclui os pré-requisitos, código completo de backend e React,
+testes e o fluxo de entrega por PR. Os alunos trabalham em forks pessoais,
+em branches `uc01` a `uc22`, com destino a `saas-evolution/fase01`.
+
+Antes de começar uma atividade, o comando abaixo verifica se seus pré-requisitos
+já foram integrados pelo professor e cria a branch a partir da base atualizada:
+
+```bash
+bun .docs/use-cases/preparar.ts uc05
+```
+
+Troque `uc05` pela atividade atribuída. Somente `maroquio` pode atualizar ou
+integrar PRs na branch central. A implementação completa validada está na branch
+`saas-evolution/fase01-teste`; as instruções de validação ficam em `qa/README.md`
+nessa branch.

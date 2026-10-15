@@ -1,0 +1,382 @@
+{
+  "uc01": {
+    "backendPrerequisites": [
+      "uc05"
+    ],
+    "files": [
+      "backend/src/modules/acervo/domain/dadosDoLivro.ts",
+      "backend/src/modules/acervo/catalogo.ts",
+      "backend/src/modules/acervo/buscarLivros.ts",
+      "backend/src/adapters/acervoIntegracao.ts",
+      "backend/src/use-cases/uc01.ts",
+      "backend/tests/uc01.test.ts"
+    ],
+    "criteria": [
+      "Livro bibliográfico armazena ISBN-13 normalizado, título, autor e data; não cria exemplar automaticamente.",
+      "ISBN duplicado e título repetido para o mesmo autor retornam 409; dados inválidos retornam 400 e autor ausente retorna 404.",
+      "Limites de 5 livros por autor literário e 10 por didático são verificados atomicamente, inclusive sob concorrência.",
+      "O número de registro legado é mantido até a migração segura do UC13; novas obras não exigem número físico.",
+      "A busca legada /api/livros/:q continua funcionando durante a integração gradual.",
+      "Identificadores exigem números inteiros positivos ou strings de dígitos; booleanos, arrays e nulos são recusados com 400.",
+      "RF11: cadastro responde 201 com Location /api/livros/{isbn}; seguir esse endereço encontra a obra, mesmo antes da integração do UC02."
+    ],
+    "steps": [
+      "Compare o livro bibliográfico com a cópia física: remova a obrigação de número de registro na tabela existente sem apagar os valores antigos.",
+      "Crie o parser de entrada, as portas de autoria/circulação, o DTO bibliográfico e o adapter entre módulos.",
+      "Implemente cadastro com verificação de ISBN, título, autor e limite na mesma transação; sincronize a projeção de contagem.",
+      "Adapte a busca compatível para retornar os novos DTOs; registre exclusivamente as rotas deste UC e a preparação idempotente."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/livros",
+        "body": {
+          "isbn": "9780141439518",
+          "titulo": "Orgulho e Preconceito",
+          "autorId": 4
+        }
+      }
+    ]
+  },
+  "uc02": {
+    "backendPrerequisites": [
+      "uc01"
+    ],
+    "files": [
+      "backend/src/modules/acervo/consultarLivro.ts",
+      "backend/src/use-cases/uc02.ts",
+      "backend/tests/uc02.test.ts"
+    ],
+    "criteria": [
+      "Busca por ISBN, parte do título e nome do autor preserva a prioridade anterior.",
+      "GET sem termo lista obras; GET por ID retorna o registro bibliográfico ou 404.",
+      "Cada resultado mostra autor, quantidade total de exemplares e quantos estão disponíveis.",
+      "Empréstimo aberto ou reserva ainda válida reduz a disponibilidade; reserva expirada não bloqueia."
+    ],
+    "steps": [
+      "Reutilize a consulta compatível adaptada no UC01 e crie a leitura individual por identificador bibliográfico.",
+      "Adicione as rotas GET /livros e GET /livros/id/:id, sem duplicar o endereço legado.",
+      "Exiba a quantidade física separadamente dos dados bibliográficos e mantenha o formulário de busca."
+    ],
+    "apiExamples": [
+      {
+        "method": "GET",
+        "path": "/api/livros?q=Austen"
+      },
+      {
+        "method": "GET",
+        "path": "/api/livros/id/1"
+      }
+    ]
+  },
+  "uc03": {
+    "backendPrerequisites": [
+      "uc02"
+    ],
+    "files": [
+      "backend/src/modules/acervo/atualizarLivro.ts",
+      "backend/src/use-cases/uc03.ts",
+      "backend/tests/uc03.test.ts"
+    ],
+    "criteria": [
+      "Edita ISBN, título e autor sem alterar identidade ou data da catalogação.",
+      "As regras de unicidade e limite desconsideram a própria obra editada.",
+      "A mudança de autor atualiza as contagens dos autores anterior e novo na mesma transação.",
+      "Obra ausente retorna 404 e conflito bibliográfico retorna 409."
+    ],
+    "steps": [
+      "Valide os dados completos de edição com o parser compartilhado.",
+      "Carregue o registro existente e reutilize as invariantes ignorando seu próprio ID.",
+      "Atualize os dados bibliográficos e as projeções dos autores atomicamente; exponha PUT /livros/:id."
+    ],
+    "apiExamples": [
+      {
+        "method": "PUT",
+        "path": "/api/livros/1",
+        "body": {
+          "isbn": "9780141439518",
+          "titulo": "Orgulho e Preconceito — edição revisada",
+          "autorId": 4
+        }
+      }
+    ]
+  },
+  "uc04": {
+    "backendPrerequisites": [
+      "uc02",
+      "uc13"
+    ],
+    "files": [
+      "backend/src/modules/acervo/excluirLivro.ts",
+      "backend/src/use-cases/uc04.ts",
+      "backend/tests/uc04.test.ts"
+    ],
+    "criteria": [
+      "Remove fisicamente apenas obra sem exemplares vinculados.",
+      "Recusa obra com cópia física com 409; registro inexistente retorna 404.",
+      "Atualiza a contagem do autor e devolve 204 sem corpo na exclusão.",
+      "A verificação do vínculo e a exclusão compartilham a transação."
+    ],
+    "steps": [
+      "Obtenha o livro e verifique as cópias físicas antes de removê-lo.",
+      "Preserve dados físicos legados ainda não migrados e apresente erro de regra quando houver vínculo.",
+      "Exclua o registro e sincronize a contagem do autor; exponha DELETE /livros/:id."
+    ],
+    "apiExamples": [
+      {
+        "method": "DELETE",
+        "path": "/api/livros/1"
+      }
+    ]
+  },
+  "uc05": {
+    "backendPrerequisites": [],
+    "files": [
+      "backend/src/modules/autoria/domain/dadosDoAutor.ts",
+      "backend/src/modules/autoria/cadastro.ts",
+      "backend/src/modules/autoria/infrastructure/postgresSchema.ts",
+      "backend/src/use-cases/uc05.ts",
+      "backend/tests/uc05.test.ts"
+    ],
+    "criteria": [
+      "Cadastro exige nome e tipo literatura ou didatico.",
+      "Autor novo recebe ID gerado e contagem inicial zero.",
+      "Nome vazio ou categoria inválida retorna 400.",
+      "A carga inicial tem marcador persistente, evitando recriar autores excluídos após reinício."
+    ],
+    "steps": [
+      "Crie o parser de nome e categoria e o DTO público de autor.",
+      "Torne a carga de autores idempotente com um marcador persistido, preservando os registros anteriores.",
+      "Implemente o INSERT transacional e registre POST /autores com resposta 201."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/autores",
+        "body": {
+          "nome": "Clarice Lispector",
+          "tipo": "literatura"
+        }
+      }
+    ]
+  },
+  "uc06": {
+    "backendPrerequisites": [
+      "uc05"
+    ],
+    "files": [
+      "backend/src/modules/autoria/buscarAutores.ts",
+      "backend/src/adapters/autoriaIntegracao.ts",
+      "backend/src/use-cases/uc06.ts",
+      "backend/tests/uc06.test.ts"
+    ],
+    "criteria": [
+      "Consulta por nome ou identificador e listagem sem termo retornam arrays.",
+      "Consulta individual retorna 404 quando o autor não existe.",
+      "A contagem de livros é calculada a partir da fonte de verdade do acervo por uma porta de integração.",
+      "As respostas permitem selecionar autores nas telas sem digitar IDs internos."
+    ],
+    "steps": [
+      "Implemente um adapter externo ao módulo para contar os registros bibliográficos do autor.",
+      "Crie busca por nome/ID e leitura por identidade, mapeando o DTO público.",
+      "Registre GET /autores e GET /autores/:id."
+    ],
+    "apiExamples": [
+      {
+        "method": "GET",
+        "path": "/api/autores?q=Clarice"
+      },
+      {
+        "method": "GET",
+        "path": "/api/autores/1"
+      }
+    ]
+  },
+  "uc07": {
+    "backendPrerequisites": [
+      "uc06",
+      "uc01"
+    ],
+    "files": [
+      "backend/src/modules/autoria/atualizarAutor.ts",
+      "backend/src/use-cases/uc07.ts",
+      "backend/tests/uc07.test.ts"
+    ],
+    "criteria": [
+      "Altera nome e categoria do autor cadastrado.",
+      "Impedir mudança para literatura quando o autor já tiver mais de 5 livros.",
+      "A contagem para validar a categoria vem do acervo e a alteração ocorre em transação.",
+      "Entrada inválida retorna 400, autor ausente retorna 404 e limite incompatível retorna 409."
+    ],
+    "steps": [
+      "Aguarde o UC01: a rota de cadastro bibliográfico precisa usar o mesmo lock antes de permitir alterações de autor concorrentes.",
+      "Valide os novos dados e obtenha o autor existente.",
+      "Consulte a quantidade real de obras e verifique o limite da categoria escolhida.",
+      "Atualize nome/categoria e exponha PUT /autores/:id."
+    ],
+    "apiExamples": [
+      {
+        "method": "PUT",
+        "path": "/api/autores/1",
+        "body": {
+          "nome": "Nome atualizado",
+          "tipo": "didatico"
+        }
+      }
+    ]
+  },
+  "uc08": {
+    "backendPrerequisites": [
+      "uc06",
+      "uc01"
+    ],
+    "files": [
+      "backend/src/modules/autoria/excluirAutor.ts",
+      "backend/src/use-cases/uc08.ts",
+      "backend/tests/uc08.test.ts"
+    ],
+    "criteria": [
+      "Exclui fisicamente autor que não possui livros.",
+      "Recusa exclusão de autor vinculado a livros com 409.",
+      "Autor inexistente retorna 404; exclusão válida devolve 204 sem corpo.",
+      "A carga inicial não recria registros excluídos em reinícios posteriores."
+    ],
+    "steps": [
+      "Aguarde o UC01: a rota de cadastro bibliográfico precisa usar o mesmo lock antes de permitir alterações de autor concorrentes.",
+      "Carregue o autor e consulte os vínculos pelo adapter.",
+      "Recuse qualquer autor com livros bibliográficos; remova somente quando a contagem for zero.",
+      "Registre DELETE /autores/:id e confira a persistência após reexecutar a preparação."
+    ],
+    "apiExamples": [
+      {
+        "method": "DELETE",
+        "path": "/api/autores/1"
+      }
+    ]
+  },
+  "uc13": {
+    "backendPrerequisites": [
+      "uc01"
+    ],
+    "files": [
+      "backend/src/modules/acervo/domain/dadosDoExemplar.ts",
+      "backend/src/modules/acervo/exemplares.ts",
+      "backend/src/use-cases/uc13.ts",
+      "backend/tests/uc13.test.ts"
+    ],
+    "criteria": [
+      "Cada exemplar pertence a um livro existente e tem localização e estado de conservação obrigatórios.",
+      "Número de registro anual é gerado no servidor e não é reutilizado após exclusão.",
+      "Várias cópias físicas podem compartilhar a mesma obra sem consumir o limite bibliográfico do autor.",
+      "A migração cria exatamente um exemplar por livro legado, preservando registro e data, antes de limpar o campo antigo.",
+      "Reexecutar a migração não duplica cópias ou altera os registros existentes.",
+      "livroId não aceita coerção de booleanos, arrays ou nulos para números."
+    ],
+    "steps": [
+      "Crie a tabela de exemplares e o contador anual persistente no módulo Acervo.",
+      "Migre os campos físicos antigos de forma idempotente e comprove a cópia antes de limpar o valor de origem.",
+      "Valide o livro e os dados físicos; incremente a sequência e cadastre a cópia na mesma transação.",
+      "Mapeie o DTO físico com situação calculada pela integração e exponha POST /exemplares."
+    ],
+    "apiExamples": [
+      {
+        "method": "POST",
+        "path": "/api/exemplares",
+        "body": {
+          "livroId": 1,
+          "localizacao": "Estante A / Prateleira 2",
+          "estadoConservacao": "bom"
+        }
+      }
+    ]
+  },
+  "uc14": {
+    "backendPrerequisites": [
+      "uc13"
+    ],
+    "files": [
+      "backend/src/modules/acervo/buscarExemplares.ts",
+      "backend/src/use-cases/uc14.ts",
+      "backend/tests/uc14.test.ts"
+    ],
+    "criteria": [
+      "Busca combina registro/título/ISBN com filtros de livro e situação.",
+      "Consulta individual retorna dados físicos, livro e disponibilidade atual.",
+      "Situações válidas são disponivel, reservado e emprestado; filtro inválido retorna 400.",
+      "Exemplar inexistente retorna 404 e resultado vazio retorna array vazio."
+    ],
+    "steps": [
+      "Valide filtros e consulte exemplares em conjunto com seus registros bibliográficos, ambos no Acervo.",
+      "Calcule a situação consultando a integração com circulação e aplique o filtro solicitado.",
+      "Registre as rotas de listagem e leitura individual, reutilizando o mapeamento do UC13."
+    ],
+    "apiExamples": [
+      {
+        "method": "GET",
+        "path": "/api/exemplares?situacao=disponivel"
+      },
+      {
+        "method": "GET",
+        "path": "/api/exemplares/1"
+      }
+    ]
+  },
+  "uc15": {
+    "backendPrerequisites": [
+      "uc13"
+    ],
+    "files": [
+      "backend/src/modules/acervo/atualizarExemplar.ts",
+      "backend/src/use-cases/uc15.ts",
+      "backend/tests/uc15.test.ts"
+    ],
+    "criteria": [
+      "Atualiza localização e estado de conservação com validação dos campos obrigatórios.",
+      "Não altera livro vinculado, número de registro ou data de catalogação.",
+      "Exemplar ausente retorna 404 e dados inválidos retornam 400.",
+      "A resposta mantém a situação atual calculada da circulação."
+    ],
+    "steps": [
+      "Valide os campos físicos e obtenha a cópia existente.",
+      "Atualize somente localização e estado, preservando a identidade física da cópia.",
+      "Retorne o DTO atualizado e exponha PUT /exemplares/:id."
+    ],
+    "apiExamples": [
+      {
+        "method": "PUT",
+        "path": "/api/exemplares/1",
+        "body": {
+          "localizacao": "Estante B / Prateleira 1",
+          "estadoConservacao": "desgastado"
+        }
+      }
+    ]
+  },
+  "uc16": {
+    "backendPrerequisites": [
+      "uc13"
+    ],
+    "files": [
+      "backend/src/modules/acervo/excluirExemplar.ts",
+      "backend/src/use-cases/uc16.ts",
+      "backend/tests/uc16.test.ts"
+    ],
+    "criteria": [
+      "Exclui fisicamente somente exemplar sem qualquer histórico de circulação.",
+      "Qualquer reserva ou empréstimo histórico, mesmo encerrado, bloqueia a exclusão.",
+      "Exemplar inexistente retorna 404, vínculo retorna 409 e sucesso retorna 204.",
+      "Verificação dos vínculos e remoção compartilham transação para impedir corrida."
+    ],
+    "steps": [
+      "Obtenha o exemplar e consulte o histórico pela porta de integração.",
+      "Recuse qualquer cópia que possua reserva ou empréstimo, independentemente da situação.",
+      "Remova a cópia sem histórico e exponha DELETE /exemplares/:id."
+    ],
+    "apiExamples": [
+      {
+        "method": "DELETE",
+        "path": "/api/exemplares/1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "base": "saas-evolution/fase01",
+  "referencia": "saas-evolution/fase01-teste",
+  "commitInicial": "0920d3b990fbefb7441b099e7cde4b95700029e6",
+  "ondas": [
+    [
+      "uc05",
+      "uc09"
+    ],
+    [
+      "uc06",
+      "uc10"
+    ],
+    [
+      "uc01",
+      "uc11",
+      "uc12"
+    ],
+    [
+      "uc02",
+      "uc07",
+      "uc08"
+    ],
+    [
+      "uc03",
+      "uc13"
+    ],
+    [
+      "uc04",
+      "uc14"
+    ],
+    [
+      "uc15",
+      "uc16",
+      "uc17"
+    ],
+    [
+      "uc22"
+    ],
+    [
+      "uc18",
+      "uc19"
+    ],
+    [
+      "uc21"
+    ],
+    [
+      "uc20"
+    ]
+  ],
+  "casos": {
+    "uc01": {
+      "titulo": "Cadastrar livro",
+      "caminho": "/livros/cadastrar",
+      "prerequisitos": [
+        "uc05",
+        "uc06"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/domain/dadosDoLivro.ts",
+        "backend/src/modules/acervo/catalogo.ts",
+        "backend/src/modules/acervo/buscarLivros.ts",
+        "backend/src/adapters/acervoIntegracao.ts",
+        "backend/src/use-cases/uc01.ts",
+        "backend/tests/uc01.test.ts",
+        "backend/src/importar.ts",
+        "frontend/src/use-cases/uc01.tsx"
+      ]
+    },
+    "uc02": {
+      "titulo": "Buscar livros",
+      "caminho": "/livros",
+      "prerequisitos": [
+        "uc01"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/consultarLivro.ts",
+        "backend/src/use-cases/uc02.ts",
+        "backend/tests/uc02.test.ts",
+        "frontend/src/use-cases/uc02.tsx"
+      ]
+    },
+    "uc03": {
+      "titulo": "Atualizar livro",
+      "caminho": "/livros/editar",
+      "prerequisitos": [
+        "uc01",
+        "uc02",
+        "uc06"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/atualizarLivro.ts",
+        "backend/src/use-cases/uc03.ts",
+        "backend/tests/uc03.test.ts",
+        "frontend/src/use-cases/uc03.tsx"
+      ]
+    },
+    "uc04": {
+      "titulo": "Excluir livro",
+      "caminho": "/livros/excluir",
+      "prerequisitos": [
+        "uc02",
+        "uc13"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/excluirLivro.ts",
+        "backend/src/use-cases/uc04.ts",
+        "backend/tests/uc04.test.ts",
+        "frontend/src/use-cases/uc04.tsx"
+      ]
+    },
+    "uc05": {
+      "titulo": "Cadastrar autor",
+      "caminho": "/autores/cadastrar",
+      "prerequisitos": [],
+      "arquivos": [
+        "backend/src/modules/autoria/domain/dadosDoAutor.ts",
+        "backend/src/modules/autoria/cadastro.ts",
+        "backend/src/modules/autoria/infrastructure/postgresSchema.ts",
+        "backend/src/use-cases/uc05.ts",
+        "backend/tests/uc05.test.ts",
+        "frontend/src/use-cases/uc05.tsx"
+      ]
+    },
+    "uc06": {
+      "titulo": "Buscar autores",
+      "caminho": "/autores",
+      "prerequisitos": [
+        "uc05"
+      ],
+      "arquivos": [
+        "backend/src/modules/autoria/buscarAutores.ts",
+        "backend/src/adapters/autoriaIntegracao.ts",
+        "backend/src/use-cases/uc06.ts",
+        "backend/tests/uc06.test.ts",
+        "frontend/src/use-cases/uc06.tsx"
+      ]
+    },
+    "uc07": {
+      "titulo": "Atualizar autor",
+      "caminho": "/autores/editar",
+      "prerequisitos": [
+        "uc01",
+        "uc05",
+        "uc06"
+      ],
+      "arquivos": [
+        "backend/src/modules/autoria/atualizarAutor.ts",
+        "backend/src/use-cases/uc07.ts",
+        "backend/tests/uc07.test.ts",
+        "frontend/src/use-cases/uc07.tsx"
+      ]
+    },
+    "uc08": {
+      "titulo": "Excluir autor",
+      "caminho": "/autores/excluir",
+      "prerequisitos": [
+        "uc01",
+        "uc06"
+      ],
+      "arquivos": [
+        "backend/src/modules/autoria/excluirAutor.ts",
+        "backend/src/use-cases/uc08.ts",
+        "backend/tests/uc08.test.ts",
+        "frontend/src/use-cases/uc08.tsx"
+      ]
+    },
+    "uc09": {
+      "titulo": "Cadastrar leitor",
+      "caminho": "/leitores/cadastrar",
+      "prerequisitos": [],
+      "arquivos": [
+        "backend/src/adapters/circulacaoHttp.ts",
+        "backend/src/modules/leitores/domain/Leitor.ts",
+        "backend/src/modules/leitores/domain/RepositorioLeitores.ts",
+        "backend/src/modules/leitores/domain/CadastrarLeitor.ts",
+        "backend/src/modules/leitores/infrastructure/schema.ts",
+        "backend/src/modules/leitores/infrastructure/LeitoresPostgres.ts",
+        "backend/src/use-cases/uc09.ts",
+        "backend/tests/uc09.test.ts",
+        "backend/tests/leitoresDouble.ts",
+        "backend/tests/leitoresApiFixture.ts",
+        "frontend/src/use-cases/uc09.tsx"
+      ]
+    },
+    "uc10": {
+      "titulo": "Buscar leitores",
+      "caminho": "/leitores",
+      "prerequisitos": [
+        "uc09"
+      ],
+      "arquivos": [
+        "backend/src/modules/leitores/domain/BuscarLeitores.ts",
+        "backend/src/use-cases/uc10.ts",
+        "backend/tests/uc10.test.ts",
+        "frontend/src/use-cases/uc10.tsx"
+      ]
+    },
+    "uc11": {
+      "titulo": "Atualizar leitor",
+      "caminho": "/leitores/editar",
+      "prerequisitos": [
+        "uc09",
+        "uc10"
+      ],
+      "arquivos": [
+        "backend/src/modules/leitores/domain/AtualizarLeitor.ts",
+        "backend/src/use-cases/uc11.ts",
+        "backend/tests/uc11.test.ts",
+        "frontend/src/use-cases/uc11.tsx"
+      ]
+    },
+    "uc12": {
+      "titulo": "Excluir leitor",
+      "caminho": "/leitores/excluir",
+      "prerequisitos": [
+        "uc09",
+        "uc10"
+      ],
+      "arquivos": [
+        "backend/src/modules/leitores/domain/HistoricoDoLeitor.ts",
+        "backend/src/modules/leitores/domain/ExcluirLeitor.ts",
+        "backend/src/adapters/LeitorHistoricoPostgres.ts",
+        "backend/src/use-cases/uc12.ts",
+        "backend/tests/uc12.test.ts",
+        "frontend/src/use-cases/uc12.tsx"
+      ]
+    },
+    "uc13": {
+      "titulo": "Cadastrar exemplar",
+      "caminho": "/exemplares/cadastrar",
+      "prerequisitos": [
+        "uc01",
+        "uc02"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/domain/dadosDoExemplar.ts",
+        "backend/src/modules/acervo/exemplares.ts",
+        "backend/src/use-cases/uc13.ts",
+        "backend/tests/uc13.test.ts",
+        "frontend/src/use-cases/uc13.tsx"
+      ]
+    },
+    "uc14": {
+      "titulo": "Buscar exemplares",
+      "caminho": "/exemplares",
+      "prerequisitos": [
+        "uc02",
+        "uc13"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/buscarExemplares.ts",
+        "backend/src/use-cases/uc14.ts",
+        "backend/tests/uc14.test.ts",
+        "frontend/src/use-cases/uc14.tsx"
+      ]
+    },
+    "uc15": {
+      "titulo": "Atualizar exemplar",
+      "caminho": "/exemplares/editar",
+      "prerequisitos": [
+        "uc13",
+        "uc14"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/atualizarExemplar.ts",
+        "backend/src/use-cases/uc15.ts",
+        "backend/tests/uc15.test.ts",
+        "frontend/src/use-cases/uc15.tsx"
+      ]
+    },
+    "uc16": {
+      "titulo": "Excluir exemplar",
+      "caminho": "/exemplares/excluir",
+      "prerequisitos": [
+        "uc13",
+        "uc14"
+      ],
+      "arquivos": [
+        "backend/src/modules/acervo/excluirExemplar.ts",
+        "backend/src/use-cases/uc16.ts",
+        "backend/tests/uc16.test.ts",
+        "frontend/src/use-cases/uc16.tsx"
+      ]
+    },
+    "uc17": {
+      "titulo": "Reservar exemplar",
+      "caminho": "/reservas/criar",
+      "prerequisitos": [
+        "uc09",
+        "uc10",
+        "uc13",
+        "uc14"
+      ],
+      "arquivos": [
+        "backend/src/modules/circulacao/domain/modelo.ts",
+        "backend/src/modules/circulacao/domain/BaseCirculacao.ts",
+        "backend/src/modules/circulacao/domain/ReservarExemplar.ts",
+        "backend/src/modules/circulacao/infrastructure/schema.ts",
+        "backend/src/modules/circulacao/infrastructure/CirculacaoPostgres.ts",
+        "backend/src/adapters/ConsultaCirculacaoPostgres.ts",
+        "backend/src/adapters/criarCirculacao.ts",
+        "backend/src/use-cases/uc17.ts",
+        "backend/tests/uc17.test.ts",
+        "backend/tests/circulacaoDouble.ts",
+        "frontend/src/use-cases/uc17.tsx"
+      ]
+    },
+    "uc18": {
+      "titulo": "Cancelar reserva de exemplar",
+      "caminho": "/reservas/cancelar",
+      "prerequisitos": [
+        "uc17",
+        "uc22"
+      ],
+      "arquivos": [
+        "backend/src/modules/circulacao/domain/CancelarReserva.ts",
+        "backend/src/use-cases/uc18.ts",
+        "backend/tests/uc18.test.ts",
+        "frontend/src/use-cases/uc18.tsx"
+      ]
+    },
+    "uc19": {
+      "titulo": "Registrar empréstimo",
+      "caminho": "/emprestimos/registrar",
+      "prerequisitos": [
+        "uc10",
+        "uc14",
+        "uc17",
+        "uc22"
+      ],
+      "arquivos": [
+        "backend/src/modules/circulacao/domain/RegistrarEmprestimo.ts",
+        "backend/src/use-cases/uc19.ts",
+        "backend/tests/uc19.test.ts",
+        "frontend/src/use-cases/uc19.tsx"
+      ]
+    },
+    "uc20": {
+      "titulo": "Registrar devolução",
+      "caminho": "/emprestimos/devolver",
+      "prerequisitos": [
+        "uc19",
+        "uc21"
+      ],
+      "arquivos": [
+        "backend/src/modules/circulacao/domain/RegistrarDevolucao.ts",
+        "backend/src/use-cases/uc20.ts",
+        "backend/tests/uc20.test.ts",
+        "frontend/src/use-cases/uc20.tsx"
+      ]
+    },
+    "uc21": {
+      "titulo": "Consultar empréstimos",
+      "caminho": "/emprestimos",
+      "prerequisitos": [
+        "uc10",
+        "uc14",
+        "uc19"
+      ],
+      "arquivos": [
+        "backend/src/modules/circulacao/domain/ConsultarEmprestimos.ts",
+        "backend/src/use-cases/uc21.ts",
+        "backend/tests/uc21.test.ts",
+        "frontend/src/use-cases/uc21.tsx"
+      ]
+    },
+    "uc22": {
+      "titulo": "Consultar reservas",
+      "caminho": "/reservas",
+      "prerequisitos": [
+        "uc10",
+        "uc14",
+        "uc17"
+      ],
+      "arquivos": [
+        "backend/src/modules/circulacao/domain/ConsultarReservas.ts",
+        "backend/src/use-cases/uc22.ts",
+        "backend/tests/uc22.test.ts",
+        "frontend/src/use-cases/uc22.tsx"
+      ]
+    }
+  }
+}
