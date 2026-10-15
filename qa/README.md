@@ -46,6 +46,17 @@ São 9 testes de interface, 4 de regras e 25 de documentação. Eles cobrem os
 22 casos de uso, os 508 blocos de código, o botão de cópia, links, responsividade,
 limites concorrentes, expiração e devolução em atraso.
 
+O painel de acompanhamento possui mais 7 testes. Com o servidor de documentos
+ativo, execute somente essa verificação em `qa/`:
+
+```bash
+PLAYWRIGHT_JSON_OUTPUT_NAME=evidencias/painel.json bun run test -- painel.spec.ts
+```
+
+Eles conferem os 22 cards inteiros em 1280 × 800, a ordem topológica e os
+pré-requisitos sem redundâncias, cores e contagens, persistência, liberação
+por pré-requisitos, exportação/importação e uso como arquivo local.
+
 ## Reprodução independente dos tutoriais
 
 O replay precisa de Python 3, Git, Bun, `psql` e das dependências instaladas em

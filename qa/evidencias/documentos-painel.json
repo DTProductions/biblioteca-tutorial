@@ -1,0 +1,1086 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.19.0/bin/node",
+      "/Volumes/Externo/Ifes/2026.2/TEES2/biblioteca-tutorial/qa/node_modules/.bin/playwright",
+      "test",
+      "documentos.spec.ts"
+    ],
+    "configFile": "/Volumes/Externo/Ifes/2026.2/TEES2/biblioteca-tutorial/qa/playwright.config.ts",
+    "rootDir": "/Volumes/Externo/Ifes/2026.2/TEES2/biblioteca-tutorial/qa/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Volumes/Externo/Ifes/2026.2/TEES2/biblioteca-tutorial/qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Volumes/Externo/Ifes/2026.2/TEES2/biblioteca-tutorial/qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidencias/documentos-painel.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "documentos.spec.ts",
+      "file": "documentos.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "uc01: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:31.654Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzAxIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzA1IiwKICAgICJ1YzA2IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vZG9tYWluL2RhZG9zRG9MaXZyby50cyIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vY2F0YWxvZ28udHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvYWNlcnZvL2J1c2NhckxpdnJvcy50cyIsCiAgICAiYmFja2VuZC9zcmMvYWRhcHRlcnMvYWNlcnZvSW50ZWdyYWNhby50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMDEudHMiLAogICAgImJhY2tlbmQvc3JjL2ltcG9ydGFyLnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMDEudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMDEudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDI2LAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-007d5bbe6668584e3a90",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc02: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:32.295Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzAyIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAxIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vY29uc3VsdGFyTGl2cm8udHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy91YzAyLnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMDIudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMDIudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDIyLAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-53a033487f7d9ba55876",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc03: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 183,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:32.499Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzAzIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAxIiwKICAgICJ1YzAyIiwKICAgICJ1YzA2IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vYXR1YWxpemFyTGl2cm8udHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy91YzAzLnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMDMudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMDMudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDIyLAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-a239b6419e8dd2672786",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc04: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 177,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:32.686Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzA0IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAyIiwKICAgICJ1YzEzIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vZXhjbHVpckxpdnJvLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMwNC50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzA0LnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzA0LnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyMiwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-054a0d058de16a67121c",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc05: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 176,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:32.868Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzA1IiwKICAicHJlcmVxdWlzaXRvcyI6IFtdLAogICJhcnF1aXZvcyI6IFsKICAgICJiYWNrZW5kL3NyYy9zaGFyZWQvdmFsaWRhdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvaW5mcmFzdHJ1Y3R1cmUvdHJhbnNhY3Rpb24udHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy90eXBlcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL2xvYWRlci50cyIsCiAgICAiYmFja2VuZC9zcmMvc2VydmVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9tYWluLnRzIiwKICAgICJiYWNrZW5kL3NjcmlwdHMvY2hlY2stYm91bmRhcmllcy50cyIsCiAgICAiYmFja2VuZC90ZXN0cy9zdXBvcnRlLWFwaS50cyIsCiAgICAiYmFja2VuZC90ZXN0cy9saW1wYXItYWNlcnZvLXRlc3RlLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2NhZGFzdHJvLmUyZS50ZXN0LnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2ltcG9ydGFjYW8udGVzdC50cyIsCiAgICAiZnJvbnRlbmQvc3JjL2FwaS50cyIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvYmlibGlvdGVjYS50c3giLAogICAgImZyb250ZW5kL3NyYy9jb21wb25lbnRzL2NpcmN1bGFjYW8udHN4IiwKICAgICJmcm9udGVuZC9zcmMvQXBwLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2luZGV4LmNzcyIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0J1c2NhckxpdnJvcy50c3giLAogICAgImZyb250ZW5kL3NyYy9wYWdlcy9DYWRhc3RyYXJMaXZyby50c3giLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvYXV0b3JpYS9kb21haW4vZGFkb3NEb0F1dG9yLnRzIiwKICAgICJiYWNrZW5kL3NyYy9tb2R1bGVzL2F1dG9yaWEvY2FkYXN0cm8udHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvYXV0b3JpYS9pbmZyYXN0cnVjdHVyZS9wb3N0Z3Jlc1NjaGVtYS50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMDUudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMwNS50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMwNS50ZXN0LnRzIgogIF0sCiAgInF1YW50aWRhZGVEZUFycXVpdm9zIjogMjQsCiAgImVycm9zSmF2YVNjcmlwdCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-923a8e67c990ac662583",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc06: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 170,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:33.047Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzA2IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzA1IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hdXRvcmlhL2J1c2NhckF1dG9yZXMudHMiLAogICAgImJhY2tlbmQvc3JjL2FkYXB0ZXJzL2F1dG9yaWFJbnRlZ3JhY2FvLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMwNi50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzA2LnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzA2LnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyMywKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-a0ba07ba6500ba932fff",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc07: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 170,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:33.221Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzA3IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAxIiwKICAgICJ1YzA1IiwKICAgICJ1YzA2IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hdXRvcmlhL2F0dWFsaXphckF1dG9yLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMwNy50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzA3LnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzA3LnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyMiwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-b91d0c4ac1348822d447",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc08: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:33.395Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzA4IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAxIiwKICAgICJ1YzA2IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hdXRvcmlhL2V4Y2x1aXJBdXRvci50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMDgudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMwOC50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMwOC50ZXN0LnRzIgogIF0sCiAgInF1YW50aWRhZGVEZUFycXVpdm9zIjogMjIsCiAgImVycm9zSmF2YVNjcmlwdCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-10bfd52c26c470de0124",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc09: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 182,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:33.563Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzA5IiwKICAicHJlcmVxdWlzaXRvcyI6IFtdLAogICJhcnF1aXZvcyI6IFsKICAgICJiYWNrZW5kL3NyYy9zaGFyZWQvdmFsaWRhdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvaW5mcmFzdHJ1Y3R1cmUvdHJhbnNhY3Rpb24udHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy90eXBlcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL2xvYWRlci50cyIsCiAgICAiYmFja2VuZC9zcmMvc2VydmVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9tYWluLnRzIiwKICAgICJiYWNrZW5kL3NjcmlwdHMvY2hlY2stYm91bmRhcmllcy50cyIsCiAgICAiYmFja2VuZC90ZXN0cy9zdXBvcnRlLWFwaS50cyIsCiAgICAiYmFja2VuZC90ZXN0cy9saW1wYXItYWNlcnZvLXRlc3RlLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2NhZGFzdHJvLmUyZS50ZXN0LnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2ltcG9ydGFjYW8udGVzdC50cyIsCiAgICAiZnJvbnRlbmQvc3JjL2FwaS50cyIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvYmlibGlvdGVjYS50c3giLAogICAgImZyb250ZW5kL3NyYy9jb21wb25lbnRzL2NpcmN1bGFjYW8udHN4IiwKICAgICJmcm9udGVuZC9zcmMvQXBwLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2luZGV4LmNzcyIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0J1c2NhckxpdnJvcy50c3giLAogICAgImZyb250ZW5kL3NyYy9wYWdlcy9DYWRhc3RyYXJMaXZyby50c3giLAogICAgImJhY2tlbmQvc3JjL2FkYXB0ZXJzL2NpcmN1bGFjYW9IdHRwLnRzIiwKICAgICJiYWNrZW5kL3NyYy9tb2R1bGVzL2xlaXRvcmVzL2RvbWFpbi9MZWl0b3IudHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvbGVpdG9yZXMvZG9tYWluL1JlcG9zaXRvcmlvTGVpdG9yZXMudHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvbGVpdG9yZXMvZG9tYWluL0NhZGFzdHJhckxlaXRvci50cyIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9sZWl0b3Jlcy9pbmZyYXN0cnVjdHVyZS9zY2hlbWEudHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvbGVpdG9yZXMvaW5mcmFzdHJ1Y3R1cmUvTGVpdG9yZXNQb3N0Z3Jlcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMDkudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMwOS50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMwOS50ZXN0LnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xlaXRvcmVzRG91YmxlLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xlaXRvcmVzQXBpRml4dHVyZS50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDI5LAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-51e489a0b8feaa933f4d",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc10: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:33.749Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzEwIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzA5IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9sZWl0b3Jlcy9kb21haW4vQnVzY2FyTGVpdG9yZXMudHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy91YzEwLnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMTAudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMTAudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDIyLAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-112e8576896c9701efb4",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc11: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 162,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:33.917Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzExIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzA5IiwKICAgICJ1YzEwIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9sZWl0b3Jlcy9kb21haW4vQXR1YWxpemFyTGVpdG9yLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMxMS50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzExLnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzExLnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyMiwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-5dccf952eb29420e12dc",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc12: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 165,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:34.083Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzEyIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzA5IiwKICAgICJ1YzEwIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9sZWl0b3Jlcy9kb21haW4vSGlzdG9yaWNvRG9MZWl0b3IudHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvbGVpdG9yZXMvZG9tYWluL0V4Y2x1aXJMZWl0b3IudHMiLAogICAgImJhY2tlbmQvc3JjL2FkYXB0ZXJzL0xlaXRvckhpc3Rvcmljb1Bvc3RncmVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMxMi50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzEyLnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzEyLnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyNCwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-ae3190a150f7f2f420f7",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc13: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 165,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:34.252Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzEzIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAxIiwKICAgICJ1YzAyIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vZG9tYWluL2RhZG9zRG9FeGVtcGxhci50cyIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vZXhlbXBsYXJlcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMTMudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMxMy50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMxMy50ZXN0LnRzIgogIF0sCiAgInF1YW50aWRhZGVEZUFycXVpdm9zIjogMjMsCiAgImVycm9zSmF2YVNjcmlwdCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-3eab54e9503c9ee279de",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc14: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:34.421Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzE0IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzAyIiwKICAgICJ1YzEzIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vYnVzY2FyRXhlbXBsYXJlcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMTQudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMxNC50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMxNC50ZXN0LnRzIgogIF0sCiAgInF1YW50aWRhZGVEZUFycXVpdm9zIjogMjIsCiAgImVycm9zSmF2YVNjcmlwdCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-4930fc1c22902dbeee6f",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc15: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 179,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:34.589Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzE1IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzEzIiwKICAgICJ1YzE0IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vYXR1YWxpemFyRXhlbXBsYXIudHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy91YzE1LnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMTUudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMTUudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDIyLAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-4fa3226c08d6a6b60633",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc16: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:34.772Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzE2IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzEzIiwKICAgICJ1YzE0IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9hY2Vydm8vZXhjbHVpckV4ZW1wbGFyLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMxNi50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzE2LnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzE2LnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyMiwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-158e955dfca345784647",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc17: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 182,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:34.939Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzE3IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzA5IiwKICAgICJ1YzEwIiwKICAgICJ1YzEzIiwKICAgICJ1YzE0IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2RvbWFpbi9tb2RlbG8udHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvY2lyY3VsYWNhby9kb21haW4vQmFzZUNpcmN1bGFjYW8udHMiLAogICAgImJhY2tlbmQvc3JjL21vZHVsZXMvY2lyY3VsYWNhby9kb21haW4vUmVzZXJ2YXJFeGVtcGxhci50cyIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2luZnJhc3RydWN0dXJlL3NjaGVtYS50cyIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2luZnJhc3RydWN0dXJlL0NpcmN1bGFjYW9Qb3N0Z3Jlcy50cyIsCiAgICAiYmFja2VuZC9zcmMvYWRhcHRlcnMvQ29uc3VsdGFDaXJjdWxhY2FvUG9zdGdyZXMudHMiLAogICAgImJhY2tlbmQvc3JjL2FkYXB0ZXJzL2NyaWFyQ2lyY3VsYWNhby50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMTcudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMxNy50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMxNy50ZXN0LnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2NpcmN1bGFjYW9Eb3VibGUudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyOSwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-f2a02acafc274979fed4",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc18: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 178,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:35.126Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzE4IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzE3IiwKICAgICJ1YzIyIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2RvbWFpbi9DYW5jZWxhclJlc2VydmEudHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy91YzE4LnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMTgudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMTgudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDIyLAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-900423258509d35ecd57",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc19: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 203,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:35.308Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzE5IiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzEwIiwKICAgICJ1YzE0IiwKICAgICJ1YzE3IiwKICAgICJ1YzIyIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2RvbWFpbi9SZWdpc3RyYXJFbXByZXN0aW1vLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvdWMxOS50cyIsCiAgICAiZnJvbnRlbmQvc3JjL3VzZS1jYXNlcy91YzE5LnRzeCIsCiAgICAiYmFja2VuZC90ZXN0cy91YzE5LnRlc3QudHMiCiAgXSwKICAicXVhbnRpZGFkZURlQXJxdWl2b3MiOiAyMiwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-3c3b5894a0e7517feae7",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc20: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 190,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:35.515Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzIwIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzE5IiwKICAgICJ1YzIxIgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2RvbWFpbi9SZWdpc3RyYXJEZXZvbHVjYW8udHMiLAogICAgImJhY2tlbmQvc3JjL3VzZS1jYXNlcy91YzIwLnRzIiwKICAgICJmcm9udGVuZC9zcmMvdXNlLWNhc2VzL3VjMjAudHN4IiwKICAgICJiYWNrZW5kL3Rlc3RzL3VjMjAudGVzdC50cyIKICBdLAogICJxdWFudGlkYWRlRGVBcnF1aXZvcyI6IDIyLAogICJlcnJvc0phdmFTY3JpcHQiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-e6ad2d2a05e834907393",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc21: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 181,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:35.709Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzIxIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzEwIiwKICAgICJ1YzE0IiwKICAgICJ1YzE5IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2RvbWFpbi9Db25zdWx0YXJFbXByZXN0aW1vcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMjEudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMyMS50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMyMS50ZXN0LnRzIgogIF0sCiAgInF1YW50aWRhZGVEZUFycXVpdm9zIjogMjIsCiAgImVycm9zSmF2YVNjcmlwdCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-d51476409947dc2f43ee",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "uc22: tutorial íntegro, pré-requisitos e arquivos completos copiáveis",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 167,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:35.894Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "integridade-do-tutorial",
+                      "contentType": "application/json",
+                      "body": "ewogICJpZCI6ICJ1YzIyIiwKICAicHJlcmVxdWlzaXRvcyI6IFsKICAgICJ1YzEwIiwKICAgICJ1YzE0IiwKICAgICJ1YzE3IgogIF0sCiAgImFycXVpdm9zIjogWwogICAgImJhY2tlbmQvc3JjL3NoYXJlZC92YWxpZGF0aW9uLnRzIiwKICAgICJiYWNrZW5kL3NyYy9pbmZyYXN0cnVjdHVyZS90cmFuc2FjdGlvbi50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3R5cGVzLnRzIiwKICAgICJiYWNrZW5kL3NyYy91c2UtY2FzZXMvbG9hZGVyLnRzIiwKICAgICJiYWNrZW5kL3NyYy9zZXJ2ZXIudHMiLAogICAgImJhY2tlbmQvc3JjL21haW4udHMiLAogICAgImJhY2tlbmQvc2NyaXB0cy9jaGVjay1ib3VuZGFyaWVzLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL3N1cG9ydGUtYXBpLnRzIiwKICAgICJiYWNrZW5kL3Rlc3RzL2xpbXBhci1hY2Vydm8tdGVzdGUudHMiLAogICAgImJhY2tlbmQvdGVzdHMvY2FkYXN0cm8uZTJlLnRlc3QudHMiLAogICAgImJhY2tlbmQvdGVzdHMvaW1wb3J0YWNhby50ZXN0LnRzIiwKICAgICJmcm9udGVuZC9zcmMvYXBpLnRzIiwKICAgICJmcm9udGVuZC9zcmMvY29tcG9uZW50cy9iaWJsaW90ZWNhLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL2NvbXBvbmVudHMvY2lyY3VsYWNhby50c3giLAogICAgImZyb250ZW5kL3NyYy9BcHAudHN4IiwKICAgICJmcm9udGVuZC9zcmMvaW5kZXguY3NzIiwKICAgICJmcm9udGVuZC9zcmMvcGFnZXMvQnVzY2FyTGl2cm9zLnRzeCIsCiAgICAiZnJvbnRlbmQvc3JjL3BhZ2VzL0NhZGFzdHJhckxpdnJvLnRzeCIsCiAgICAiYmFja2VuZC9zcmMvbW9kdWxlcy9jaXJjdWxhY2FvL2RvbWFpbi9Db25zdWx0YXJSZXNlcnZhcy50cyIsCiAgICAiYmFja2VuZC9zcmMvdXNlLWNhc2VzL3VjMjIudHMiLAogICAgImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMyMi50c3giLAogICAgImJhY2tlbmQvdGVzdHMvdWMyMi50ZXN0LnRzIgogIF0sCiAgInF1YW50aWRhZGVEZUFycXVpdm9zIjogMjIsCiAgImVycm9zSmF2YVNjcmlwdCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-b6addb366913941414d2",
+          "file": "documentos.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "todos os links internos do índice e dos 22 tutoriais retornam 200",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 828,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:36.064Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "links-internos",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvZ2l0aHViLXByb3RlY3Rpb24uanNvbiIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvaW5kZXguaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvcGFpbmVsLmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMDEuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMwMi5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzAzLmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMDQuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMwNS5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzA2Lmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMDcuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMwOC5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzA5Lmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMTAuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMxMS5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzEyLmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMTMuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMxNC5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzE1Lmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMTYuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMxNy5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzE4Lmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMTkuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdWMyMC5odG1sIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAiYW5jb3JhIjogbnVsbAogIH0sCiAgewogICAgInVybCI6ICJodHRwOi8vMTI3LjAuMC4xOjYyMzEyLy5kb2NzL3VzZS1jYXNlcy91YzIxLmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfSwKICB7CiAgICAidXJsIjogImh0dHA6Ly8xMjcuMC4wLjE6NjIzMTIvLmRvY3MvdXNlLWNhc2VzL3VjMjIuaHRtbCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgImFuY29yYSI6IG51bGwKICB9LAogIHsKICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo2MjMxMi8uZG9jcy91c2UtY2FzZXMvdmFsaWRhY2FvLmh0bWwiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJhbmNvcmEiOiBudWxsCiAgfQpd"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-d79f6055a5d51835561a",
+          "file": "documentos.spec.ts",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "botão Copiar entrega o arquivo UC17 integral na área de transferência",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 194,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:36.896Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "copia-validada",
+                      "contentType": "application/json",
+                      "body": "ewogICJhcnF1aXZvIjogImZyb250ZW5kL3NyYy91c2UtY2FzZXMvdWMxNy50c3giLAogICJjYXJhY3RlcmVzIjogMzE3OSwKICAic2hhMjU2IjogImRiY2Q3OWJmNzkyZTliMWJlMGY3ZTdhZmNhYjdkZTZhOTc5MjhjMGI3MGM1MWZlYTk1Yjg5YWFkMTFkMjhiNDgiLAogICJpbnRlZ3JhbCI6IHRydWUKfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-21dc97ee82017108e6ed",
+          "file": "documentos.spec.ts",
+          "line": 72,
+          "column": 1
+        },
+        {
+          "title": "revisão visual: UC17 desktop e índice móvel sem overflow de página",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1376,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T16:44:37.094Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ade0a728e43f5c7ce26-9fb9c5ce91b4a8e5974a",
+          "file": "documentos.spec.ts",
+          "line": 85,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-15T16:44:31.381Z",
+    "duration": 7150.193,
+    "expected": 25,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
