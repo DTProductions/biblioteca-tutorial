@@ -9,7 +9,7 @@ const pasta = `${origem}/.docs/use-cases/`;
 const raiz = resolve(import.meta.dirname, "../..");
 type Arquivo = { caminho: string; conteudo: string; sha256: string; comum: boolean };
 type Pacote = { id: string; titulo: string; prerequisitos: string[]; arquivos: Arquivo[] };
-const casos = Array.from({ length: 22 }, (_, indice) => `uc${String(indice + 1).padStart(2, "0")}`);
+const casos = Array.from({ length: 23 }, (_, indice) => `uc${String(indice + 1).padStart(2, "0")}`);
 const pacote = (id: string): Pacote => JSON.parse(readFileSync(resolve(raiz, `.docs/use-cases/pacotes/${id}.json`), "utf8"));
 
 for (const id of casos) {
@@ -47,7 +47,7 @@ for (const id of casos) {
   });
 }
 
-test("todos os links internos do índice e dos 22 tutoriais retornam 200", async ({ page, request }, info) => {
+test("todos os links internos do índice e dos 23 tutoriais retornam 200", async ({ page, request }, info) => {
   const links = new Set<string>();
   for (const documento of ["index", ...casos, "validacao"]) {
     const resposta = await page.goto(`${pasta}${documento}.html`);

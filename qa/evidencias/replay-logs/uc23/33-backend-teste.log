@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc23.test.ts:
+(pass) UC23: conflito tardio de ISBN reverte toda a execução sem apagar dados existentes [460.67ms]
+(pass) UC23: seed atômico, idempotente, completo e coerente com os limites e o histórico [860.55ms]
+
+ 2 pass
+ 0 fail
+ 140 expect() calls
+Ran 2 tests across 1 file. [1486.00ms]

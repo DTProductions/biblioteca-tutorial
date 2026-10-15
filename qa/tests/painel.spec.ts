@@ -12,20 +12,20 @@ const imediatos: Record<string, string[]> = {
   uc09: [], uc10: ["uc09"], uc11: ["uc10"], uc12: ["uc10"],
   uc13: ["uc02"], uc14: ["uc13"], uc15: ["uc14"], uc16: ["uc14"],
   uc17: ["uc10", "uc14"], uc18: ["uc22"], uc19: ["uc22"],
-  uc20: ["uc21"], uc21: ["uc19"], uc22: ["uc17"],
+  uc20: ["uc21"], uc21: ["uc19"], uc22: ["uc17"], uc23: ["uc18", "uc20"],
 };
-const ordem = ["uc05", "uc09", "uc06", "uc10", "uc01", "uc11", "uc12", "uc02", "uc07", "uc08", "uc03", "uc13", "uc04", "uc14", "uc15", "uc16", "uc17", "uc22", "uc18", "uc19", "uc21", "uc20"];
+const ordem = ["uc05", "uc09", "uc06", "uc10", "uc01", "uc11", "uc12", "uc02", "uc07", "uc08", "uc03", "uc13", "uc04", "uc14", "uc15", "uc16", "uc17", "uc22", "uc18", "uc19", "uc21", "uc20", "uc23"];
 
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto(url);
 });
 
-test("22 cards inteiros em 1280×800, sem rolagem ou sobreposição", async ({ page }, info) => {
+test("23 cards inteiros em 1280×800, sem rolagem ou sobreposição", async ({ page }, info) => {
   const erros: string[] = [];
   page.on("pageerror", erro => erros.push(erro.message));
   await page.reload();
-  await expect(page.locator(".caso")).toHaveCount(22);
+  await expect(page.locator(".caso")).toHaveCount(23);
   const limites = await page.locator(".caso").evaluateAll(cards => cards.map(card => {
     const caixa = card.getBoundingClientRect();
     const titulo = card.querySelector("h2")!.getBoundingClientRect();
@@ -59,11 +59,11 @@ test("quatro estados mudam o fundo, atualizam legenda e persistem ao recarregar"
   await page.getByLabel("Estado de UC05", { exact: true }).selectOption("implementacao");
   await page.getByLabel("Estado de UC09", { exact: true }).selectOption("correcao");
   await page.getByLabel("Estado de UC06", { exact: true }).selectOption("concluido");
-  await expect(page.locator("#total-pendente")).toHaveText("19");
+  await expect(page.locator("#total-pendente")).toHaveText("20");
   for (const estado of ["implementacao", "correcao", "concluido"]) await expect(page.locator(`#total-${estado}`)).toHaveText("1");
   const fundos = await page.locator("#uc01, #uc05, #uc09, #uc06").evaluateAll(cards => cards.map(card => getComputedStyle(card).backgroundColor));
   expect(new Set(fundos).size).toBe(4);
-  await expect(page.locator("#progresso")).toHaveText("1 de 22 concluídos");
+  await expect(page.locator("#progresso")).toHaveText("1 de 23 concluídos");
   await page.reload();
   await expect(page.locator("#uc05")).toHaveAttribute("data-estado", "implementacao");
   await expect(page.locator("#uc09")).toHaveAttribute("data-estado", "correcao");
@@ -83,7 +83,7 @@ test("liberação considera os pré-requisitos próprios, sem esperar a onda int
   await expect(page.locator("#disponiveis")).toContainText("UC01");
 });
 
-test("exportação e importação recuperam os 22 estados; arquivo inválido preserva o andamento", async ({ page }) => {
+test("exportação e importação recuperam os 23 estados; arquivo inválido preserva o andamento", async ({ page }) => {
   await page.getByLabel("Estado de UC05", { exact: true }).selectOption("concluido");
   await page.getByLabel("Estado de UC09", { exact: true }).selectOption("implementacao");
   const baixando = page.waitForEvent("download");
@@ -93,7 +93,7 @@ test("exportação e importação recuperam os 22 estados; arquivo inválido pre
   expect(caminho).toBeTruthy();
   const conteudo = readFileSync(caminho!, "utf8");
   const copia = JSON.parse(conteudo);
-  expect(Object.keys(copia.estados)).toHaveLength(22);
+  expect(Object.keys(copia.estados)).toHaveLength(23);
   expect(copia.estados.uc05).toBe("concluido");
   await page.getByLabel("Estado de UC05", { exact: true }).selectOption("correcao");
   await page.locator("#arquivo").setInputFiles({ name: "andamento.json", mimeType: "application/json", buffer: Buffer.from(conteudo) });
@@ -109,7 +109,7 @@ test("funciona aberto como arquivo local e se adapta ao celular", async ({ page 
   const externas: string[] = [];
   page.on("request", request => { if (/^https?:/.test(request.url())) externas.push(request.url()); });
   await page.goto(pathToFileURL(resolve(raiz, ".docs/use-cases/painel.html")).href);
-  await expect(page.locator(".caso")).toHaveCount(22);
+  await expect(page.locator(".caso")).toHaveCount(23);
   await page.getByLabel("Estado de UC05", { exact: true }).selectOption("implementacao");
   await page.reload();
   await expect(page.locator("#uc05")).toHaveAttribute("data-estado", "implementacao");
@@ -128,4 +128,15 @@ test("armazenamento indisponível mantém os controles e oferece exportação", 
   await expect(page.locator("#uc05")).toHaveAttribute("data-estado", "implementacao");
   await expect(page.getByRole("status")).toContainText("Clique em Exportar");
   await expect(page.getByRole("button", { name: "Exportar", exact: true })).toBeEnabled();
+});
+
+test("painel preserva o andamento salvo com 22 casos e acrescenta UC23 pendente", async ({ page }) => {
+  await page.evaluate(() => {
+    const estados = Object.fromEntries(Array.from({ length: 22 }, (_, i) => [`uc${String(i + 1).padStart(2, "0")}`, i === 4 ? "concluido" : "pendente"]));
+    localStorage.setItem("biblioteca:turma:fase01:painel:v1", JSON.stringify({ versao: 1, estados }));
+  });
+  await page.reload();
+  await expect(page.locator("#uc05")).toHaveAttribute("data-estado", "concluido");
+  await expect(page.locator("#uc23")).toHaveAttribute("data-estado", "pendente");
+  await expect(page.locator("#progresso")).toHaveText("1 de 23 concluídos");
 });

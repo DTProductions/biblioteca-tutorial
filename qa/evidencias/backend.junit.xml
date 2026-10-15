@@ -1,125 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="bun test" tests="70" assertions="293" failures="0" skipped="0" time="1.82534">
-  <testsuite name="tests/uc03.test.ts" file="tests/uc03.test.ts" tests="1" assertions="6" failures="0" skipped="0" time="0.200572" hostname="MacMini.local">
-    <testcase name="UC03: edição preserva identidade e catalogação e rejeita ISBN duplicado" classname="" time="0.048168" file="tests/uc03.test.ts" line="4" assertions="6" />
+<testsuites name="bun test" tests="72" assertions="433" failures="0" skipped="0" time="3.902406">
+  <testsuite name="tests/uc03.test.ts" file="tests/uc03.test.ts" tests="1" assertions="6" failures="0" skipped="0" time="0.193539" hostname="MacMini.local">
+    <testcase name="UC03: edição preserva identidade e catalogação e rejeita ISBN duplicado" classname="" time="0.046301" file="tests/uc03.test.ts" line="4" assertions="6" />
   </testsuite>
-  <testsuite name="tests/uc13.test.ts" file="tests/uc13.test.ts" tests="3" assertions="17" failures="0" skipped="0" time="0.072711" hostname="MacMini.local">
-    <testcase name="UC13: cria cópias distintas e o número não é reutilizado após exclusão" classname="" time="0.042878" file="tests/uc13.test.ts" line="6" assertions="7" />
-    <testcase name="UC13: migração preserva número e data de cada livro antigo, sem duplicar na reexecução" classname="" time="0.016263" file="tests/uc13.test.ts" line="23" assertions="3" />
-    <testcase name="UC13: identificador do livro exige inteiro positivo sem coerções de outros tipos" classname="" time="0.012817" file="tests/uc13.test.ts" line="39" assertions="7" />
+  <testsuite name="tests/uc13.test.ts" file="tests/uc13.test.ts" tests="3" assertions="17" failures="0" skipped="0" time="0.071221" hostname="MacMini.local">
+    <testcase name="UC13: cria cópias distintas e o número não é reutilizado após exclusão" classname="" time="0.042569" file="tests/uc13.test.ts" line="6" assertions="7" />
+    <testcase name="UC13: migração preserva número e data de cada livro antigo, sem duplicar na reexecução" classname="" time="0.016021" file="tests/uc13.test.ts" line="23" assertions="3" />
+    <testcase name="UC13: identificador do livro exige inteiro positivo sem coerções de outros tipos" classname="" time="0.012125" file="tests/uc13.test.ts" line="39" assertions="7" />
   </testsuite>
-  <testsuite name="tests/circulacao-postgres.test.ts" file="tests/circulacao-postgres.test.ts" tests="6" assertions="21" failures="0" skipped="0" time="0.262909" hostname="MacMini.local">
-    <testcase name="PostgreSQL leitores: CPF único, busca com máscara, edição e exclusão sem histórico" classname="" time="0.02763" file="tests/circulacao-postgres.test.ts" line="67" assertions="6" />
-    <testcase name="PostgreSQL concorrência: somente duas de três reservas simultâneas do leitor" classname="" time="0.038973" file="tests/circulacao-postgres.test.ts" line="81" assertions="3" />
-    <testcase name="PostgreSQL concorrência: dois leitores não reservam a mesma cópia" classname="" time="0.027337" file="tests/circulacao-postgres.test.ts" line="88" assertions="2" />
-    <testcase name="PostgreSQL concorrência: empréstimo limita três por leitor e um por exemplar" classname="" time="0.033002" file="tests/circulacao-postgres.test.ts" line="94" assertions="3" />
-    <testcase name="PostgreSQL reserva própria vira empréstimo e histórico impede excluir leitor após devolução" classname="" time="0.039601" file="tests/circulacao-postgres.test.ts" line="104" assertions="4" />
-    <testcase name="PostgreSQL falha ao inserir empréstimo reverte atendimento da reserva" classname="" time="0.062682" file="tests/circulacao-postgres.test.ts" line="119" assertions="3" />
+  <testsuite name="tests/circulacao-postgres.test.ts" file="tests/circulacao-postgres.test.ts" tests="6" assertions="21" failures="0" skipped="0" time="0.286718" hostname="MacMini.local">
+    <testcase name="PostgreSQL leitores: CPF único, busca com máscara, edição e exclusão sem histórico" classname="" time="0.036366" file="tests/circulacao-postgres.test.ts" line="67" assertions="6" />
+    <testcase name="PostgreSQL concorrência: somente duas de três reservas simultâneas do leitor" classname="" time="0.039097" file="tests/circulacao-postgres.test.ts" line="81" assertions="3" />
+    <testcase name="PostgreSQL concorrência: dois leitores não reservam a mesma cópia" classname="" time="0.02639" file="tests/circulacao-postgres.test.ts" line="88" assertions="2" />
+    <testcase name="PostgreSQL concorrência: empréstimo limita três por leitor e um por exemplar" classname="" time="0.06349" file="tests/circulacao-postgres.test.ts" line="94" assertions="3" />
+    <testcase name="PostgreSQL reserva própria vira empréstimo e histórico impede excluir leitor após devolução" classname="" time="0.03902" file="tests/circulacao-postgres.test.ts" line="104" assertions="4" />
+    <testcase name="PostgreSQL falha ao inserir empréstimo reverte atendimento da reserva" classname="" time="0.042992" file="tests/circulacao-postgres.test.ts" line="119" assertions="3" />
   </testsuite>
-  <testsuite name="tests/uc12.test.ts" file="tests/uc12.test.ts" tests="2" assertions="5" failures="0" skipped="0" time="0.019473" hostname="MacMini.local">
-    <testcase name="UC12 exclusão física só é permitida sem qualquer histórico" classname="" time="0.000856" file="tests/uc12.test.ts" line="7" assertions="3" />
-    <testcase name="UC12 API: exclusão sem histórico retorna204 e segunda tentativa404" classname="" time="0.014853" file="tests/uc12.test.ts" line="17" assertions="2" />
+  <testsuite name="tests/uc12.test.ts" file="tests/uc12.test.ts" tests="2" assertions="5" failures="0" skipped="0" time="0.023582" hostname="MacMini.local">
+    <testcase name="UC12 exclusão física só é permitida sem qualquer histórico" classname="" time="0.000276" file="tests/uc12.test.ts" line="7" assertions="3" />
+    <testcase name="UC12 API: exclusão sem histórico retorna204 e segunda tentativa404" classname="" time="0.019509" file="tests/uc12.test.ts" line="17" assertions="2" />
   </testsuite>
-  <testsuite name="tests/uc02.test.ts" file="tests/uc02.test.ts" tests="1" assertions="9" failures="0" skipped="0" time="0.028083" hostname="MacMini.local">
-    <testcase name="UC02: pesquisa por ISBN, título e autor e mantém endereço legado" classname="" time="0.027827" file="tests/uc02.test.ts" line="4" assertions="9" />
+  <testsuite name="tests/uc02.test.ts" file="tests/uc02.test.ts" tests="1" assertions="9" failures="0" skipped="0" time="0.025694" hostname="MacMini.local">
+    <testcase name="UC02: pesquisa por ISBN, título e autor e mantém endereço legado" classname="" time="0.025289" file="tests/uc02.test.ts" line="4" assertions="9" />
   </testsuite>
-  <testsuite name="tests/uc19.test.ts" file="tests/uc19.test.ts" tests="5" assertions="15" failures="0" skipped="0" time="0.170536" hostname="MacMini.local">
-    <testcase name="UC19 empréstimo dura14 dias e reserva própria é atendida" classname="" time="0.000613" file="tests/uc19.test.ts" line="10" assertions="5" />
-    <testcase name="UC19 API: empréstimo atende reserva própria, impede reserva alheia e vence em14 dias" classname="" time="0.057822" file="tests/uc19.test.ts" line="23" assertions="5" />
-    <testcase name="UC19 API: quatro pedidos simultâneos resultam em três empréstimos" classname="" time="0.108592" file="tests/uc19.test.ts" line="35" assertions="2" />
-    <testcase name="UC19 recusa quarto empréstimo incluindo os atrasados" classname="" time="0.000394" file="tests/uc19.test.ts" line="43" assertions="2" />
-    <testcase name="UC19 reserva expirada não impede empréstimo por outro leitor" classname="" time="0.000172" file="tests/uc19.test.ts" line="53" assertions="1" />
+  <testsuite name="tests/uc19.test.ts" file="tests/uc19.test.ts" tests="5" assertions="15" failures="0" skipped="0" time="0.178788" hostname="MacMini.local">
+    <testcase name="UC19 empréstimo dura14 dias e reserva própria é atendida" classname="" time="0.000586" file="tests/uc19.test.ts" line="10" assertions="5" />
+    <testcase name="UC19 API: empréstimo atende reserva própria, impede reserva alheia e vence em14 dias" classname="" time="0.056287" file="tests/uc19.test.ts" line="23" assertions="5" />
+    <testcase name="UC19 API: quatro pedidos simultâneos resultam em três empréstimos" classname="" time="0.120356" file="tests/uc19.test.ts" line="35" assertions="2" />
+    <testcase name="UC19 recusa quarto empréstimo incluindo os atrasados" classname="" time="0.00049" file="tests/uc19.test.ts" line="43" assertions="2" />
+    <testcase name="UC19 reserva expirada não impede empréstimo por outro leitor" classname="" time="0.00021" file="tests/uc19.test.ts" line="53" assertions="1" />
   </testsuite>
-  <testsuite name="tests/uc09.test.ts" file="tests/uc09.test.ts" tests="5" assertions="23" failures="0" skipped="0" time="0.012841" hostname="MacMini.local">
-    <testcase name="UC09 normaliza CPF, e-mail, nome e telefone" classname="" time="0.000045" file="tests/uc09.test.ts" line="10" assertions="1" />
-    <testcase name="UC09 rejeita CPF com checksum inválido ou dígitos repetidos" classname="" time="0.000085" file="tests/uc09.test.ts" line="14" assertions="5" />
-    <testcase name="UC09 exige todos os campos e valida contatos" classname="" time="0.000099" file="tests/uc09.test.ts" line="20" assertions="7" />
+  <testsuite name="tests/uc09.test.ts" file="tests/uc09.test.ts" tests="5" assertions="23" failures="0" skipped="0" time="0.010759" hostname="MacMini.local">
+    <testcase name="UC09 normaliza CPF, e-mail, nome e telefone" classname="" time="0.000042" file="tests/uc09.test.ts" line="10" assertions="1" />
+    <testcase name="UC09 rejeita CPF com checksum inválido ou dígitos repetidos" classname="" time="0.000082" file="tests/uc09.test.ts" line="14" assertions="5" />
+    <testcase name="UC09 exige todos os campos e valida contatos" classname="" time="0.000085" file="tests/uc09.test.ts" line="20" assertions="7" />
     <testcase name="UC09 impede CPF duplicado com ou sem máscara" classname="" time="0.000102" file="tests/uc09.test.ts" line="27" assertions="2" />
-    <testcase name="UC09 API: valida campos, normaliza CPF e rejeita duplicidade" classname="" time="0.011724" file="tests/uc09.test.ts" line="35" assertions="8" />
+    <testcase name="UC09 API: valida campos, normaliza CPF e rejeita duplicidade" classname="" time="0.009889" file="tests/uc09.test.ts" line="35" assertions="8" />
   </testsuite>
-  <testsuite name="tests/uc10.test.ts" file="tests/uc10.test.ts" tests="2" assertions="11" failures="0" skipped="0" time="0.006513" hostname="MacMini.local">
-    <testcase name="UC10 consulta retorna lista vazia, nome, CPF e identificador" classname="" time="0.000182" file="tests/uc10.test.ts" line="8" assertions="5" />
-    <testcase name="UC10 API: busca por nome, CPF pontuado e consulta individual" classname="" time="0.005694" file="tests/uc10.test.ts" line="19" assertions="6" />
+  <testsuite name="tests/uc10.test.ts" file="tests/uc10.test.ts" tests="2" assertions="11" failures="0" skipped="0" time="0.006316" hostname="MacMini.local">
+    <testcase name="UC10 consulta retorna lista vazia, nome, CPF e identificador" classname="" time="0.000178" file="tests/uc10.test.ts" line="8" assertions="5" />
+    <testcase name="UC10 API: busca por nome, CPF pontuado e consulta individual" classname="" time="0.00569" file="tests/uc10.test.ts" line="19" assertions="6" />
   </testsuite>
-  <testsuite name="tests/cadastro.e2e.test.ts" file="tests/cadastro.e2e.test.ts" tests="4" assertions="23" failures="0" skipped="0" time="0.292807" hostname="MacMini.local">
-    <testcase name="uma rota inexistente da API responde 404 em JSON" classname="" time="0.006259" file="tests/cadastro.e2e.test.ts" line="73" assertions="3" />
-    <testcase name="uma rota do frontend pode ser aberta diretamente" classname="" time="0.004611" file="tests/cadastro.e2e.test.ts" line="81" assertions="3" />
-    <testcase name="RF05: um autor de literatura vai até 5 livros no acervo" classname="" time="0.098304" file="tests/cadastro.e2e.test.ts" line="89" assertions="6" />
-    <testcase name="RF05′: um autor didático vai até 10 livros no acervo" classname="" time="0.076299" file="tests/cadastro.e2e.test.ts" line="100" assertions="11" />
+  <testsuite name="tests/cadastro.e2e.test.ts" file="tests/cadastro.e2e.test.ts" tests="4" assertions="23" failures="0" skipped="0" time="0.393838" hostname="MacMini.local">
+    <testcase name="uma rota inexistente da API responde 404 em JSON" classname="" time="0.006645" file="tests/cadastro.e2e.test.ts" line="73" assertions="3" />
+    <testcase name="uma rota do frontend pode ser aberta diretamente" classname="" time="0.004494" file="tests/cadastro.e2e.test.ts" line="81" assertions="3" />
+    <testcase name="RF05: um autor de literatura vai até 5 livros no acervo" classname="" time="0.088033" file="tests/cadastro.e2e.test.ts" line="89" assertions="6" />
+    <testcase name="RF05′: um autor didático vai até 10 livros no acervo" classname="" time="0.088379" file="tests/cadastro.e2e.test.ts" line="100" assertions="11" />
   </testsuite>
-  <testsuite name="tests/uc11.test.ts" file="tests/uc11.test.ts" tests="2" assertions="9" failures="0" skipped="0" time="0.019499" hostname="MacMini.local">
-    <testcase name="UC11 permite manter CPF próprio mas recusa CPF de outro leitor sem alterar dados" classname="" time="0.000213" file="tests/uc11.test.ts" line="7" assertions="4" />
-    <testcase name="UC11 API: edita mantendo CPF próprio e recusa CPF de outro leitor" classname="" time="0.018596" file="tests/uc11.test.ts" line="17" assertions="5" />
+  <testsuite name="tests/uc11.test.ts" file="tests/uc11.test.ts" tests="2" assertions="9" failures="0" skipped="0" time="0.029289" hostname="MacMini.local">
+    <testcase name="UC11 permite manter CPF próprio mas recusa CPF de outro leitor sem alterar dados" classname="" time="0.000201" file="tests/uc11.test.ts" line="7" assertions="4" />
+    <testcase name="UC11 API: edita mantendo CPF próprio e recusa CPF de outro leitor" classname="" time="0.028047" file="tests/uc11.test.ts" line="17" assertions="5" />
   </testsuite>
-  <testsuite name="tests/uc01.test.ts" file="tests/uc01.test.ts" tests="4" assertions="29" failures="0" skipped="0" time="0.085081" hostname="MacMini.local">
-    <testcase name="UC01: cadastro bibliográfico normaliza ISBN e começa sem cópia física" classname="" time="0.015405" file="tests/uc01.test.ts" line="4" assertions="11" />
-    <testcase name="UC01: valida entrada e limite de 5 livros bibliográficos do autor literário" classname="" time="0.035841" file="tests/uc01.test.ts" line="25" assertions="9" />
-    <testcase name="UC01: tentativas concorrentes não ultrapassam limite do autor" classname="" time="0.030607" file="tests/uc01.test.ts" line="35" assertions="2" />
-    <testcase name="UC01: identificador do autor rejeita coerções de booleanos, arrays e formatos não inteiros" classname="" time="0.00283" file="tests/uc01.test.ts" line="42" assertions="7" />
+  <testsuite name="tests/uc01.test.ts" file="tests/uc01.test.ts" tests="4" assertions="29" failures="0" skipped="0" time="0.088496" hostname="MacMini.local">
+    <testcase name="UC01: cadastro bibliográfico normaliza ISBN e começa sem cópia física" classname="" time="0.014015" file="tests/uc01.test.ts" line="4" assertions="11" />
+    <testcase name="UC01: valida entrada e limite de 5 livros bibliográficos do autor literário" classname="" time="0.043838" file="tests/uc01.test.ts" line="25" assertions="9" />
+    <testcase name="UC01: tentativas concorrentes não ultrapassam limite do autor" classname="" time="0.027674" file="tests/uc01.test.ts" line="35" assertions="2" />
+    <testcase name="UC01: identificador do autor rejeita coerções de booleanos, arrays e formatos não inteiros" classname="" time="0.002571" file="tests/uc01.test.ts" line="42" assertions="7" />
   </testsuite>
-  <testsuite name="tests/uc08.test.ts" file="tests/uc08.test.ts" tests="2" assertions="8" failures="0" skipped="0" time="0.025998" hostname="MacMini.local">
-    <testcase name="UC08: exclui autor sem livros, preserva vinculados e não ressuscita a carga inicial" classname="" time="0.017237" file="tests/uc08.test.ts" line="6" assertions="4" />
-    <testcase name="UC08: reinicializar não ressuscita autor excluído que pertencia à carga inicial" classname="" time="0.008096" file="tests/uc08.test.ts" line="18" assertions="4" />
+  <testsuite name="tests/uc08.test.ts" file="tests/uc08.test.ts" tests="2" assertions="8" failures="0" skipped="0" time="0.02872" hostname="MacMini.local">
+    <testcase name="UC08: exclui autor sem livros, preserva vinculados e não ressuscita a carga inicial" classname="" time="0.016028" file="tests/uc08.test.ts" line="6" assertions="4" />
+    <testcase name="UC08: reinicializar não ressuscita autor excluído que pertencia à carga inicial" classname="" time="0.012233" file="tests/uc08.test.ts" line="18" assertions="4" />
   </testsuite>
-  <testsuite name="tests/uc18.test.ts" file="tests/uc18.test.ts" tests="3" assertions="9" failures="0" skipped="0" time="0.03898" hostname="MacMini.local">
-    <testcase name="UC18 cancelar libera exemplar e vaga; não permite cancelamento repetido" classname="" time="0.000554" file="tests/uc18.test.ts" line="8" assertions="2" />
-    <testcase name="UC18 API: cancelamento preserva ID e libera a cópia para outro leitor" classname="" time="0.037562" file="tests/uc18.test.ts" line="18" assertions="5" />
-    <testcase name="UC18 não cancela reserva expirada ou inexistente" classname="" time="0.00025" file="tests/uc18.test.ts" line="29" assertions="2" />
+  <testsuite name="tests/uc18.test.ts" file="tests/uc18.test.ts" tests="3" assertions="9" failures="0" skipped="0" time="0.066726" hostname="MacMini.local">
+    <testcase name="UC18 cancelar libera exemplar e vaga; não permite cancelamento repetido" classname="" time="0.000581" file="tests/uc18.test.ts" line="8" assertions="2" />
+    <testcase name="UC18 API: cancelamento preserva ID e libera a cópia para outro leitor" classname="" time="0.065319" file="tests/uc18.test.ts" line="18" assertions="5" />
+    <testcase name="UC18 não cancela reserva expirada ou inexistente" classname="" time="0.000314" file="tests/uc18.test.ts" line="29" assertions="2" />
   </testsuite>
-  <testsuite name="tests/uc22.test.ts" file="tests/uc22.test.ts" tests="2" assertions="11" failures="0" skipped="0" time="0.032137" hostname="MacMini.local">
-    <testcase name="UC22 filtra reservas por leitor, exemplar e situação derivada sem apagar histórico" classname="" time="0.000422" file="tests/uc22.test.ts" line="10" assertions="5" />
-    <testcase name="UC22 API: lista com nomes e filtros e deriva expiração na data corrente" classname="" time="0.031037" file="tests/uc22.test.ts" line="25" assertions="6" />
+  <testsuite name="tests/uc22.test.ts" file="tests/uc22.test.ts" tests="2" assertions="11" failures="0" skipped="0" time="0.080405" hostname="MacMini.local">
+    <testcase name="UC22 filtra reservas por leitor, exemplar e situação derivada sem apagar histórico" classname="" time="0.000475" file="tests/uc22.test.ts" line="10" assertions="5" />
+    <testcase name="UC22 API: lista com nomes e filtros e deriva expiração na data corrente" classname="" time="0.079378" file="tests/uc22.test.ts" line="25" assertions="6" />
   </testsuite>
-  <testsuite name="tests/uc04.test.ts" file="tests/uc04.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.034144" hostname="MacMini.local">
-    <testcase name="UC04: exclusão física aceita livro sem exemplares e recusa livro vinculado" classname="" time="0.033903" file="tests/uc04.test.ts" line="4" assertions="4" />
+  <testsuite name="tests/uc04.test.ts" file="tests/uc04.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.077909" hostname="MacMini.local">
+    <testcase name="UC04: exclusão física aceita livro sem exemplares e recusa livro vinculado" classname="" time="0.077471" file="tests/uc04.test.ts" line="4" assertions="4" />
   </testsuite>
-  <testsuite name="tests/uc14.test.ts" file="tests/uc14.test.ts" tests="1" assertions="6" failures="0" skipped="0" time="0.019469" hostname="MacMini.local">
-    <testcase name="UC14: consulta exemplar e combina filtros de registro, livro e disponibilidade" classname="" time="0.018853" file="tests/uc14.test.ts" line="4" assertions="6" />
+  <testsuite name="tests/uc14.test.ts" file="tests/uc14.test.ts" tests="1" assertions="6" failures="0" skipped="0" time="0.049912" hostname="MacMini.local">
+    <testcase name="UC14: consulta exemplar e combina filtros de registro, livro e disponibilidade" classname="" time="0.049469" file="tests/uc14.test.ts" line="4" assertions="6" />
   </testsuite>
-  <testsuite name="tests/cadastrar-livro.test.ts" file="tests/cadastrar-livro.test.ts" tests="8" assertions="11" failures="0" skipped="0" time="0.005441" hostname="MacMini.local">
-    <testcase name="RF04: um autor fora da base é recusado" classname="" time="0.000237" file="tests/cadastrar-livro.test.ts" line="55" assertions="1" />
-    <testcase name="RF05: um autor de literatura vai até 5 livros no acervo" classname="" time="0.000237" file="tests/cadastrar-livro.test.ts" line="63" assertions="1" />
-    <testcase name="RF05′: um autor didático vai até 10 livros no acervo" classname="" time="0.000215" file="tests/cadastrar-livro.test.ts" line="73" assertions="1" />
-    <testcase name="RF06 e RF07: a data e o número de registro vêm do servidor, sequenciais no ano" classname="" time="0.000054" file="tests/cadastrar-livro.test.ts" line="83" assertions="3" />
-    <testcase name="RF07: o sequencial recomeça a cada ano" classname="" time="0.000085" file="tests/cadastrar-livro.test.ts" line="94" assertions="2" />
-    <testcase name="RF08: o mesmo ISBN não entra duas vezes" classname="" time="0.000041" file="tests/cadastrar-livro.test.ts" line="121" assertions="1" />
-    <testcase name="RF09: o mesmo autor não repete título, mesmo com outro ISBN" classname="" time="0.000035" file="tests/cadastrar-livro.test.ts" line="129" assertions="1" />
-    <testcase name="o cadastro anuncia LivroCatalogado" classname="" time="0.000039" file="tests/cadastrar-livro.test.ts" line="143" assertions="1" />
+  <testsuite name="tests/cadastrar-livro.test.ts" file="tests/cadastrar-livro.test.ts" tests="8" assertions="11" failures="0" skipped="0" time="0.002434" hostname="MacMini.local">
+    <testcase name="RF04: um autor fora da base é recusado" classname="" time="0.000246" file="tests/cadastrar-livro.test.ts" line="55" assertions="1" />
+    <testcase name="RF05: um autor de literatura vai até 5 livros no acervo" classname="" time="0.000365" file="tests/cadastrar-livro.test.ts" line="63" assertions="1" />
+    <testcase name="RF05′: um autor didático vai até 10 livros no acervo" classname="" time="0.000246" file="tests/cadastrar-livro.test.ts" line="73" assertions="1" />
+    <testcase name="RF06 e RF07: a data e o número de registro vêm do servidor, sequenciais no ano" classname="" time="0.000064" file="tests/cadastrar-livro.test.ts" line="83" assertions="3" />
+    <testcase name="RF07: o sequencial recomeça a cada ano" classname="" time="0.000104" file="tests/cadastrar-livro.test.ts" line="94" assertions="2" />
+    <testcase name="RF08: o mesmo ISBN não entra duas vezes" classname="" time="0.00004" file="tests/cadastrar-livro.test.ts" line="121" assertions="1" />
+    <testcase name="RF09: o mesmo autor não repete título, mesmo com outro ISBN" classname="" time="0.000034" file="tests/cadastrar-livro.test.ts" line="129" assertions="1" />
+    <testcase name="o cadastro anuncia LivroCatalogado" classname="" time="0.000045" file="tests/cadastrar-livro.test.ts" line="143" assertions="1" />
   </testsuite>
-  <testsuite name="tests/uc15.test.ts" file="tests/uc15.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.052019" hostname="MacMini.local">
-    <testcase name="UC15: altera dados físicos preservando livro e número de registro" classname="" time="0.051473" file="tests/uc15.test.ts" line="4" assertions="4" />
+  <testsuite name="tests/uc15.test.ts" file="tests/uc15.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.303861" hostname="MacMini.local">
+    <testcase name="UC15: altera dados físicos preservando livro e número de registro" classname="" time="0.303561" file="tests/uc15.test.ts" line="4" assertions="4" />
   </testsuite>
-  <testsuite name="tests/uc05.test.ts" file="tests/uc05.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.002778" hostname="MacMini.local">
-    <testcase name="UC05: cadastra autor e valida nome e categoria" classname="" time="0.002502" file="tests/uc05.test.ts" line="4" assertions="4" />
+  <testsuite name="tests/uc05.test.ts" file="tests/uc05.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.007747" hostname="MacMini.local">
+    <testcase name="UC05: cadastra autor e valida nome e categoria" classname="" time="0.007483" file="tests/uc05.test.ts" line="4" assertions="4" />
   </testsuite>
-  <testsuite name="tests/uc07.test.ts" file="tests/uc07.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.018628" hostname="MacMini.local">
-    <testcase name="UC07: atualiza autor e recusa reduzir categoria abaixo da quantidade existente" classname="" time="0.018069" file="tests/uc07.test.ts" line="5" assertions="4" />
+  <testsuite name="tests/uc23.test.ts" file="tests/uc23.test.ts" tests="2" assertions="140" failures="0" skipped="0" time="1.572471" hostname="MacMini.local">
+    <testcase name="UC23: conflito tardio de ISBN reverte toda a execução sem apagar dados existentes" classname="" time="0.53242" file="tests/uc23.test.ts" line="14" assertions="3" />
+    <testcase name="UC23: seed atômico, idempotente, completo e coerente com os limites e o histórico" classname="" time="1.039447" file="tests/uc23.test.ts" line="29" assertions="137" />
   </testsuite>
-  <testsuite name="tests/uc17.test.ts" file="tests/uc17.test.ts" tests="7" assertions="33" failures="0" skipped="0" time="0.1472" hostname="MacMini.local">
-    <testcase name="UC17 reserva imediatamente com sete dias corridos de exclusividade" classname="" time="0.000295" file="tests/uc17.test.ts" line="9" assertions="2" />
-    <testcase name="UC17 API: reserva tem janela inclusiva7 dias e recusa terceiro pedido" classname="" time="0.053912" file="tests/uc17.test.ts" line="17" assertions="6" />
-    <testcase name="UC17 API: concorrência não ultrapassa duas reservas nem duplica reserva da cópia" classname="" time="0.072911" file="tests/uc17.test.ts" line="30" assertions="4" />
-    <testcase name="UC17 recusa a terceira reserva do leitor sem alterar o exemplar" classname="" time="0.000355" file="tests/uc17.test.ts" line="42" assertions="3" />
-    <testcase name="UC17 reserva expira no início do oitavo dia e libera o limite e a cópia" classname="" time="0.000279" file="tests/uc17.test.ts" line="51" assertions="3" />
-    <testcase name="UC17 exige vínculos existentes e usa data civil brasileira" classname="" time="0.000113" file="tests/uc17.test.ts" line="62" assertions="3" />
-    <testcase name="UC17 API: IDs não aceitam booleanos, arrays, nulos ou notação exponencial" classname="" time="0.01595" file="tests/uc17.test.ts" line="70" assertions="12" />
+  <testsuite name="tests/uc07.test.ts" file="tests/uc07.test.ts" tests="1" assertions="4" failures="0" skipped="0" time="0.045138" hostname="MacMini.local">
+    <testcase name="UC07: atualiza autor e recusa reduzir categoria abaixo da quantidade existente" classname="" time="0.044845" file="tests/uc07.test.ts" line="5" assertions="4" />
   </testsuite>
-  <testsuite name="tests/uc21.test.ts" file="tests/uc21.test.ts" tests="2" assertions="14" failures="0" skipped="0" time="0.027492" hostname="MacMini.local">
-    <testcase name="UC21 consulta filtra leitor, exemplar e situação e calcula atraso" classname="" time="0.000679" file="tests/uc21.test.ts" line="10" assertions="8" />
-    <testcase name="UC21 API: identifica histórico e calcula atraso com filtros" classname="" time="0.026074" file="tests/uc21.test.ts" line="29" assertions="6" />
+  <testsuite name="tests/uc17.test.ts" file="tests/uc17.test.ts" tests="7" assertions="33" failures="0" skipped="0" time="0.15707" hostname="MacMini.local">
+    <testcase name="UC17 reserva imediatamente com sete dias corridos de exclusividade" classname="" time="0.001395" file="tests/uc17.test.ts" line="9" assertions="2" />
+    <testcase name="UC17 API: reserva tem janela inclusiva7 dias e recusa terceiro pedido" classname="" time="0.062142" file="tests/uc17.test.ts" line="17" assertions="6" />
+    <testcase name="UC17 API: concorrência não ultrapassa duas reservas nem duplica reserva da cópia" classname="" time="0.075492" file="tests/uc17.test.ts" line="30" assertions="4" />
+    <testcase name="UC17 recusa a terceira reserva do leitor sem alterar o exemplar" classname="" time="0.000363" file="tests/uc17.test.ts" line="42" assertions="3" />
+    <testcase name="UC17 reserva expira no início do oitavo dia e libera o limite e a cópia" classname="" time="0.000256" file="tests/uc17.test.ts" line="51" assertions="3" />
+    <testcase name="UC17 exige vínculos existentes e usa data civil brasileira" classname="" time="0.000086" file="tests/uc17.test.ts" line="62" assertions="3" />
+    <testcase name="UC17 API: IDs não aceitam booleanos, arrays, nulos ou notação exponencial" classname="" time="0.016324" file="tests/uc17.test.ts" line="70" assertions="12" />
   </testsuite>
-  <testsuite name="tests/uc20.test.ts" file="tests/uc20.test.ts" tests="2" assertions="7" failures="0" skipped="0" time="0.034441" hostname="MacMini.local">
-    <testcase name="UC20 devolução libera exemplar e vaga e só pode ocorrer uma vez" classname="" time="0.000532" file="tests/uc20.test.ts" line="10" assertions="2" />
-    <testcase name="UC20 API: devolução única libera a cópia para novo empréstimo" classname="" time="0.033291" file="tests/uc20.test.ts" line="24" assertions="5" />
+  <testsuite name="tests/uc21.test.ts" file="tests/uc21.test.ts" tests="2" assertions="14" failures="0" skipped="0" time="0.028466" hostname="MacMini.local">
+    <testcase name="UC21 consulta filtra leitor, exemplar e situação e calcula atraso" classname="" time="0.000768" file="tests/uc21.test.ts" line="10" assertions="8" />
+    <testcase name="UC21 API: identifica histórico e calcula atraso com filtros" classname="" time="0.027067" file="tests/uc21.test.ts" line="29" assertions="6" />
   </testsuite>
-  <testsuite name="tests/importacao.test.ts" file="tests/importacao.test.ts" tests="1" assertions="1" failures="0" skipped="0" time="0.14569" hostname="MacMini.local">
-    <testcase name="RF05 também vale para a importação em lote" classname="" time="0.142582" file="tests/importacao.test.ts" line="51" assertions="1" />
+  <testsuite name="tests/uc20.test.ts" file="tests/uc20.test.ts" tests="2" assertions="7" failures="0" skipped="0" time="0.029334" hostname="MacMini.local">
+    <testcase name="UC20 devolução libera exemplar e vaga e só pode ocorrer uma vez" classname="" time="0.000616" file="tests/uc20.test.ts" line="10" assertions="2" />
+    <testcase name="UC20 API: devolução única libera a cópia para novo empréstimo" classname="" time="0.028309" file="tests/uc20.test.ts" line="24" assertions="5" />
   </testsuite>
-  <testsuite name="tests/uc16.test.ts" file="tests/uc16.test.ts" tests="2" assertions="3" failures="0" skipped="0" time="0.057009" hostname="MacMini.local">
-    <testcase name="UC16: exclui exemplar sem histórico e informa ausência na repetição" classname="" time="0.040237" file="tests/uc16.test.ts" line="7" assertions="2" />
-    <testcase name="UC16: histórico informado pela integração impede exclusão física" classname="" time="0.016029" file="tests/uc16.test.ts" line="13" assertions="1" />
+  <testsuite name="tests/importacao.test.ts" file="tests/importacao.test.ts" tests="1" assertions="1" failures="0" skipped="0" time="0.094057" hostname="MacMini.local">
+    <testcase name="RF05 também vale para a importação em lote" classname="" time="0.091659" file="tests/importacao.test.ts" line="51" assertions="1" />
   </testsuite>
-  <testsuite name="tests/uc06.test.ts" file="tests/uc06.test.ts" tests="1" assertions="6" failures="0" skipped="0" time="0.007615" hostname="MacMini.local">
-    <testcase name="UC06: busca por nome, por identificador e informa ausência" classname="" time="0.007367" file="tests/uc06.test.ts" line="4" assertions="6" />
+  <testsuite name="tests/uc16.test.ts" file="tests/uc16.test.ts" tests="2" assertions="3" failures="0" skipped="0" time="0.035373" hostname="MacMini.local">
+    <testcase name="UC16: exclui exemplar sem histórico e informa ausência na repetição" classname="" time="0.020264" file="tests/uc16.test.ts" line="7" assertions="2" />
+    <testcase name="UC16: histórico informado pela integração impede exclusão física" classname="" time="0.014609" file="tests/uc16.test.ts" line="13" assertions="1" />
+  </testsuite>
+  <testsuite name="tests/uc06.test.ts" file="tests/uc06.test.ts" tests="1" assertions="6" failures="0" skipped="0" time="0.007807" hostname="MacMini.local">
+    <testcase name="UC06: busca por nome, por identificador e informa ausência" classname="" time="0.007569" file="tests/uc06.test.ts" line="4" assertions="6" />
   </testsuite>
 </testsuites>

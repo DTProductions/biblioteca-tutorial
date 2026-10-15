@@ -1,0 +1,548 @@
+{
+  "inicio": "2026-10-15T17:10:04.537664+00:00",
+  "fim": "2026-10-15T17:10:08.212828+00:00",
+  "commitInicial": "0920d3b990fbefb7441b099e7cde4b95700029e6",
+  "manifestoSha256": "46ae1a1eedba6372807f28cb11b0376bee939a1c329dbcbd9afc43f8a778c541",
+  "diretorio": "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho",
+  "origemCodigo": "Exclusivamente .docs/use-cases/codigo.ts e pacotes/ucXX.json",
+  "casos": [
+    {
+      "id": "uc23",
+      "inicio": "2026-10-15T17:10:04.575509+00:00",
+      "fim": "2026-10-15T17:10:08.212114+00:00",
+      "fechamento": [
+        "uc09",
+        "uc10",
+        "uc05",
+        "uc06",
+        "uc01",
+        "uc02",
+        "uc13",
+        "uc14",
+        "uc17",
+        "uc22",
+        "uc18",
+        "uc19",
+        "uc21",
+        "uc20",
+        "uc23"
+      ],
+      "diretorio": "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23",
+      "banco": "replay_20261015_141004_edb95d_uc23_test",
+      "aprovado": true,
+      "pacotesSha256": {
+        "uc09": "532b4863dffd0df7276dc61907d56d2aeb1268a5087b31ec34a801ea7a249b4b",
+        "uc10": "02d2dfb930372d987ee7f3712723adb92c6d9e3571da89523366a577e07e8a99",
+        "uc05": "ef08b9c78fa19f11408be8019bf99764066a97f147f319402d3d9c6f5bc6860d",
+        "uc06": "e17fc7aba58cccbd5044f2f5e8eb724e34b8ebbea7dc8586c596b782c92044d5",
+        "uc01": "820f9682171a4edb6fec1a3e299dc6cb0e78c2e8307a43a9fb8812c2b4198468",
+        "uc02": "3af9202b2b24ef4a8bede63d7cd591bd89ed3d696a188a9ddf5105d10302910e",
+        "uc13": "7c02c81de9bedcc9d5da4d49988f536011eb152642cfa76c407768ae5b42de4e",
+        "uc14": "eeca6e14d78b0d0a94063ed448a37ab92066417f32151ca53bfcdb4de3cc8dc0",
+        "uc17": "f1a3d497f00461ea6540b5cec6cb7c11bf7103e966b924efc3c9650abbd27fc5",
+        "uc22": "35936e00850e234b16e256ee6f4b4a6fbd22fc870dedcff3c667436084287b0e",
+        "uc18": "2f11932b3ee421a59b58208ceadde7ff46c6299346941de02ea18a033c08bd7b",
+        "uc19": "212583b203523d675412c39c3b1aa7b78ee389df4506f8838187043e1686276e",
+        "uc21": "3ed8e1dda336c12e79883391906c386cccc403739d62659afbc8e73cf6e95f3d",
+        "uc20": "4d9316576b21db1e055e2b565a50b47bcd5d9198e4c007ede5d96fff884421bd",
+        "uc23": "1235ac37379069bb546275144defa20c45dbed7b04e8ea9f0266e1ccffe81f1f"
+      },
+      "etapas": [
+        {
+          "nome": "aplicar-uc09",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc09",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.021,
+          "log": "qa/evidencias/replay-logs/uc23/01-aplicar-uc09.log"
+        },
+        {
+          "nome": "aplicar-uc10",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc10",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.014,
+          "log": "qa/evidencias/replay-logs/uc23/02-aplicar-uc10.log"
+        },
+        {
+          "nome": "aplicar-uc05",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc05",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/03-aplicar-uc05.log"
+        },
+        {
+          "nome": "aplicar-uc06",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc06",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/04-aplicar-uc06.log"
+        },
+        {
+          "nome": "aplicar-uc01",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc01",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.014,
+          "log": "qa/evidencias/replay-logs/uc23/05-aplicar-uc01.log"
+        },
+        {
+          "nome": "aplicar-uc02",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc02",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/06-aplicar-uc02.log"
+        },
+        {
+          "nome": "aplicar-uc13",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc13",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/07-aplicar-uc13.log"
+        },
+        {
+          "nome": "aplicar-uc14",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc14",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/08-aplicar-uc14.log"
+        },
+        {
+          "nome": "aplicar-uc17",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc17",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.014,
+          "log": "qa/evidencias/replay-logs/uc23/09-aplicar-uc17.log"
+        },
+        {
+          "nome": "aplicar-uc22",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc22",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/10-aplicar-uc22.log"
+        },
+        {
+          "nome": "aplicar-uc18",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc18",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/11-aplicar-uc18.log"
+        },
+        {
+          "nome": "aplicar-uc19",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc19",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/12-aplicar-uc19.log"
+        },
+        {
+          "nome": "aplicar-uc21",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc21",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/13-aplicar-uc21.log"
+        },
+        {
+          "nome": "aplicar-uc20",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc20",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/14-aplicar-uc20.log"
+        },
+        {
+          "nome": "aplicar-uc23",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc23",
+            "--aplicar",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.014,
+          "log": "qa/evidencias/replay-logs/uc23/15-aplicar-uc23.log"
+        },
+        {
+          "nome": "comparar-uc09",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc09",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/16-comparar-uc09.log"
+        },
+        {
+          "nome": "comparar-uc10",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc10",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.012,
+          "log": "qa/evidencias/replay-logs/uc23/17-comparar-uc10.log"
+        },
+        {
+          "nome": "comparar-uc05",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc05",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/18-comparar-uc05.log"
+        },
+        {
+          "nome": "comparar-uc06",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc06",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/19-comparar-uc06.log"
+        },
+        {
+          "nome": "comparar-uc01",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc01",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/20-comparar-uc01.log"
+        },
+        {
+          "nome": "comparar-uc02",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc02",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/21-comparar-uc02.log"
+        },
+        {
+          "nome": "comparar-uc13",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc13",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.012,
+          "log": "qa/evidencias/replay-logs/uc23/22-comparar-uc13.log"
+        },
+        {
+          "nome": "comparar-uc14",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc14",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/23-comparar-uc14.log"
+        },
+        {
+          "nome": "comparar-uc17",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc17",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/24-comparar-uc17.log"
+        },
+        {
+          "nome": "comparar-uc22",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc22",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/25-comparar-uc22.log"
+        },
+        {
+          "nome": "comparar-uc18",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc18",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/26-comparar-uc18.log"
+        },
+        {
+          "nome": "comparar-uc19",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc19",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/27-comparar-uc19.log"
+        },
+        {
+          "nome": "comparar-uc21",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc21",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.012,
+          "log": "qa/evidencias/replay-logs/uc23/28-comparar-uc21.log"
+        },
+        {
+          "nome": "comparar-uc20",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc20",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.012,
+          "log": "qa/evidencias/replay-logs/uc23/29-comparar-uc20.log"
+        },
+        {
+          "nome": "comparar-uc23",
+          "comando": [
+            "bun",
+            "/private/tmp/biblioteca-uc23-referencia/.docs/use-cases/codigo.ts",
+            "uc23",
+            "--raiz",
+            "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23"
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.013,
+          "log": "qa/evidencias/replay-logs/uc23/30-comparar-uc23.log"
+        },
+        {
+          "nome": "criar-banco",
+          "comando": [
+            "psql",
+            "<URL PostgreSQL QA>",
+            "--no-psqlrc",
+            "-v",
+            "ON_ERROR_STOP=1",
+            "-c",
+            "CREATE DATABASE \"replay_20261015_141004_edb95d_uc23_test\""
+          ],
+          "cwd": "/private/tmp/biblioteca-uc23-referencia",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.19,
+          "log": "qa/evidencias/replay-logs/uc23/31-criar-banco.log"
+        },
+        {
+          "nome": "backend-typecheck",
+          "comando": [
+            "bun",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23/backend",
+          "codigoSaida": 0,
+          "duracaoSegundos": 0.221,
+          "log": "qa/evidencias/replay-logs/uc23/32-backend-typecheck.log"
+        },
+        {
+          "nome": "backend-teste",
+          "comando": [
+            "bun",
+            "test",
+            "tests/uc23.test.ts"
+          ],
+          "cwd": "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23/backend",
+          "codigoSaida": 0,
+          "duracaoSegundos": 1.497,
+          "log": "qa/evidencias/replay-logs/uc23/33-backend-teste.log"
+        },
+        {
+          "nome": "frontend-build",
+          "comando": [
+            "bun",
+            "run",
+            "build"
+          ],
+          "cwd": "/var/folders/sh/b90hvpmn505_dh8y306nkjyc0000gn/T/biblioteca-tutoriais-obhu_qho/uc23/frontend",
+          "codigoSaida": 0,
+          "duracaoSegundos": 1.328,
+          "log": "qa/evidencias/replay-logs/uc23/34-frontend-build.log"
+        }
+      ]
+    }
+  ],
+  "resumo": {
+    "executados": 1,
+    "aprovados": 1,
+    "reprovados": 0
+  },
+  "manifestoInalteradoDuranteReplay": true,
+  "pacotesInalteradosDuranteReplay": true
+}

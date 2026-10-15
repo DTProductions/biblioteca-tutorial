@@ -1,4 +1,4 @@
-# Validação dos 22 tutoriais
+# Validação dos tutoriais
 
 Execute na branch `saas-evolution/fase01-teste`. O material dos alunos está em
 [.docs/use-cases/index.html](../.docs/use-cases/index.html).
@@ -46,7 +46,7 @@ São 9 testes de interface, 4 de regras e 25 de documentação. Eles cobrem os
 22 casos de uso, os 508 blocos de código, o botão de cópia, links, responsividade,
 limites concorrentes, expiração e devolução em atraso.
 
-O painel de acompanhamento possui mais 7 testes. Com o servidor de documentos
+O painel de acompanhamento possui mais 8 testes, incluindo a migração do andamento anterior. Com o servidor de documentos
 ativo, execute somente essa verificação em `qa/`:
 
 ```bash
@@ -84,3 +84,16 @@ Para encerrar os contêineres, preservando os dados de validação:
 ```bash
 docker compose -p biblioteca-uc22-validacao -f infra/compose.yaml -f qa/compose.yaml down
 ```
+
+## UC23 · seed
+
+O novo teste `seed.spec.ts` exige uma instância exclusiva com banco vazio e
+`BIBLIOTECA_SEED_TEST=1`. A execução cria o catálogo e o histórico e repete a
+operação para verificar idempotência. Exemplo em `qa/`:
+
+```bash
+BIBLIOTECA_SEED_TEST=1 BIBLIOTECA_URL=http://127.0.0.1:62315 PLAYWRIGHT_JSON_OUTPUT_NAME=evidencias/seed.json bun run test -- seed.spec.ts
+```
+
+A instância dedicada deve usar um banco terminado em `_test`. Na aplicação
+manual, use `/livros/seed` para executar a carga quando desejar.

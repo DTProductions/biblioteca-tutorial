@@ -38,7 +38,7 @@ def digest(path: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--casos", nargs="+", help="Ex.: uc05 uc01; padrão: todos os 22")
+    parser.add_argument("--casos", nargs="+", help="Ex.: uc05 uc01; padrão: todos os 23")
     parser.add_argument("--saida", default="qa/evidencias/replay.json")
     parser.add_argument("--diretorio", help="Pasta para conservar as cópias independentes")
     parser.add_argument("--database-url", default=os.environ.get(
@@ -50,8 +50,8 @@ def main() -> int:
     manifesto_path = tutoriais / "manifesto.json"
     manifesto = json.loads(manifesto_path.read_text())
     casos = args.casos or sorted(manifesto["casos"])
-    if any(not re.fullmatch(r"uc(?:0[1-9]|1[0-9]|2[0-2])", caso) for caso in casos):
-        parser.error("Casos devem estar entre uc01 e uc22.")
+    if any(not re.fullmatch(r"uc(?:0[1-9]|1[0-9]|2[0-3])", caso) for caso in casos):
+        parser.error("Casos devem estar entre uc01 e uc23.")
     for executavel in ("bun", "git", "psql"):
         if not shutil.which(executavel):
             parser.error(f"Executável necessário não encontrado: {executavel}")

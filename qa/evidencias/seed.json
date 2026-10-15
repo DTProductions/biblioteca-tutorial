@@ -1,0 +1,132 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.19.0/bin/node",
+      "/private/tmp/biblioteca-uc23-referencia/qa/node_modules/.bin/playwright",
+      "test",
+      "seed.spec.ts"
+    ],
+    "configFile": "/private/tmp/biblioteca-uc23-referencia/qa/playwright.config.ts",
+    "rootDir": "/private/tmp/biblioteca-uc23-referencia/qa/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/private/tmp/biblioteca-uc23-referencia/qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/private/tmp/biblioteca-uc23-referencia/qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/uc23-playwright-resultados.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "seed.spec.ts",
+      "file": "seed.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UC23: gerar exemplos, conferir contagens, consultar telas e repetir sem duplicação",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2067,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-15T17:10:18.947Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "resultado-seed",
+                      "contentType": "application/json",
+                      "body": "ewogICJyZXN1bHRhZG8iOiB7CiAgICAiZXhlY3V0YWRvIjogdHJ1ZSwKICAgICJjcmlhZG8iOiB0cnVlLAogICAgImRhdGFSZWZlcmVuY2lhIjogIjIwMjYtMTAtMTUiLAogICAgInJlc3VtbyI6IHsKICAgICAgImF1dG9yZXMiOiA1MCwKICAgICAgImxpdnJvcyI6IDUwLAogICAgICAiZXhlbXBsYXJlcyI6IDI3NSwKICAgICAgImxlaXRvcmVzIjogMTIwLAogICAgICAiZW1wcmVzdGltb3NEZXZvbHZpZG9zIjogMTIwLAogICAgICAiZW1wcmVzdGltb3NFbURpYSI6IDMwLAogICAgICAiZW1wcmVzdGltb3NBdHJhc2Fkb3MiOiAzMCwKICAgICAgInJlc2VydmFzQXRpdmFzIjogMjAsCiAgICAgICJyZXNlcnZhc0NhbmNlbGFkYXMiOiAxMCwKICAgICAgInJlc2VydmFzRXhwaXJhZGFzIjogMTAKICAgIH0KICB9LAogICJyZXBldGljYW8iOiB7CiAgICAiZXhlY3V0YWRvIjogdHJ1ZSwKICAgICJkYXRhUmVmZXJlbmNpYSI6ICIyMDI2LTEwLTE1IiwKICAgICJyZXN1bW8iOiB7CiAgICAgICJsaXZyb3MiOiA1MCwKICAgICAgImF1dG9yZXMiOiA1MCwKICAgICAgImxlaXRvcmVzIjogMTIwLAogICAgICAiZXhlbXBsYXJlcyI6IDI3NSwKICAgICAgInJlc2VydmFzQXRpdmFzIjogMjAsCiAgICAgICJlbXByZXN0aW1vc0VtRGlhIjogMzAsCiAgICAgICJyZXNlcnZhc0V4cGlyYWRhcyI6IDEwLAogICAgICAicmVzZXJ2YXNDYW5jZWxhZGFzIjogMTAsCiAgICAgICJlbXByZXN0aW1vc0F0cmFzYWRvcyI6IDMwLAogICAgICAiZW1wcmVzdGltb3NEZXZvbHZpZG9zIjogMTIwCiAgICB9LAogICAgImNyaWFkbyI6IGZhbHNlCiAgfSwKICAiY29udGFnZW5zQW50ZXMiOiB7CiAgICAiYXV0b3JlcyI6IDUyLAogICAgImxpdnJvcyI6IDUwLAogICAgImV4ZW1wbGFyZXMiOiAyNzUsCiAgICAibGVpdG9yZXMiOiAxMjAsCiAgICAiZW1wcmVzdGltb3MiOiAxODAsCiAgICAicmVzZXJ2YXMiOiA0MAogIH0sCiAgImNvbnRhZ2Vuc0RlcG9pcyI6IHsKICAgICJhdXRvcmVzIjogNTIsCiAgICAibGl2cm9zIjogNTAsCiAgICAiZXhlbXBsYXJlcyI6IDI3NSwKICAgICJsZWl0b3JlcyI6IDEyMCwKICAgICJlbXByZXN0aW1vcyI6IDE4MCwKICAgICJyZXNlcnZhcyI6IDQwCiAgfSwKICAiZXJyb3NKYXZhU2NyaXB0IjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "11ceb7af692008938f3b-a424596e47a33926d500",
+          "file": "seed.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-15T17:10:18.697Z",
+    "duration": 2573.21,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
