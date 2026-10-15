@@ -13,16 +13,19 @@ export async function createAutoriaTablesPostgres(): Promise<void> {
     )
   `;
 
-  for (const [id, nome, tipo] of AUTORES) {
-    await sql`
-      INSERT INTO autores (id, nome, tipo) VALUES (${id}, ${nome}, ${tipo})
-      ON CONFLICT (id) DO NOTHING
-    `;
-  }
-
-  // os ids da carga foram dados à mão: a sequência precisa saber, senão o
-  // próximo autor cadastrado tentaria o id 1 de novo
-  await sql`
-    SELECT setval(pg_get_serial_sequence('autores', 'id'), (SELECT MAX(id) FROM autores))
-  `;
+  await sql`CREATE TABLE IF NOT EXISTS autoria_migracoes (nome TEXT PRIMARY KEY)`;
+  await sql.begin(async (tx) => {
+    await tx`SELECT pg_advisory_xact_lock(22001)`;
+    const [aplicada] = await tx`SELECT nome FROM autoria_migracoes WHERE nome = 'carga-inicial'`;
+    if (aplicada) return;
+    for (const [id, nome, tipo] of AUTORES) {
+      await tx`
+        INSERT INTO autores (id, nome, tipo) VALUES (${id}, ${nome}, ${tipo})
+        ON CONFLICT (id) DO NOTHING
+      `;
+    }
+    // Executa uma vez: reiniciar o servidor não ressuscita autores excluídos.
+    await tx`SELECT setval(pg_get_serial_sequence('autores', 'id'), (SELECT MAX(id) FROM autores))`;
+    await tx`INSERT INTO autoria_migracoes (nome) VALUES ('carga-inicial')`;
+  });
 }
