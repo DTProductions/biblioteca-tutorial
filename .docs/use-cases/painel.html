@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Andamento dos casos de uso · Biblioteca</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172334;
+      background: #fff;
+      --pendente: #eef1f5;
+      --implementacao: #dcecff;
+      --correcao: #fff0cc;
+      --concluido: #dcefe1;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    ::selection { background: #b8d3fb; color: #142c50; }
+    :focus-visible { outline: 3px solid #194abf; outline-offset: 3px; }
+    a { color: inherit; text-underline-offset: 3px; }
+    button, select { font: inherit; color: inherit; }
+    button, .ferramentas a { border: 1px solid #b8c2cf; background: #fff; border-radius: 6px; padding: 8px 11px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    button:hover, .ferramentas a:hover { background: #f0f4fa; border-color: #62758e; }
+    .painel { width: 100%; max-width: 1600px; height: 100svh; min-height: 720px; margin: auto; padding: 18px 20px 12px; display: grid; grid-template-rows: 58px 42px minmax(0, 1fr) 39px; gap: 12px; }
+    .cabecalho { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    h1 { margin: 0 0 4px; font-size: 25px; line-height: 1.15; letter-spacing: -.025em; font-weight: 750; }
+    .subtitulo { margin: 0; color: #506176; font-size: 13px; }
+    .ferramentas { display: flex; align-items: center; gap: 7px; }
+    .ferramentas a { text-decoration: none; }
+    .resumo { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #dbe1e9; border-bottom: 1px solid #dbe1e9; }
+    .legenda { list-style: none; display: flex; align-items: center; gap: 20px; padding: 0; margin: 0; }
+    .legenda li { display: flex; align-items: center; gap: 7px; font-size: 13px; white-space: nowrap; }
+    .amostra { width: 17px; height: 17px; border: 1px solid #68768a; border-radius: 4px; }
+    [data-cor="pendente"] { background: var(--pendente); }
+    [data-cor="implementacao"] { background: var(--implementacao); }
+    [data-cor="correcao"] { background: var(--correcao); }
+    [data-cor="concluido"] { background: var(--concluido); }
+    .legenda strong, .progresso { font-variant-numeric: tabular-nums; }
+    .legenda strong { min-width: 15px; }
+    .progresso { font-size: 13px; white-space: nowrap; }
+    .grade { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 10px; min-height: 0; }
+    .caso { display: grid; grid-template-rows: 19px minmax(32px, 1fr) 19px 30px; gap: 5px; padding: 11px 12px; border: 1px solid #b6c0ce; border-radius: 12px; min-width: 0; transition: background-color 150ms ease-out; }
+    .caso[data-estado="pendente"] { background: var(--pendente); color: #243348; }
+    .caso[data-estado="implementacao"] { background: var(--implementacao); color: #173c6a; border-color: #83a8d5; }
+    .caso[data-estado="correcao"] { background: var(--correcao); color: #634514; border-color: #c9a45a; }
+    .caso[data-estado="concluido"] { background: var(--concluido); color: #234b31; border-color: #86ad92; }
+    .caso:target { outline: 3px solid #194abf; outline-offset: 1px; }
+    .identificacao { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .codigo { font-size: 14px; font-weight: 800; text-decoration-thickness: 1px; }
+    .codigo:hover { text-decoration-thickness: 2px; }
+    .etapa { font-size: 11px; font-weight: 600; white-space: nowrap; }
+    h2 { margin: 0; align-self: center; font-size: 17px; line-height: 1.2; letter-spacing: -.015em; font-weight: 700; overflow-wrap: normal; }
+    .dependencias { margin: 0; display: flex; gap: 5px; align-items: center; font-size: 12px; white-space: nowrap; }
+    .dependencias > span:first-child { font-weight: 550; }
+    .dependencias a { font-weight: 750; }
+    .dependencias a[data-integrado="true"] { text-decoration-style: double; }
+    select { min-width: 0; width: 100%; height: 30px; padding: 3px 7px; border: 1px solid currentColor; border-radius: 5px; background: transparent; font-size: 12px; font-weight: 650; cursor: pointer; }
+    select:hover { background: #ffffff70; }
+    select option { background: white; color: #172334; }
+    .rodape { display: flex; justify-content: space-between; align-items: start; gap: 16px; font-size: 11px; line-height: 1.55; color: #506176; }
+    .rodape p { margin: 0; }
+    #disponiveis { font-size: 12px; font-weight: 700; color: #213b60; }
+    .salvamento { text-align: right; max-width: 460px; }
+    .salvamento[data-erro="true"] { color: #9c2d20; font-weight: 650; }
+    .somente-leitor { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    noscript { display: block; padding: 20px; color: #9c2d20; }
+    @media (prefers-reduced-motion: reduce) { .caso { transition: none; } }
+    @media (min-width: 1601px) { .painel { max-height: 1000px; } }
+    @media (max-width: 1050px) {
+      .painel { height: auto; min-height: 100svh; grid-template-rows: auto auto 1fr auto; }
+      .cabecalho, .resumo { flex-wrap: wrap; padding-bottom: 10px; }
+      .resumo { padding-top: 10px; gap: 8px; }
+      .legenda { flex-wrap: wrap; gap: 8px 16px; }
+      .grade { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 150px; }
+    }
+    @media (max-width: 600px) {
+      .painel { padding: 16px 12px; }
+      h1 { font-size: 23px; }
+      .ferramentas { flex-wrap: wrap; }
+      .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .caso { padding: 10px; }
+      h2 { font-size: 16px; }
+      .rodape { flex-direction: column; gap: 6px; }
+      .salvamento { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main class="painel">
+    <header class="cabecalho">
+      <div>
+        <h1>Biblioteca · andamento da turma</h1>
+        <p class="subtitulo">22 casos de uso em ordem de implementação · mesma etapa pode avançar em paralelo</p>
+      </div>
+      <nav class="ferramentas" aria-label="Ferramentas do painel">
+        <a href="index.html" target="_blank" rel="noopener">Tutoriais</a>
+        <button type="button" id="exportar">Exportar</button>
+        <button type="button" id="importar">Importar</button>
+        <button type="button" id="tela-cheia">Tela cheia</button>
+      </nav>
+    </header>
+    <section class="resumo" aria-label="Legenda dos estados e progresso">
+      <ul class="legenda">
+        <li><span class="amostra" data-cor="pendente" aria-hidden="true"></span>Pendente <strong id="total-pendente">22</strong></li>
+        <li><span class="amostra" data-cor="implementacao" aria-hidden="true"></span>Em implementação <strong id="total-implementacao">0</strong></li>
+        <li><span class="amostra" data-cor="correcao" aria-hidden="true"></span>Em correção <strong id="total-correcao">0</strong></li>
+        <li><span class="amostra" data-cor="concluido" aria-hidden="true"></span>Concluído <strong id="total-concluido">0</strong></li>
+      </ul>
+      <span class="progresso" id="progresso">0 de 22 concluídos</span>
+    </section>
+    <section class="grade" id="grade" aria-label="Casos de uso por prioridade"></section>
+    <footer class="rodape">
+      <div>
+        <p id="disponiveis"></p>
+        <p>Leia da esquerda para a direita, de cima para baixo. Concluído = PR integrado na fase01.</p>
+      </div>
+      <div class="salvamento" id="salvamento" role="status" aria-live="polite">
+        <p>Altere o estado em cada card. Andamento salvo neste navegador.</p>
+        <p>Os códigos abrem os tutoriais. Exportar guarda uma cópia para outro navegador.</p>
+      </div>
+    </footer>
+  </main>
+  <input type="file" id="arquivo" accept="application/json,.json" hidden>
+  <noscript>Ative o JavaScript para exibir os casos de uso e atualizar o andamento.</noscript>
+  <script id="dados-casos" type="application/json">[
+  {
+    "id": "uc01",
+    "titulo": "Cadastrar livro",
+    "prerequisitos": [
+      "uc05",
+      "uc06"
+    ]
+  },
+  {
+    "id": "uc02",
+    "titulo": "Buscar livros",
+    "prerequisitos": [
+      "uc01"
+    ]
+  },
+  {
+    "id": "uc03",
+    "titulo": "Atualizar livro",
+    "prerequisitos": [
+      "uc01",
+      "uc02",
+      "uc06"
+    ]
+  },
+  {
+    "id": "uc04",
+    "titulo": "Excluir livro",
+    "prerequisitos": [
+      "uc02",
+      "uc13"
+    ]
+  },
+  {
+    "id": "uc05",
+    "titulo": "Cadastrar autor",
+    "prerequisitos": []
+  },
+  {
+    "id": "uc06",
+    "titulo": "Buscar autores",
+    "prerequisitos": [
+      "uc05"
+    ]
+  },
+  {
+    "id": "uc07",
+    "titulo": "Atualizar autor",
+    "prerequisitos": [
+      "uc01",
+      "uc05",
+      "uc06"
+    ]
+  },
+  {
+    "id": "uc08",
+    "titulo": "Excluir autor",
+    "prerequisitos": [
+      "uc01",
+      "uc06"
+    ]
+  },
+  {
+    "id": "uc09",
+    "titulo": "Cadastrar leitor",
+    "prerequisitos": []
+  },
+  {
+    "id": "uc10",
+    "titulo": "Buscar leitores",
+    "prerequisitos": [
+      "uc09"
+    ]
+  },
+  {
+    "id": "uc11",
+    "titulo": "Atualizar leitor",
+    "prerequisitos": [
+      "uc09",
+      "uc10"
+    ]
+  },
+  {
+    "id": "uc12",
+    "titulo": "Excluir leitor",
+    "prerequisitos": [
+      "uc09",
+      "uc10"
+    ]
+  },
+  {
+    "id": "uc13",
+    "titulo": "Cadastrar exemplar",
+    "prerequisitos": [
+      "uc01",
+      "uc02"
+    ]
+  },
+  {
+    "id": "uc14",
+    "titulo": "Buscar exemplares",
+    "prerequisitos": [
+      "uc02",
+      "uc13"
+    ]
+  },
+  {
+    "id": "uc15",
+    "titulo": "Atualizar exemplar",
+    "prerequisitos": [
+      "uc13",
+      "uc14"
+    ]
+  },
+  {
+    "id": "uc16",
+    "titulo": "Excluir exemplar",
+    "prerequisitos": [
+      "uc13",
+      "uc14"
+    ]
+  },
+  {
+    "id": "uc17",
+    "titulo": "Reservar exemplar",
+    "prerequisitos": [
+      "uc09",
+      "uc10",
+      "uc13",
+      "uc14"
+    ]
+  },
+  {
+    "id": "uc18",
+    "titulo": "Cancelar reserva de exemplar",
+    "prerequisitos": [
+      "uc17",
+      "uc22"
+    ]
+  },
+  {
+    "id": "uc19",
+    "titulo": "Registrar empréstimo",
+    "prerequisitos": [
+      "uc10",
+      "uc14",
+      "uc17",
+      "uc22"
+    ]
+  },
+  {
+    "id": "uc20",
+    "titulo": "Registrar devolução",
+    "prerequisitos": [
+      "uc19",
+      "uc21"
+    ]
+  },
+  {
+    "id": "uc21",
+    "titulo": "Consultar empréstimos",
+    "prerequisitos": [
+      "uc10",
+      "uc14",
+      "uc19"
+    ]
+  },
+  {
+    "id": "uc22",
+    "titulo": "Consultar reservas",
+    "prerequisitos": [
+      "uc10",
+      "uc14",
+      "uc17"
+    ]
+  }
+]</script>
+  <script>
+    "use strict";
+    const dados = JSON.parse(document.getElementById("dados-casos").textContent);
+    const casos = new Map(dados.map(caso => [caso.id, caso]));
+    const nomesCurtos = { uc18: "Cancelar reserva", uc19: "Emprestar exemplar", uc20: "Devolver exemplar" };
+    const rotulos = { pendente: "Pendente", implementacao: "Em implementação", correcao: "Em correção", concluido: "Concluído" };
+    const chave = "biblioteca:turma:fase01:painel:v1";
+    const mensagem = document.getElementById("salvamento");
+    const elementos = new Map();
+    const niveis = new Map();
+
+    function ancestrais(id, caminho = new Set()) {
+      if (caminho.has(id)) throw new Error("O grafo contém um ciclo.");
+      const caso = casos.get(id);
+      if (!caso) throw new Error("Pré-requisito inexistente: " + id);
+      const proximos = new Set([...caminho, id]);
+      return new Set(caso.prerequisitos.flatMap(dep => [dep, ...ancestrais(dep, proximos)]));
+    }
+
+    function nivel(id) {
+      if (!niveis.has(id)) {
+        const deps = casos.get(id).prerequisitos;
+        niveis.set(id, deps.length ? 1 + Math.max(...deps.map(nivel)) : 1);
+      }
+      return niveis.get(id);
+    }
+
+    // Redução transitiva: preserva o grafo e omite somente setas redundantes.
+    for (const caso of dados) {
+      caso.ancestrais = ancestrais(caso.id);
+      caso.imediatos = caso.prerequisitos.filter(dep => !caso.prerequisitos.some(outro => outro !== dep && ancestrais(outro).has(dep)));
+    }
+    const ordenados = [...dados].sort((a, b) => nivel(a.id) - nivel(b.id) || a.id.localeCompare(b.id));
+    let estados = Object.fromEntries(dados.map(caso => [caso.id, "pendente"]));
+
+    function avisar(texto, erro = false) {
+      mensagem.textContent = texto;
+      mensagem.dataset.erro = String(erro);
+    }
+
+    function validar(copia) {
+      if (!copia || copia.versao !== 1 || !copia.estados || typeof copia.estados !== "object" || Array.isArray(copia.estados)) throw new Error("Formato inválido.");
+      const ids = Object.keys(copia.estados);
+      if (ids.length !== casos.size || ids.some(id => !casos.has(id)) || ids.some(id => !Object.hasOwn(rotulos, copia.estados[id]))) throw new Error("A cópia deve conter os 22 casos com estados válidos.");
+      return Object.fromEntries(dados.map(caso => [caso.id, copia.estados[caso.id]]));
+    }
+
+    try {
+      const salvo = localStorage.getItem(chave);
+      if (salvo) estados = validar(JSON.parse(salvo));
+    } catch {
+      avisar("O registro local não pôde ser carregado. Use Importar para recuperar uma cópia; Exportar permite guardar o andamento.", true);
+    }
+
+    function copia() {
+      return { versao: 1, atualizadoEm: new Date().toISOString(), estados };
+    }
+
+    function salvar() {
+      try {
+        localStorage.setItem(chave, JSON.stringify(copia()));
+        avisar("Andamento salvo neste navegador. Exporte uma cópia para guardar ou usar em outro navegador.");
+      } catch {
+        avisar("O navegador não permitiu salvar. Clique em Exportar para guardar o andamento em um arquivo.", true);
+      }
+    }
+
+    function atualizar() {
+      const totais = Object.fromEntries(Object.keys(rotulos).map(estado => [estado, 0]));
+      for (const caso of ordenados) {
+        const estado = estados[caso.id];
+        totais[estado]++;
+        const elemento = elementos.get(caso.id);
+        elemento.dataset.estado = estado;
+        elemento.querySelector("select").value = estado;
+        for (const link of elemento.querySelectorAll("[data-requisito]")) {
+          const integrado = estados[link.dataset.requisito] === "concluido";
+          link.dataset.integrado = String(integrado);
+          link.title = link.dataset.requisito.toUpperCase() + (integrado ? " — concluído" : " — ainda não concluído");
+        }
+      }
+      for (const [estado, total] of Object.entries(totais)) document.getElementById("total-" + estado).textContent = total;
+      document.getElementById("progresso").textContent = totais.concluido + " de 22 concluídos";
+      const prontos = ordenados.filter(caso => estados[caso.id] === "pendente" && [...caso.ancestrais].every(dep => estados[dep] === "concluido"));
+      document.getElementById("disponiveis").textContent = prontos.length
+        ? "Podem iniciar: " + prontos.map(caso => caso.id.toUpperCase()).join(" · ")
+        : totais.concluido === casos.size ? "Todos os casos foram concluídos." : "Nenhum caso pendente está liberado neste momento.";
+    }
+
+    for (const caso of ordenados) {
+      const artigo = document.createElement("article");
+      artigo.id = caso.id;
+      artigo.className = "caso";
+      artigo.tabIndex = -1;
+      artigo.dataset.etapa = nivel(caso.id);
+      artigo.setAttribute("aria-labelledby", "titulo-" + caso.id);
+      const requisitos = caso.imediatos.length
+        ? caso.imediatos.map(dep => '<a href="#' + dep + '" data-requisito="' + dep + '">' + dep.toUpperCase() + '</a>').join(" ")
+        : "<span>Nenhum</span>";
+      artigo.innerHTML = '<div class="identificacao"><a class="codigo" href="' + caso.id + '.html" target="_blank" rel="noopener" title="Abrir tutorial de ' + caso.id.toUpperCase() + '">' + caso.id.toUpperCase() + '</a><span class="etapa">Etapa ' + String(nivel(caso.id)).padStart(2, "0") + '</span></div>'
+        + '<h2 id="titulo-' + caso.id + '"></h2>'
+        + '<p class="dependencias" aria-label="Pré-requisitos imediatos"><span>Pré:</span>' + requisitos + '</p>'
+        + '<label class="somente-leitor" for="estado-' + caso.id + '">Estado de ' + caso.id.toUpperCase() + '</label><select id="estado-' + caso.id + '">' + Object.entries(rotulos).map(([valor, rotulo]) => '<option value="' + valor + '">' + rotulo + '</option>').join("") + '</select>';
+      artigo.querySelector("h2").textContent = nomesCurtos[caso.id] || caso.titulo;
+      artigo.querySelector("select").addEventListener("change", evento => {
+        estados[caso.id] = evento.target.value;
+        atualizar();
+        salvar();
+      });
+      elementos.set(caso.id, artigo);
+      document.getElementById("grade").append(artigo);
+    }
+    atualizar();
+
+    document.getElementById("exportar").addEventListener("click", () => {
+      const url = URL.createObjectURL(new Blob([JSON.stringify(copia(), null, 2) + "\n"], { type: "application/json" }));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "biblioteca-andamento-" + new Date().toISOString().slice(0, 10) + ".json";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    const arquivo = document.getElementById("arquivo");
+    document.getElementById("importar").addEventListener("click", () => arquivo.click());
+    arquivo.addEventListener("change", async () => {
+      const selecionado = arquivo.files[0];
+      if (!selecionado) return;
+      try {
+        if (selecionado.size > 100000) throw new Error("Arquivo muito grande.");
+        const novos = validar(JSON.parse(await selecionado.text()));
+        estados = novos;
+        atualizar();
+        salvar();
+      } catch {
+        avisar("Não foi possível importar. Escolha uma cópia JSON exportada por este painel; o andamento atual foi mantido.", true);
+      } finally { arquivo.value = ""; }
+    });
+    document.getElementById("tela-cheia").addEventListener("click", async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else await document.documentElement.requestFullscreen();
+      } catch { avisar("Use F11 ou a opção de tela cheia do navegador."); }
+    });
+    document.addEventListener("fullscreenchange", () => {
+      document.getElementById("tela-cheia").textContent = document.fullscreenElement ? "Sair da tela cheia" : "Tela cheia";
+    });
+  </script>
+</body>
+</html>
