@@ -1,0 +1,40 @@
+{
+  "uc23": {
+    "backendPrerequisites": ["uc18", "uc20"],
+    "files": [
+      "backend/src/seed/catalogo.json",
+      "backend/src/seed/modelo.ts",
+      "backend/src/seed/preparar.ts",
+      "backend/src/seed/relatorio.ts",
+      "backend/src/seed/executar.ts",
+      "backend/src/seed.ts",
+      "backend/src/use-cases/uc23.ts",
+      "backend/tests/uc23.test.ts"
+    ],
+    "criteria": [
+      "O catálogo contém exatamente 50 autores reais, entre um e cinco livros reais por autor e ISBN-13 válido, com links de fontes bibliográficas versionados.",
+      "Cada livro do catálogo recebe entre um e dez exemplares físicos, respeitando o contador de registros e os limites de autores.",
+      "O seed cria 120 leitores fictícios, com nome, CPF válido e único, e-mail e telefone obrigatórios.",
+      "A fotografia inicial contém 120 empréstimos devolvidos, 30 não devolvidos no prazo e 30 não devolvidos atrasados: 180 empréstimos no total.",
+      "A fotografia inicial contém 20 reservas ativas, 10 canceladas e 10 expiradas, com a janela de sete dias corridos e datas civis de São Paulo.",
+      "Nenhum leitor excede três empréstimos não devolvidos ou duas reservas ativas; exemplares com empréstimo aberto não possuem reserva ativa.",
+      "A carga é explícita, transacional e idempotente; uma repetição ou requisição concorrente não duplica os registros e preserva dados existentes.",
+      "GET /api/seed informa a execução e o resumo; POST /api/seed executa a carga; a tela /livros/seed e o CLI oferecem a mesma operação.",
+      "O relatório mantém a data de referência da execução e não restaura registros alterados manualmente posteriormente."
+    ],
+    "steps": [
+      "Aguarde os pré-requisitos de cancelamento e devolução integrados na branch central; sua cadeia já inclui catálogo, exemplares, leitores e consultas de circulação.",
+      "Versione o catálogo real com ISBNs e URLs de origem, separando dados bibliográficos dos leitores e contatos sintéticos.",
+      "Defina o plano de carga e as datas relativas ao dia da primeira execução: catalogação anterior ao histórico, empréstimos com prazo de 14 dias e reservas com janela de sete dias.",
+      "Crie o marcador de execução e o rastreamento dos registros do seed. Execute verificação, inserções e marcador na mesma transação com o lock compartilhado.",
+      "Reutilize registros equivalentes quando isso preservar as regras; diante de conflitos incompatíveis, reverta toda a carga e apresente uma mensagem clara.",
+      "Separe os exemplares das 60 retiradas não devolvidas e das 20 reservas ativas; distribua os leitores sem ultrapassar os limites.",
+      "Exponha consulta e execução manual na API e no CLI; acrescente a página React sem editar o registro compartilhado dos 22 casos anteriores.",
+      "Teste as contagens, vínculos, ISBNs, datas, limites, preservação de dados, rollback e idempotência antes de solicitar o PR."
+    ],
+    "apiExamples": [
+      {"method": "GET", "path": "/api/seed"},
+      {"method": "POST", "path": "/api/seed", "body": {}}
+    ]
+  }
+}

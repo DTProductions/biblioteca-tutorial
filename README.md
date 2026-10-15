@@ -102,15 +102,15 @@ O Compose usa a raiz do repositório como contexto de build para incluir
 `backend/` e `frontend/`. O ignore específico `infra/Dockerfile.dockerignore`
 filtra esse contexto. O nome do projeto continua sendo `biblioteca-tutorial`.
 
-## Atividades da turma: 22 casos de uso
+## Atividades da turma: 23 casos de uso
 
 Abra o [índice dos tutoriais](.docs/use-cases/index.html) no navegador.
-O [painel de andamento](.docs/use-cases/painel.html) mostra os 22 casos em ordem
+O [painel de andamento](.docs/use-cases/painel.html) mostra os 23 casos em ordem
 de implementação, com pré-requisitos imediatos e quatro estados editáveis.
 Cabe em 1280 × 800, salva neste navegador e permite exportar/importar o progresso.
 Cada documento inclui os pré-requisitos, código completo de backend e React,
 testes e o fluxo de entrega por PR. Os alunos trabalham em forks pessoais,
-em branches `uc01` a `uc22`, com destino a `saas-evolution/fase01`.
+em branches `uc01` a `uc23`, com destino a `saas-evolution/fase01`.
 
 Antes de começar uma atividade, o comando abaixo verifica se seus pré-requisitos
 já foram integrados pelo professor e cria a branch a partir da base atualizada:
@@ -123,3 +123,8 @@ Troque `uc05` pela atividade atribuída. Somente `maroquio` pode atualizar ou
 integrar PRs na branch central. A implementação completa validada está na branch
 `saas-evolution/fase01-teste`; as instruções de validação ficam em `qa/README.md`
 nessa branch.
+
+O UC23 implementa um seed manual e idempotente. Na referência completa, abra
+`/livros/seed` ou execute `docker compose -f infra/compose.yaml exec -T app bun src/seed.ts`.
+O catálogo tem fontes bibliográficas; os leitores são fictícios. A distribuição
+de circulação é descrita no [tutorial UC23](.docs/use-cases/uc23.html).

@@ -92,7 +92,7 @@
     <header class="cabecalho">
       <div>
         <h1>Biblioteca · andamento da turma</h1>
-        <p class="subtitulo">22 casos de uso em ordem de implementação · mesma etapa pode avançar em paralelo</p>
+        <p class="subtitulo">23 casos de uso em ordem de implementação · mesma etapa pode avançar em paralelo</p>
       </div>
       <nav class="ferramentas" aria-label="Ferramentas do painel">
         <a href="index.html" target="_blank" rel="noopener">Tutoriais</a>
@@ -103,12 +103,12 @@
     </header>
     <section class="resumo" aria-label="Legenda dos estados e progresso">
       <ul class="legenda">
-        <li><span class="amostra" data-cor="pendente" aria-hidden="true"></span>Pendente <strong id="total-pendente">22</strong></li>
+        <li><span class="amostra" data-cor="pendente" aria-hidden="true"></span>Pendente <strong id="total-pendente">23</strong></li>
         <li><span class="amostra" data-cor="implementacao" aria-hidden="true"></span>Em implementação <strong id="total-implementacao">0</strong></li>
         <li><span class="amostra" data-cor="correcao" aria-hidden="true"></span>Em correção <strong id="total-correcao">0</strong></li>
         <li><span class="amostra" data-cor="concluido" aria-hidden="true"></span>Concluído <strong id="total-concluido">0</strong></li>
       </ul>
-      <span class="progresso" id="progresso">0 de 22 concluídos</span>
+      <span class="progresso" id="progresso">0 de 23 concluídos</span>
     </section>
     <section class="grade" id="grade" aria-label="Casos de uso por prioridade"></section>
     <footer class="rodape">
@@ -299,13 +299,21 @@
       "uc14",
       "uc17"
     ]
+  },
+  {
+    "id": "uc23",
+    "titulo": "Popular biblioteca com seed",
+    "prerequisitos": [
+      "uc18",
+      "uc20"
+    ]
   }
 ]</script>
   <script>
     "use strict";
     const dados = JSON.parse(document.getElementById("dados-casos").textContent);
     const casos = new Map(dados.map(caso => [caso.id, caso]));
-    const nomesCurtos = { uc18: "Cancelar reserva", uc19: "Emprestar exemplar", uc20: "Devolver exemplar" };
+    const nomesCurtos = { uc18: "Cancelar reserva", uc19: "Emprestar exemplar", uc20: "Devolver exemplar", uc23: "Popular biblioteca" };
     const rotulos = { pendente: "Pendente", implementacao: "Em implementação", correcao: "Em correção", concluido: "Concluído" };
     const chave = "biblioteca:turma:fase01:painel:v1";
     const mensagem = document.getElementById("salvamento");
@@ -344,8 +352,9 @@
     function validar(copia) {
       if (!copia || copia.versao !== 1 || !copia.estados || typeof copia.estados !== "object" || Array.isArray(copia.estados)) throw new Error("Formato inválido.");
       const ids = Object.keys(copia.estados);
-      if (ids.length !== casos.size || ids.some(id => !casos.has(id)) || ids.some(id => !Object.hasOwn(rotulos, copia.estados[id]))) throw new Error("A cópia deve conter os 22 casos com estados válidos.");
-      return Object.fromEntries(dados.map(caso => [caso.id, copia.estados[caso.id]]));
+      const copiaAnterior = ids.length === casos.size - 1 && !Object.hasOwn(copia.estados, "uc23");
+      if ((!copiaAnterior && ids.length !== casos.size) || ids.some(id => !casos.has(id)) || ids.some(id => !Object.hasOwn(rotulos, copia.estados[id]))) throw new Error("A cópia deve conter todos os casos com estados válidos.");
+      return Object.fromEntries(dados.map(caso => [caso.id, copia.estados[caso.id] || "pendente"]));
     }
 
     try {
@@ -383,7 +392,7 @@
         }
       }
       for (const [estado, total] of Object.entries(totais)) document.getElementById("total-" + estado).textContent = total;
-      document.getElementById("progresso").textContent = totais.concluido + " de 22 concluídos";
+      document.getElementById("progresso").textContent = totais.concluido + " de " + casos.size + " concluídos";
       const prontos = ordenados.filter(caso => estados[caso.id] === "pendente" && [...caso.ancestrais].every(dep => estados[dep] === "concluido"));
       document.getElementById("disponiveis").textContent = prontos.length
         ? "Podem iniciar: " + prontos.map(caso => caso.id.toUpperCase()).join(" · ")

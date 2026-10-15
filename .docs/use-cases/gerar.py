@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gera os 22 tutoriais a partir dos mesmos arquivos executados na referência."""
+"""Gera os tutoriais a partir dos mesmos arquivos executados na referência."""
 from __future__ import annotations
 
 import hashlib
@@ -20,7 +20,7 @@ TITULOS = [
     "Cadastrar leitor", "Buscar leitores", "Atualizar leitor", "Excluir leitor",
     "Cadastrar exemplar", "Buscar exemplares", "Atualizar exemplar", "Excluir exemplar",
     "Reservar exemplar", "Cancelar reserva de exemplar", "Registrar empréstimo",
-    "Registrar devolução", "Consultar empréstimos", "Consultar reservas",
+    "Registrar devolução", "Consultar empréstimos", "Consultar reservas", "Popular biblioteca com seed",
 ]
 CAMINHOS = [
     "/livros/cadastrar", "/livros", "/livros/editar", "/livros/excluir",
@@ -28,7 +28,7 @@ CAMINHOS = [
     "/leitores/cadastrar", "/leitores", "/leitores/editar", "/leitores/excluir",
     "/exemplares/cadastrar", "/exemplares", "/exemplares/editar", "/exemplares/excluir",
     "/reservas/criar", "/reservas/cancelar", "/emprestimos/registrar",
-    "/emprestimos/devolver", "/emprestimos", "/reservas",
+    "/emprestimos/devolver", "/emprestimos", "/reservas", "/livros/seed",
 ]
 FRONT_DEPS = {
     "uc01": ["uc06"], "uc02": ["uc01"], "uc03": ["uc01", "uc02", "uc06"],
@@ -37,7 +37,7 @@ FRONT_DEPS = {
     "uc12": ["uc10"], "uc13": ["uc02"], "uc14": ["uc02", "uc13"],
     "uc15": ["uc13", "uc14"], "uc16": ["uc14"], "uc17": ["uc10", "uc14"],
     "uc18": ["uc22"], "uc19": ["uc10", "uc14", "uc22"], "uc20": ["uc21"],
-    "uc21": ["uc10", "uc14", "uc19"], "uc22": ["uc10", "uc14", "uc17"],
+    "uc21": ["uc10", "uc14", "uc19"], "uc22": ["uc10", "uc14", "uc17"], "uc23": [],
 }
 COMUNS = [
     "backend/src/shared/validation.ts", "backend/src/infrastructure/transaction.ts",
@@ -98,9 +98,9 @@ def pacote_arquivo(caminho, comum=False):
 
 def carregar():
     casos = {}
-    for arquivo in ["catalogo-manifest.json", "circulacao-manifest.json"]:
+    for arquivo in ["catalogo-manifest.json", "circulacao-manifest.json", "seed-manifest.json"]:
         casos.update(json.loads((PASTA / arquivo).read_text(encoding="utf-8")))
-    assert set(casos) == {f"uc{i:02}" for i in range(1, 23)}, "Precisam existir exatamente os 22 casos"
+    assert set(casos) == {f"uc{i:02}" for i in range(1, len(TITULOS) + 1)}, "O manifesto deve conter todos os casos de uso"
     for id, caso in casos.items():
         caso["titulo"] = TITULOS[int(id[2:])-1]
         caso["caminho"] = CAMINHOS[int(id[2:])-1]
@@ -167,7 +167,7 @@ def gerar_caso(id, caso):
     corpo += '<p>Agora execute a preparação da atividade. Ela configura <code>upstream</code>, atualiza a base, verifica todos os pré-requisitos transitivos e cria a branch sem configurar o repositório do professor como destino de push.</p>'
     corpo += bloco('Terminal · criar a branch correta', f'bun .docs/use-cases/preparar.ts {id}\ngit branch --show-current\ngit remote -v')
     corpo += f'<p>O nome exibido deve ser <code>{id}</code>. Se a preparação informar atividade bloqueada, aguarde os merges indicados e repita o comando. Se a branch já existir, preserve seu trabalho; atualize-a com <code>git fetch upstream</code> e <code>git merge upstream/saas-evolution/fase01</code>.</p></section>'
-    corpo += '<section class="secao" id="base"><h2>Preparação compartilhada</h2><p>Estes arquivos são <strong>idênticos nas 22 atividades</strong>. Eles preservam os dois casos legados enquanto as evoluções não são integradas e descobrem os novos arquivos automaticamente. Assim, dois PRs não precisam adicionar linhas ao mesmo registro central. Copie uma vez; se os pré-requisitos já trouxeram esta preparação, confira e mantenha o conteúdo existente.</p><p>A transação PostgreSQL usa um advisory lock compartilhado. A consulta de disponibilidade/limites e sua alteração ocorrem na mesma transação, incluindo requisições simultâneas de processos diferentes. Os testes legados recebem limpeza restrita a bancos cujo nome termina em <code>_test</code>.</p><details><summary>Mostrar todos os arquivos da preparação compartilhada</summary>'
+    corpo += '<section class="secao" id="base"><h2>Preparação compartilhada</h2><p>Estes arquivos são <strong>idênticos em todas as atividades</strong>. Eles preservam os dois casos legados enquanto as evoluções não são integradas e descobrem os novos arquivos automaticamente. Assim, dois PRs não precisam adicionar linhas ao mesmo registro central. Copie uma vez; se os pré-requisitos já trouxeram esta preparação, confira e mantenha o conteúdo existente.</p><p>A transação PostgreSQL usa um advisory lock compartilhado. A consulta de disponibilidade/limites e sua alteração ocorrem na mesma transação, incluindo requisições simultâneas de processos diferentes. Os testes legados recebem limpeza restrita a bancos cujo nome termina em <code>_test</code>.</p><details><summary>Mostrar todos os arquivos da preparação compartilhada</summary>'
     corpo += ''.join(arquivo_html(caminho) for caminho in COMUNS)
     corpo += '</details></section>'
     corpo += '<section class="secao" id="backend"><h2>Implementar domínio, persistência e API</h2><ol class="etapas">' + ''.join(f'<li>{esc(item)}</li>' for item in caso["steps"]) + '</ol><p>Crie os arquivos na ordem apresentada. Regras de negócio ficam no módulo responsável; os adapters de integração ficam fora dos módulos e traduzem suas consultas. O arquivo <code>backend/src/use-cases/' + id + '.ts</code> compõe as dependências e registra as rotas desta atividade.</p>'
@@ -181,6 +181,10 @@ def gerar_caso(id, caso):
     corpo += '<p>Resultado esperado: typecheck, fronteiras, lint e build sem erros; todos os testes do arquivo desta atividade aprovados. O teste SQL usa <code>biblioteca_test</code>, separado do banco da aplicação. Ao remover o volume do Compose, recrie esse banco com o comando acima.</p>'
     corpo += bloco('Terminal · comparar com o código de referência', f'bun .docs/use-cases/codigo.ts {id}')
     corpo += '<p>A comparação é de conteúdo, não uma prova de comportamento: uma solução própria pode diferir e estar correta. Os testes e os critérios de aceite são a verificação funcional.</p></section>'
+    if id == 'uc23':
+        corpo += '<section class="secao"><h2>Executar e conferir o seed</h2><p>Depois de integrar os pré-requisitos, inicie o Compose e abra <code>/livros/seed</code>. Execute a carga uma vez e confira o resumo. Uma segunda execução deve informar que a carga já existe e preservar as contagens e alterações manuais posteriores.</p>'
+        corpo += bloco('Terminal · executar manualmente pelo CLI', 'docker compose -f infra/compose.yaml exec -T app bun src/seed.ts')
+        corpo += '<p>São 30 empréstimos abertos no prazo e outros 30 atrasados, portanto 60 não devolvidos. As reservas expiradas são registros históricos cuja data de expiração já passou; elas não bloqueiam exemplares nem consomem o limite do leitor. As datas são relativas ao dia da primeira execução no calendário de São Paulo.</p><p>O resumo é a fotografia da carga na data de referência: a passagem dos dias e operações manuais posteriores podem alterar a situação atual dos empréstimos e reservas. O seed preserva essas alterações e não é reexecutado automaticamente.</p><p>Os autores, títulos e ISBNs são documentados em <code>backend/src/seed/catalogo.json</code>, com links de origem na <a href="https://openlibrary.org/dev/docs/api/search">Open Library</a>. Os leitores e seus contatos são fictícios.</p></section>'
     corpo += '<section class="secao" id="pr"><h2>Revisar e solicitar o pull request</h2><ul class="checkboxes">' + ''.join(f'<li><label><input type="checkbox">{esc(item)}</label></li>' for item in caso["criteria"]) + '<li><label><input type="checkbox">Testes, build, lint e verificador de fronteiras aprovados.</label></li><li><label><input type="checkbox">Tela exercitada no navegador e arquivos temporários fora do commit.</label></li></ul>'
     corpo += bloco('Terminal · commit e push no fork', f'git status --short\ngit diff --check\ngit add backend/src backend/tests backend/scripts frontend/src\ngit diff --cached --stat\ngit commit -m "feat({id}): {caso["titulo"].lower()}"\ngit push -u origin {id}')
     corpo += f'<ol class="etapas"><li>Abra seu fork no GitHub e use <strong>Contribute → Open pull request</strong>.</li><li>Selecione base repository <code>maroquio/biblioteca-tutorial</code>, base <code>saas-evolution/fase01</code>, head repository <strong>seu fork</strong> e compare <code>{id}</code>.</li><li>Use o título <strong>{numero} — {esc(caso["titulo"])}</strong>. Na descrição, informe pré-requisitos integrados, arquivos alterados, regras implementadas, comandos executados e resultados dos testes. Inclua uma captura da tela.</li><li>Solicite a revisão do professor. Somente <code>maroquio</code> pode integrar na branch central; a autoria dos seus commits é preservada.</li><li>Se a base avançar e houver conflito, atualize sua branch com <code>git fetch upstream</code> e <code>git merge upstream/saas-evolution/fase01</code>, resolva os conflitos preservando os outros UCs, repita os testes e faça outro push para o fork.</li></ol>'
@@ -202,8 +206,8 @@ def main():
     painel_html, alteracoes = re.subn(r'(<script id="dados-casos" type="application/json">).*?(</script>)', lambda trecho: trecho[1] + json.dumps(dados_painel, ensure_ascii=False, indent=2) + trecho[2], painel.read_text(encoding='utf-8'), count=1, flags=re.S)
     assert alteracoes == 1, 'O painel deve conter o bloco de dados dos casos de uso.'
     painel.write_text(painel_html, encoding='utf-8')
-    corpo = '<header class="capa"><h1>Biblioteca · 22 casos de uso</h1><p>Tutoriais completos para implementar o sistema em equipe, com React, API Bun/Hono, PostgreSQL, testes e entrega por pull request.</p><p>Livro representa o registro bibliográfico; exemplar é a cópia física. Reservas bloqueiam um exemplar disponível por sete dias a partir de hoje; empréstimos duram 14 dias. Cada leitor pode manter duas reservas ativas e três empréstimos em aberto.</p></header>'
-    corpo += '<p><a href="painel.html"><strong>Abrir o painel de andamento da turma</strong></a> · 22 cards, pré-requisitos imediatos e estados editáveis; preparado para projeção em 1280 × 800.</p>'
+    corpo = '<header class="capa"><h1>Biblioteca · 23 casos de uso</h1><p>Tutoriais completos para implementar o sistema em equipe, com React, API Bun/Hono, PostgreSQL, testes e entrega por pull request.</p><p>Livro representa o registro bibliográfico; exemplar é a cópia física. Reservas bloqueiam um exemplar disponível por sete dias a partir de hoje; empréstimos duram 14 dias. Cada leitor pode manter duas reservas ativas e três empréstimos em aberto. O UC23 acrescenta um seed de catálogo e circulação para testes manuais.</p></header>'
+    corpo += '<p><a href="painel.html"><strong>Abrir o painel de andamento da turma</strong></a> · 23 cards, pré-requisitos imediatos e estados editáveis; preparado para projeção em 1280 × 800.</p>'
     corpo += '<section class="secao"><h2>Como distribuir as atividades</h2><p>Distribua os UCs entre os alunos. Cada aluno trabalha em seu fork e envia uma branch <code>ucXX</code> para a base central <code>saas-evolution/fase01</code>. Os pré-requisitos incluem código e endpoints usados pela interface e pelos testes. A numeração identifica a atividade; ela não determina a ordem de implementação.</p><div class="nota aviso">Só inicie uma atividade quando todos os seus pré-requisitos estiverem integrados na base central pelo professor. O comando <code>bun .docs/use-cases/preparar.ts ucXX</code> verifica isso antes de criar a branch.</div><p>Os arquivos de preparação compartilhada são idênticos em todos os tutoriais e podem entrar pelo primeiro PR de qualquer frente. Cada UC acrescenta seu próprio ponto de composição, página e testes.</p><h3>Ondas possíveis de integração</h3><p>Dentro de cada onda, as atividades podem ser realizadas em paralelo. Uma atividade pode começar assim que seus próprios pré-requisitos forem integrados, mesmo se outras atividades da onda anterior estiverem pendentes.</p><ol class="ondas">'
     for fase in fases:
         corpo += '<li>' + ' · '.join(link_uc(id) for id in fase) + '</li>'
@@ -213,7 +217,7 @@ def main():
         estado = 'Existente; será adaptado para livro bibliográfico' if id in ('uc01', 'uc02') else 'Novo'
         corpo += f'<tr><td>{id.upper()}</td><td><a href="{id}.html">{esc(caso["titulo"])}</a></td><td>{deps}</td><td>{estado}</td></tr>'
     corpo += '</tbody></table></div></section><section class="secao"><h2>Validação e referência do professor</h2><p>O código de cada arquivo é reproduzido integralmente nos HTMLs. Os pacotes JSON contêm os mesmos conteúdos e hashes para reproduzir cada atividade a partir da base original e testar o grafo de pré-requisitos.</p><p>A branch <code>saas-evolution/fase01-teste</code> contém a implementação completa. Ela é uma referência de execução; os alunos criam suas branches a partir de <code>saas-evolution/fase01</code>.</p><p><a href="validacao.html">Consultar o relatório de validação</a> · <a href="https://github.com/maroquio/biblioteca-tutorial/rules/25172303">Regra de proteção da branch central no GitHub</a></p><p>A importação CSV já existente é preservada e adaptada no UC01. Ela reutiliza o cadastro bibliográfico e não constitui um 23º caso de uso desta atividade.</p><h3>Documentação oficial consultada</h3><ul><li><a href="https://bun.sh/docs/api/sql">Bun SQL e transações</a></li><li><a href="https://hono.dev/docs/">Hono</a></li><li><a href="https://react.dev/reference/react">React</a></li><li><a href="https://playwright.dev/docs/intro">Playwright</a></li><li><a href="https://docs.github.com/en/rest/repos/rules">GitHub Rulesets</a></li></ul></section>'
-    (PASTA / 'index.html').write_text(pagina('22 casos de uso', corpo), encoding='utf-8')
+    (PASTA / 'index.html').write_text(pagina('23 casos de uso', corpo), encoding='utf-8')
     print(f'Gerados {len(casos)} tutoriais, índice, manifesto e pacotes. Ondas: {len(fases)}.')
 
 if __name__ == '__main__':
