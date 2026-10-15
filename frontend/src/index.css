@@ -63,6 +63,11 @@ body {
   border-radius: 10px;
 }
 
+/* No cadastro, soma a largura do formulário ao padding e às bordas. */
+.conteudo:has(.cadastro) {
+  max-width: calc(420px + 4rem + 2px);
+}
+
 h1 {
   margin-top: 0;
   font-size: 1.6rem;

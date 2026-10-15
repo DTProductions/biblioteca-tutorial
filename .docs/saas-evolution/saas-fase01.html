@@ -2756,6 +2756,11 @@ body {
   <i class="t-key">border-radius</i><i class="t-pun">:</i> 10px;
 }
 
+<i class="t-com">/* No cadastro, soma a largura do formulário ao padding e às bordas. */</i>
+.conteudo:has(.cadastro) {
+  <i class="t-key">max-width</i><i class="t-pun">:</i> calc(420px + 4rem + 2px);
+}
+
 h1 {
   <i class="t-key">margin-top</i><i class="t-pun">:</i> 0;
   <i class="t-key">font-size</i><i class="t-pun">:</i> 1.6rem;
