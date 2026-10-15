@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc08.test.ts:
+(pass) UC08: exclui autor sem livros, preserva vinculados e não ressuscita a carga inicial [25.45ms]
+(pass) UC08: reinicializar não ressuscita autor excluído que pertencia à carga inicial [9.06ms]
+
+ 2 pass
+ 0 fail
+ 8 expect() calls
+Ran 2 tests across 1 file. [171.00ms]

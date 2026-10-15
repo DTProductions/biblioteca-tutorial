@@ -1,0 +1,9 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc03.test.ts:
+(pass) UC03: edição preserva identidade e catalogação e rejeita ISBN duplicado [59.60ms]
+
+ 1 pass
+ 0 fail
+ 6 expect() calls
+Ran 1 test across 1 file. [168.00ms]

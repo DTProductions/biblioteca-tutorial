@@ -1,0 +1,15 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc17.test.ts:
+(pass) UC17 reserva imediatamente com sete dias corridos de exclusividade [3.67ms]
+(pass) UC17 API: reserva tem janela inclusiva7 dias e recusa terceiro pedido [107.17ms]
+(pass) UC17 API: concorrência não ultrapassa duas reservas nem duplica reserva da cópia [98.86ms]
+(pass) UC17 recusa a terceira reserva do leitor sem alterar o exemplar [0.68ms]
+(pass) UC17 reserva expira no início do oitavo dia e libera o limite e a cópia [0.65ms]
+(pass) UC17 exige vínculos existentes e usa data civil brasileira [0.20ms]
+(pass) UC17 API: IDs não aceitam booleanos, arrays, nulos ou notação exponencial [16.85ms]
+
+ 7 pass
+ 0 fail
+ 33 expect() calls
+Ran 7 tests across 1 file. [420.00ms]

@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc11.test.ts:
+(pass) UC11 permite manter CPF próprio mas recusa CPF de outro leitor sem alterar dados [0.52ms]
+(pass) UC11 API: edita mantendo CPF próprio e recusa CPF de outro leitor [40.28ms]
+
+ 2 pass
+ 0 fail
+ 9 expect() calls
+Ran 2 tests across 1 file. [189.00ms]

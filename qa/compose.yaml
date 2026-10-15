@@ -1,0 +1,9 @@
+# Sobreposição exclusiva da validação; não altera as portas de outros projetos.
+# Requer Docker Compose 2.24.4+ (Docker Desktop atual).
+services:
+  app:
+    ports: !override
+      - "127.0.0.1:62310:3000"
+  db:
+    ports:
+      - "127.0.0.1:62311:5432"

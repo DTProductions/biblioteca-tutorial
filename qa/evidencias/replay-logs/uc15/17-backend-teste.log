@@ -1,0 +1,9 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc15.test.ts:
+(pass) UC15: altera dados físicos preservando livro e número de registro [36.06ms]
+
+ 1 pass
+ 0 fail
+ 4 expect() calls
+Ran 1 test across 1 file. [188.00ms]

@@ -1,0 +1,11 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc13.test.ts:
+(pass) UC13: cria cópias distintas e o número não é reutilizado após exclusão [43.90ms]
+(pass) UC13: migração preserva número e data de cada livro antigo, sem duplicar na reexecução [14.93ms]
+(pass) UC13: identificador do livro exige inteiro positivo sem coerções de outros tipos [11.38ms]
+
+ 3 pass
+ 0 fail
+ 17 expect() calls
+Ran 3 tests across 1 file. [249.00ms]

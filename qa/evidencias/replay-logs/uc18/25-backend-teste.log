@@ -1,0 +1,11 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc18.test.ts:
+(pass) UC18 cancelar libera exemplar e vaga; não permite cancelamento repetido [5.29ms]
+(pass) UC18 API: cancelamento preserva ID e libera a cópia para outro leitor [55.64ms]
+(pass) UC18 não cancela reserva expirada ou inexistente [0.22ms]
+
+ 3 pass
+ 0 fail
+ 9 expect() calls
+Ran 3 tests across 1 file. [202.00ms]

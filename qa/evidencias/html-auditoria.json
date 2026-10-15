@@ -1,0 +1,208 @@
+{
+  "inicio": "2026-10-15T16:19:48.293619+00:00",
+  "casos": [
+    {
+      "id": "uc01",
+      "codigoArquivos": 26,
+      "blocosCopiaveis": 32,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc02",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 29,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc03",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc04",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc05",
+      "codigoArquivos": 24,
+      "blocosCopiaveis": 30,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc06",
+      "codigoArquivos": 23,
+      "blocosCopiaveis": 30,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc07",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc08",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc09",
+      "codigoArquivos": 29,
+      "blocosCopiaveis": 35,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc10",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 29,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc11",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc12",
+      "codigoArquivos": 24,
+      "blocosCopiaveis": 30,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc13",
+      "codigoArquivos": 23,
+      "blocosCopiaveis": 29,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc14",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 29,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc15",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc16",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc17",
+      "codigoArquivos": 29,
+      "blocosCopiaveis": 35,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc18",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc19",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc20",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 28,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc21",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 29,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    },
+    {
+      "id": "uc22",
+      "codigoArquivos": 22,
+      "blocosCopiaveis": 29,
+      "ausentes": [],
+      "diferentes": [],
+      "linksQuebrados": [],
+      "aprovado": true
+    }
+  ],
+  "resumo": {
+    "paginas": 22,
+    "aprovadas": 22,
+    "codigoArquivosConferidos": 508
+  }
+}

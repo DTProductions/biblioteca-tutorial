@@ -1,0 +1,9 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc02.test.ts:
+(pass) UC02: pesquisa por ISBN, título e autor e mantém endereço legado [32.24ms]
+
+ 1 pass
+ 0 fail
+ 9 expect() calls
+Ran 1 test across 1 file. [87.00ms]

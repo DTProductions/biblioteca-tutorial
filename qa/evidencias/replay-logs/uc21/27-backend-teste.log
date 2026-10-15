@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc21.test.ts:
+(pass) UC21 consulta filtra leitor, exemplar e situação e calcula atraso [4.30ms]
+(pass) UC21 API: identifica histórico e calcula atraso com filtros [45.14ms]
+
+ 2 pass
+ 0 fail
+ 14 expect() calls
+Ran 2 tests across 1 file. [225.00ms]

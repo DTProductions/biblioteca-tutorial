@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc12.test.ts:
+(pass) UC12 exclusão física só é permitida sem qualquer histórico [0.49ms]
+(pass) UC12 API: exclusão sem histórico retorna204 e segunda tentativa404 [16.32ms]
+
+ 2 pass
+ 0 fail
+ 5 expect() calls
+Ran 2 tests across 1 file. [158.00ms]

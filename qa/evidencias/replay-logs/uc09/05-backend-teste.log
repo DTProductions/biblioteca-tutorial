@@ -1,0 +1,13 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc09.test.ts:
+(pass) UC09 normaliza CPF, e-mail, nome e telefone [0.29ms]
+(pass) UC09 rejeita CPF com checksum inválido ou dígitos repetidos [0.12ms]
+(pass) UC09 exige todos os campos e valida contatos [0.08ms]
+(pass) UC09 impede CPF duplicado com ou sem máscara [0.17ms]
+(pass) UC09 API: valida campos, normaliza CPF e rejeita duplicidade [21.18ms]
+
+ 5 pass
+ 0 fail
+ 23 expect() calls
+Ran 5 tests across 1 file. [146.00ms]

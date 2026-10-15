@@ -1,0 +1,9 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc14.test.ts:
+(pass) UC14: consulta exemplar e combina filtros de registro, livro e disponibilidade [32.71ms]
+
+ 1 pass
+ 0 fail
+ 6 expect() calls
+Ran 1 test across 1 file. [214.00ms]

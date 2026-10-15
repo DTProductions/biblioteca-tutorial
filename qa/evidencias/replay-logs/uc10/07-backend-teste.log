@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc10.test.ts:
+(pass) UC10 consulta retorna lista vazia, nome, CPF e identificador [0.22ms]
+(pass) UC10 API: busca por nome, CPF pontuado e consulta individual [10.58ms]
+
+ 2 pass
+ 0 fail
+ 11 expect() calls
+Ran 2 tests across 1 file. [178.00ms]

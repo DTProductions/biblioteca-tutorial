@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc20.test.ts:
+(pass) UC20 devolução libera exemplar e vaga e só pode ocorrer uma vez [4.55ms]
+(pass) UC20 API: devolução única libera a cópia para novo empréstimo [52.37ms]
+
+ 2 pass
+ 0 fail
+ 7 expect() calls
+Ran 2 tests across 1 file. [232.00ms]

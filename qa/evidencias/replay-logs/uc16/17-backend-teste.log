@@ -1,0 +1,10 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc16.test.ts:
+(pass) UC16: exclui exemplar sem histórico e informa ausência na repetição [33.38ms]
+(pass) UC16: histórico informado pela integração impede exclusão física [21.11ms]
+
+ 2 pass
+ 0 fail
+ 3 expect() calls
+Ran 2 tests across 1 file. [226.00ms]

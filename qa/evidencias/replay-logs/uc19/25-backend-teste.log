@@ -1,0 +1,13 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc19.test.ts:
+(pass) UC19 empréstimo dura14 dias e reserva própria é atendida [9.89ms]
+(pass) UC19 API: empréstimo atende reserva própria, impede reserva alheia e vence em14 dias [68.95ms]
+(pass) UC19 API: quatro pedidos simultâneos resultam em três empréstimos [132.80ms]
+(pass) UC19 recusa quarto empréstimo incluindo os atrasados [0.96ms]
+(pass) UC19 reserva expirada não impede empréstimo por outro leitor [0.57ms]
+
+ 5 pass
+ 0 fail
+ 15 expect() calls
+Ran 5 tests across 1 file. [446.00ms]

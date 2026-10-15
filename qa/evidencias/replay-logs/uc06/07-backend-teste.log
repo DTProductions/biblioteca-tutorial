@@ -1,0 +1,9 @@
+bun test v1.4.2 (744846f84)
+
+tests/uc06.test.ts:
+(pass) UC06: busca por nome, por identificador e informa ausência [9.56ms]
+
+ 1 pass
+ 0 fail
+ 6 expect() calls
+Ran 1 test across 1 file. [63.00ms]
