@@ -35,6 +35,8 @@ services:
       POSTGRES_USER: biblioteca
       POSTGRES_PASSWORD: biblioteca
       POSTGRES_DB: biblioteca
+    ports:
+      - "5432:5432"
     # sem "ports": o banco não fica exposto no seu computador, só os outros
     # serviços deste infra/compose.yaml o enxergam, pela rede interna do Docker
     volumes:
