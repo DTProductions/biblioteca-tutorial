@@ -83,7 +83,6 @@ export default function BuscarLivros() {
           <table>
             <thead>
               <tr>
-                <th>Registro</th>
                 <th>ISBN</th>
                 <th>Título</th>
                 <th>Autor</th>
@@ -93,7 +92,6 @@ export default function BuscarLivros() {
             <tbody>
               {resultado.livros.map((livro) => (
                 <tr key={livro.id}>
-                  <td>{livro.numeroRegistro}</td>
                   <td>{livro.isbn}</td>
                   <td>{livro.titulo}</td>
                   <td>{livro.autor}</td>

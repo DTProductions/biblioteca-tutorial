@@ -2,6 +2,7 @@ import { beforeEach, expect, test } from "bun:test";
 import { sql } from "../src/infrastructure/postgres";
 import { createAcervoTablesPostgres } from "../src/modules/acervo";
 import { createAutoriaTablesPostgres } from "../src/modules/autoria";
+import { limparAcervoDeTeste } from "./limpar-acervo-teste";
 
 const AUSTEN = 4;
 const LIVROS = [
@@ -17,7 +18,7 @@ await createAutoriaTablesPostgres();
 await createAcervoTablesPostgres();
 
 beforeEach(async () => {
-  await sql`DELETE FROM livros`;
+  await limparAcervoDeTeste();
 });
 
 async function importar(csv: string): Promise<void> {
