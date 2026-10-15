@@ -12,17 +12,17 @@ para cadastrar e buscar livros por ISBN, título ou autor.
 Com Docker Desktop aberto, na raiz do projeto:
 
 ```bash
-docker compose up -d --build
+docker compose -f infra/compose.yaml up -d --build
 ```
 
-Abra <http://localhost:3000>. O Dockerfile compila o frontend, e o backend serve
+Abra <http://localhost:3000>. O `infra/Dockerfile` compila o frontend, e o backend serve
 a interface e a API no mesmo endereço. O PostgreSQL atende somente na rede do
 Compose, sem publicar a porta 5432. Os dados ficam no volume `pgdata`.
 
 Para parar e preservar os dados:
 
 ```bash
-docker compose down
+docker compose -f infra/compose.yaml down
 ```
 
 ## Testes e verificações
@@ -30,17 +30,17 @@ docker compose down
 Na primeira execução, crie o banco exclusivo da suíte, com o serviço `db` no ar:
 
 ```bash
-docker compose exec db createdb -U biblioteca biblioteca_test
+docker compose -f infra/compose.yaml exec db createdb -U biblioteca biblioteca_test
 ```
 
 Execute a suíte completa dentro da rede do Docker:
 
 ```bash
-docker compose run --rm --build test
+docker compose -f infra/compose.yaml run --rm --build test
 ```
 
 Os testes de integração usam `biblioteca_test`; a aplicação usa `biblioteca`.
-Se remover o volume com `docker compose down -v`, crie novamente o banco de testes.
+Se remover o volume com `docker compose -f infra/compose.yaml down -v`, crie novamente o banco de testes.
 
 As verificações que dispensam PostgreSQL podem rodar localmente com Bun 1.4 ou
 mais novo. Em `backend/`:
@@ -72,7 +72,7 @@ bun run build
 ```
 
 Após alterações no backend, recrie o serviço com
-`docker compose up -d --build app`. Para atualizar também a interface servida
+`docker compose -f infra/compose.yaml up -d --build app`. Para atualizar também a interface servida
 pela porta 3000, refaça esse build depois de alterar o frontend.
 
 ## API e carga inicial
@@ -90,9 +90,14 @@ O cadastro recebe `isbn`, `titulo` e `autorId`. Os autores da carga inicial são
 
 - `backend/`: aplicação Bun/Hono, módulos Acervo e Autoria, testes e verificador de fronteiras.
 - `frontend/`: React, React Router, Vite e CSS.
+- `infra/`: Compose, Dockerfile e `Dockerfile.dockerignore`.
 - `.docs/saas-evolution/`: aulas da evolução SaaS.
 - `.docs/atividades/`: atividades complementares.
 
 O [tutorial original](.docs/modular-monolith.html) percorre as 53 fases até o
 monólito modular. Os estados anteriores estão nas branches
 `modular-monolith/fase01` a `modular-monolith/fase53`.
+
+O Compose usa a raiz do repositório como contexto de build para incluir
+`backend/` e `frontend/`. O ignore específico `infra/Dockerfile.dockerignore`
+filtra esse contexto. O nome do projeto continua sendo `biblioteca-tutorial`.
