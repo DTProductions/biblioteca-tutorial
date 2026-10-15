@@ -1,0 +1,28 @@
+import type { AutorConhecido, ConsultaDeAutoria } from "../modules/acervo";
+import type { ConsultaDeAutores } from "../modules/autoria";
+import type { AutorId } from "../shared/identifiers";
+
+/**
+ * Camada anticorrupção: aqui — e só aqui — o vocabulário da Autoria
+ * ("literatura" / "didatico") vira o vocabulário do Acervo
+ * ("curta" / "ampla").
+ */
+export class AutoriaComoConsulta implements ConsultaDeAutoria {
+  constructor(private readonly autores: ConsultaDeAutores) {}
+
+  async autor(autorId: AutorId): Promise<AutorConhecido | null> {
+    const resumo = await this.autores.resumo(autorId);
+
+    if (!resumo) return null;
+
+    return {
+      nome: resumo.nome,
+      tiragem: resumo.tipo === "didatico" ? "ampla" : "curta",
+      livrosNoAcervo: resumo.livrosNoAcervo,
+    };
+  }
+
+  idsPorNome(termo: string): Promise<AutorId[]> {
+    return this.autores.idsPorNome(termo);
+  }
+}

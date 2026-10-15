@@ -1,49 +1,98 @@
-# Biblioteca — uma feature, 53 fases
+# Biblioteca — evolução SaaS, fase 01
 
 Tópicos Especiais em Engenharia de Software II · Ifes 2026.2
 
-Um cadastro de livros construído em 53 passos, da API ingênua ao monólito
-modular. O mesmo caso de uso atravessa o percurso inteiro: cada fase muda a forma
-do código sem mudar o que ele faz, e a fase seguinte cobra o preço da anterior.
+A branch `saas-evolution/fase01` implementa a
+[aula de PostgreSQL, Docker e React](.docs/saas-evolution/saas-fase01.html).
+O monólito modular da fase 53 usa PostgreSQL 18 e oferece uma interface React 19
+para cadastrar e buscar livros por ISBN, título ou autor.
 
-## Comece aqui
+## Executar a aplicação
+
+Com Docker Desktop aberto, na raiz do projeto:
 
 ```bash
-git clone https://github.com/maroquio/biblioteca-tutorial
-cd biblioteca-tutorial
-open .docs/modular-monolith.html
+docker compose up -d --build
 ```
 
-O tutorial traz as 53 fases em sequência, com o código pronto para copiar.
-Este branch (`main`) tem o código no estado final, ao fim da fase 53.
+Abra <http://localhost:3000>. O Dockerfile compila o frontend, e o backend serve
+a interface e a API no mesmo endereço. O PostgreSQL atende somente na rede do
+Compose, sem publicar a porta 5432. Os dados ficam no volume `pgdata`.
 
-## Uma branch por fase
-
-Cada fase tem uma branch com o código **concluído** até ela e o enunciado em
-`.docs/task.html`.
+Para parar e preservar os dados:
 
 ```bash
-git checkout fase10             # o projeto ao fim da fase 10
-git diff fase09 fase10          # exatamente o que a fase 10 mudou
-git log --oneline fase10        # as dez fases até aqui
+docker compose down
 ```
 
-| Marco | Branches |
-|---|---|
-| Preparação | `fase01` – `fase08` |
-| A API ingênua | `fase09` – `fase19` |
-| A dor | `fase20` – `fase23` |
-| A primeira reação | `fase24` – `fase30` |
-| O domínio | `fase31` – `fase37` |
-| Ports, casos de uso, payoff | `fase38` – `fase45` |
-| Fatias e módulos | `fase46` – `fase53` |
+## Testes e verificações
 
-## Requisitos
-
-[Bun](https://bun.sh) 1.2 ou mais novo. Nenhum banco a instalar: o SQLite vem
-embutido no Bun, e o arquivo é criado na primeira execução.
+Na primeira execução, crie o banco exclusivo da suíte, com o serviço `db` no ar:
 
 ```bash
-bun install
+docker compose exec db createdb -U biblioteca biblioteca_test
+```
+
+Execute a suíte completa dentro da rede do Docker:
+
+```bash
+docker compose run --rm --build test
+```
+
+Os testes de integração usam `biblioteca_test`; a aplicação usa `biblioteca`.
+Se remover o volume com `docker compose down -v`, crie novamente o banco de testes.
+
+As verificações que dispensam PostgreSQL podem rodar localmente com Bun 1.4 ou
+mais novo. Em `backend/`:
+
+```bash
+bun install --frozen-lockfile
+bun run typecheck
+bun run verificar
+bun test tests/cadastrar-livro.test.ts
+```
+
+## Desenvolver o frontend
+
+Mantenha a aplicação no Docker. Em `frontend/`:
+
+```bash
+bun install --frozen-lockfile
 bun run dev
 ```
+
+Abra <http://localhost:5173>. O proxy do Vite encaminha `/api` para a aplicação
+na porta 3000. As páginas são `/` (busca) e `/cadastrar` (cadastro).
+
+Para validar o frontend:
+
+```bash
+bun run lint
+bun run build
+```
+
+Após alterações no backend, recrie o serviço com
+`docker compose up -d --build app`. Para atualizar também a interface servida
+pela porta 3000, refaça esse build depois de alterar o frontend.
+
+## API e carga inicial
+
+| Operação | Endereço |
+|---|---|
+| Identificação da API | `GET /api` |
+| Cadastro de livro | `POST /api/livros` |
+| Busca por ISBN, título ou autor | `GET /api/livros/:q` |
+
+O cadastro recebe `isbn`, `titulo` e `autorId`. Os autores da carga inicial são
+1 — Eric Evans, 2 — Robert C. Martin, 3 — Harper Lee e 4 — Jane Austen.
+
+## Estrutura e tutorial original
+
+- `backend/`: aplicação Bun/Hono, módulos Acervo e Autoria, testes e verificador de fronteiras.
+- `frontend/`: React, React Router, Vite e CSS.
+- `.docs/saas-evolution/`: aulas da evolução SaaS.
+- `.docs/atividades/`: atividades complementares.
+
+O [tutorial original](.docs/modular-monolith.html) percorre as 53 fases até o
+monólito modular. Os estados anteriores estão nas branches
+`modular-monolith/fase01` a `modular-monolith/fase53`.

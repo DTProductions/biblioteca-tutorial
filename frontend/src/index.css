@@ -1,0 +1,161 @@
+:root {
+  --fundo: #f6f7f9;
+  --cartao: #ffffff;
+  --texto: #1f2937;
+  --suave: #6b7280;
+  --linha: #e5e7eb;
+  --destaque: #1d4ed8;
+  --erro: #b91c1c;
+  --sucesso: #047857;
+
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fundo);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: #0f172a;
+  color: #fff;
+}
+
+.marca {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.topo nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.topo nav a {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+}
+
+/* o NavLink do React Router põe a classe "active" no link da página atual */
+.topo nav a.active {
+  background: var(--destaque);
+  color: #fff;
+}
+
+.conteudo {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 1.6rem;
+}
+
+input,
+button {
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+button {
+  background: var(--destaque);
+  color: #fff;
+  border-color: var(--destaque);
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.busca {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.busca input {
+  flex: 1;
+  min-width: 0;
+}
+
+.resultado-busca {
+  overflow-x: auto;
+}
+
+.cadastro {
+  display: grid;
+  gap: 1rem;
+  max-width: 420px;
+}
+
+.cadastro label {
+  display: grid;
+  gap: 0.25rem;
+  font-weight: 600;
+}
+
+.cadastro small {
+  font-weight: 400;
+  color: var(--suave);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--linha);
+}
+
+th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--suave);
+}
+
+.dica {
+  color: var(--suave);
+}
+
+.erro {
+  color: var(--erro);
+  font-weight: 600;
+}
+
+.sucesso {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: var(--sucesso);
+}
+
+.sucesso p {
+  margin: 0 0 0.5rem;
+}
