@@ -1,11 +1,9 @@
-import { buildUseCases } from "./composition";
-import { createAcervoTablesPostgres } from "./modules/acervo";
+import { cadastrarLivro, prepararCatalogo } from "./modules/acervo/catalogo";
+import { integracaoDoCatalogo } from "./adapters/acervoIntegracao";
 import { createAutoriaTablesPostgres } from "./modules/autoria";
 
 await createAutoriaTablesPostgres();
-await createAcervoTablesPostgres();
-
-const { cadastrarLivro } = buildUseCases();
+await prepararCatalogo();
 
 const path = process.argv[2];
 
@@ -24,7 +22,7 @@ for (const row of rows) {
   const [isbn, titulo, autorId] = row.split(",") as [string, string, string];
 
   try {
-    await cadastrarLivro.execute({ isbn, titulo, autorId: Number(autorId) });
+    await cadastrarLivro({ isbn, titulo, autorId: Number(autorId) }, integracaoDoCatalogo);
     importados++;
   } catch (error) {
     console.log(`linha rejeitada (${(error as Error).message}): ${row}`);
