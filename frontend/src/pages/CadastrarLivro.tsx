@@ -70,9 +70,7 @@ export default function CadastrarLivro() {
       {salvo !== null && (
         <div className="sucesso">
           <p>
-            <strong>{salvo.titulo}</strong> entrou no acervo com o registro{" "}
-            <strong>{salvo.numeroRegistro}</strong> em{" "}
-            {formatarData(salvo.dataCatalogacao)}.
+            <strong>{salvo.titulo}</strong> entrou no catálogo em {formatarData(salvo.dataCatalogacao)}.
           </p>
           <Link to={`/?q=${salvo.isbn}`}>Ver no acervo</Link>
         </div>
