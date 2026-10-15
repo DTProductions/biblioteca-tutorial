@@ -47,3 +47,11 @@ backend/data/*.csv
 
 # Saida do ai-distiller
 .aid/
+
+# Artefatos locais do Playwright, inclusive na branch da turma sem qa/.gitignore
+/qa/playwright-report/
+/qa/test-results/
+/qa/.cache/
+
+# Cache dos geradores Python
+__pycache__/
