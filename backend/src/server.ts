@@ -2,14 +2,16 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import type { UseCases } from "./composition";
 import { DomainError, InvalidValue } from "./shared/domain-errors";
-import { registerRoutes as registerAcervo } from "./modules/acervo";
+import { register as registerCadastrarLegado } from "./modules/acervo/features/cadastrar-livro/route";
+import { register as registerBuscarLegado } from "./modules/acervo/features/buscar-livro/route";
 import { InvalidInput, NotFound, RuleConflict } from "./shared/errors";
+import type { CasoDeUso } from "./use-cases/types";
 
 /** O build do React (`bun run build` em frontend/), relativo à pasta backend/. */
 const FRONTEND = "../frontend/dist";
 
 function errorResponse(error: unknown): Response {
-  if (error instanceof InvalidInput || error instanceof InvalidValue) {
+  if (error instanceof InvalidInput || error instanceof InvalidValue || error instanceof SyntaxError) {
     return Response.json({ error: error.message }, { status: 400 });
   }
 
@@ -26,12 +28,16 @@ function errorResponse(error: unknown): Response {
   return Response.json({ error: "Erro interno" }, { status: 500 });
 }
 
-export function createServer(useCases: UseCases, porta = Number(process.env.PORT ?? 3000)) {
+export function createApp(useCases: UseCases, casos: CasoDeUso[] = []) {
   const api = new Hono();
 
   api.get("/", (contexto) => contexto.json({ message: "API da Biblioteca" }));
 
-  registerAcervo(api, useCases);
+  // Mantém os dois casos originais até suas atividades de evolução serem integradas.
+  const ids = new Set(casos.map((caso) => caso.id));
+  if (!ids.has("uc01")) registerCadastrarLegado(api, useCases);
+  if (!ids.has("uc01") && !ids.has("uc02")) registerBuscarLegado(api, useCases);
+  for (const caso of casos) caso.registrar(api);
 
   const app = new Hono();
 
@@ -52,5 +58,13 @@ export function createServer(useCases: UseCases, porta = Number(process.env.PORT
 
   app.onError((error) => errorResponse(error));
 
-  return Bun.serve({ port: porta, fetch: app.fetch });
+  return app;
+}
+
+export function createServer(
+  useCases: UseCases,
+  porta = Number(process.env.PORT ?? 3000),
+  casos: CasoDeUso[] = [],
+) {
+  return Bun.serve({ port: porta, fetch: createApp(useCases, casos).fetch });
 }
