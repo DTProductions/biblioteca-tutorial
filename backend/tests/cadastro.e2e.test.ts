@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, expect, test } from "bun:test";
-import { sql } from "../src/infrastructure/postgres";
+import { limparAcervoDeTeste } from "./limpar-acervo-teste";
 
 const BASE = "http://localhost:3999";
 const AUSTEN = 4;
@@ -57,7 +57,7 @@ afterAll(() => {
 
 beforeEach(async () => {
   // ... e sem limpar o banco de verdade entre um teste e outro
-  await sql`DELETE FROM livros`;
+  await limparAcervoDeTeste();
 });
 
 function cadastrar(n: number, autorId = AUSTEN, livros = LIVROS) {
