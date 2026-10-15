@@ -1,0 +1,564 @@
+{
+  "consultadoEm": "2026-10-15T17:08:04.966824+00:00",
+  "fontePrimaria": "https://openlibrary.org/dev/docs/api/search",
+  "userAgent": "BibliotecaTutorial/1.0 (+https://github.com/maroquio/biblioteca-tutorial; classroom catalog verification)",
+  "criterios": [
+    "autoria única na obra",
+    "nome correspondente ao autor",
+    "ISBN-13 válido e único",
+    "ISBN confirmado na edição individual",
+    "autor e obra presentes na mesma edição"
+  ],
+  "autores": [
+    {
+      "autor": "José de Alencar",
+      "consulta": "https://openlibrary.org/search.json?author=Jos%C3%A9+de+Alencar&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788516039776",
+          "edicao": "https://openlibrary.org/books/OL27047336M",
+          "consulta": "https://openlibrary.org/isbn/9788516039776.json"
+        }
+      ]
+    },
+    {
+      "autor": "Graciliano Ramos",
+      "consulta": "https://openlibrary.org/search.json?author=Graciliano+Ramos&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788501114785",
+          "edicao": "https://openlibrary.org/books/OL47541481M",
+          "consulta": "https://openlibrary.org/isbn/9788501114785.json"
+        }
+      ]
+    },
+    {
+      "autor": "Rachel de Queiroz",
+      "consulta": "https://openlibrary.org/search.json?author=Rachel+de+Queiroz&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788503008051",
+          "edicao": "https://openlibrary.org/books/OL27503670M",
+          "consulta": "https://openlibrary.org/isbn/9788503008051.json"
+        }
+      ]
+    },
+    {
+      "autor": "Clarice Lispector",
+      "consulta": "https://openlibrary.org/search.json?author=Clarice+Lispector&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780141197357",
+          "edicao": "https://openlibrary.org/books/OL28502554M",
+          "consulta": "https://openlibrary.org/isbn/9780141197357.json"
+        }
+      ]
+    },
+    {
+      "autor": "Machado de Assis",
+      "consulta": "https://openlibrary.org/search.json?author=Machado+de+Assis&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788525044655",
+          "edicao": "https://openlibrary.org/books/OL27998544M",
+          "consulta": "https://openlibrary.org/isbn/9788525044655.json"
+        }
+      ]
+    },
+    {
+      "autor": "João Guimarães Rosa",
+      "consulta": "https://openlibrary.org/search.json?author=Jo%C3%A3o+Guimar%C3%A3es+Rosa&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9786559210572",
+          "edicao": "https://openlibrary.org/books/OL47303621M",
+          "consulta": "https://openlibrary.org/isbn/9786559210572.json"
+        }
+      ]
+    },
+    {
+      "autor": "Aluísio Azevedo",
+      "consulta": "https://openlibrary.org/search.json?author=Alu%C3%ADsio+Azevedo&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9789879551035",
+          "edicao": "https://openlibrary.org/books/OL13205782M",
+          "consulta": "https://openlibrary.org/isbn/9789879551035.json"
+        }
+      ]
+    },
+    {
+      "autor": "Carlos Drummond de Andrade",
+      "consulta": "https://openlibrary.org/search.json?author=Carlos+Drummond+de+Andrade&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788475178653",
+          "edicao": "https://openlibrary.org/books/OL23093659M",
+          "consulta": "https://openlibrary.org/isbn/9788475178653.json"
+        }
+      ]
+    },
+    {
+      "autor": "Érico Veríssimo",
+      "consulta": "https://openlibrary.org/search.json?author=%C3%89rico+Ver%C3%ADssimo&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788535906097",
+          "edicao": "https://openlibrary.org/books/OL17538056M",
+          "consulta": "https://openlibrary.org/isbn/9788535906097.json"
+        }
+      ]
+    },
+    {
+      "autor": "Monteiro Lobato",
+      "consulta": "https://openlibrary.org/search.json?author=Monteiro+Lobato&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788525048042",
+          "edicao": "https://openlibrary.org/books/OL35322135M",
+          "consulta": "https://openlibrary.org/isbn/9788525048042.json"
+        }
+      ]
+    },
+    {
+      "autor": "Lygia Fagundes Telles",
+      "consulta": "https://openlibrary.org/search.json?author=Lygia+Fagundes+Telles&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788535914306",
+          "edicao": "https://openlibrary.org/books/OL44942760M",
+          "consulta": "https://openlibrary.org/isbn/9788535914306.json"
+        }
+      ]
+    },
+    {
+      "autor": "Manuel Bandeira",
+      "consulta": "https://openlibrary.org/search.json?author=Manuel+Bandeira&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788575036181",
+          "edicao": "https://openlibrary.org/books/OL24031723M",
+          "consulta": "https://openlibrary.org/isbn/9788575036181.json"
+        }
+      ]
+    },
+    {
+      "autor": "Rubem Fonseca",
+      "consulta": "https://openlibrary.org/search.json?author=Rubem+Fonseca&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780002228916",
+          "edicao": "https://openlibrary.org/books/OL9316739M",
+          "consulta": "https://openlibrary.org/isbn/9780002228916.json"
+        }
+      ]
+    },
+    {
+      "autor": "Mário de Andrade",
+      "consulta": "https://openlibrary.org/search.json?author=M%C3%A1rio+de+Andrade&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788522007707",
+          "edicao": "https://openlibrary.org/books/OL16778880M",
+          "consulta": "https://openlibrary.org/isbn/9788522007707.json"
+        }
+      ]
+    },
+    {
+      "autor": "Jane Austen",
+      "consulta": "https://openlibrary.org/search.json?author=Jane+Austen&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780415125383",
+          "edicao": "https://openlibrary.org/books/OL33354153M",
+          "consulta": "https://openlibrary.org/isbn/9780415125383.json"
+        }
+      ]
+    },
+    {
+      "autor": "Charles Dickens",
+      "consulta": "https://openlibrary.org/search.json?author=Charles+Dickens&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780006940470",
+          "edicao": "https://openlibrary.org/books/OL28424828M",
+          "consulta": "https://openlibrary.org/isbn/9780006940470.json"
+        }
+      ]
+    },
+    {
+      "autor": "Ariano Suassuna",
+      "consulta": "https://openlibrary.org/search.json?author=Ariano+Suassuna&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788503011174",
+          "edicao": "https://openlibrary.org/books/OL30418670M",
+          "consulta": "https://openlibrary.org/isbn/9788503011174.json"
+        }
+      ]
+    },
+    {
+      "autor": "Virginia Woolf",
+      "consulta": "https://openlibrary.org/search.json?author=Virginia+Woolf&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780006547563",
+          "edicao": "https://openlibrary.org/books/OL7259945M",
+          "consulta": "https://openlibrary.org/isbn/9780006547563.json"
+        }
+      ]
+    },
+    {
+      "autor": "William Shakespeare",
+      "consulta": "https://openlibrary.org/search.json?author=William+Shakespeare&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9781075607820",
+          "edicao": "https://openlibrary.org/books/OL35983732M",
+          "consulta": "https://openlibrary.org/isbn/9781075607820.json"
+        }
+      ]
+    },
+    {
+      "autor": "Ernest Hemingway",
+      "consulta": "https://openlibrary.org/search.json?author=Ernest+Hemingway&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788528617986",
+          "edicao": "https://openlibrary.org/books/OL37123798M",
+          "consulta": "https://openlibrary.org/isbn/9788528617986.json"
+        }
+      ]
+    },
+    {
+      "autor": "Mark Twain",
+      "consulta": "https://openlibrary.org/search.json?author=Mark+Twain&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780007420117",
+          "edicao": "https://openlibrary.org/books/OL32176720M",
+          "consulta": "https://openlibrary.org/isbn/9780007420117.json"
+        }
+      ]
+    },
+    {
+      "autor": "F. Scott Fitzgerald",
+      "consulta": "https://openlibrary.org/search.json?author=F.+Scott+Fitzgerald&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780007449484",
+          "edicao": "https://openlibrary.org/books/OL35468698M",
+          "consulta": "https://openlibrary.org/isbn/9780007449484.json"
+        }
+      ]
+    },
+    {
+      "autor": "John Steinbeck",
+      "consulta": "https://openlibrary.org/search.json?author=John+Steinbeck&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780140173208",
+          "edicao": "https://openlibrary.org/books/OL7349330M",
+          "consulta": "https://openlibrary.org/isbn/9780140173208.json"
+        }
+      ]
+    },
+    {
+      "autor": "Toni Morrison",
+      "consulta": "https://openlibrary.org/search.json?author=Toni+Morrison&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788535910698",
+          "edicao": "https://openlibrary.org/books/OL35664040M",
+          "consulta": "https://openlibrary.org/isbn/9788535910698.json"
+        }
+      ]
+    },
+    {
+      "autor": "Agatha Christie",
+      "consulta": "https://openlibrary.org/search.json?author=Agatha+Christie&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9786559870332",
+          "edicao": "https://openlibrary.org/books/OL39484618M",
+          "consulta": "https://openlibrary.org/isbn/9786559870332.json"
+        }
+      ]
+    },
+    {
+      "autor": "Arthur Conan Doyle",
+      "consulta": "https://openlibrary.org/search.json?author=Arthur+Conan+Doyle&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9781725540828",
+          "edicao": "https://openlibrary.org/books/OL56692928M",
+          "consulta": "https://openlibrary.org/isbn/9781725540828.json"
+        }
+      ]
+    },
+    {
+      "autor": "Harper Lee",
+      "consulta": "https://openlibrary.org/search.json?author=Harper+Lee&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780060173227",
+          "edicao": "https://openlibrary.org/books/OL899317M",
+          "consulta": "https://openlibrary.org/isbn/9780060173227.json"
+        }
+      ]
+    },
+    {
+      "autor": "Victor Hugo",
+      "consulta": "https://openlibrary.org/search.json?author=Victor+Hugo&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9798763520798",
+          "edicao": "https://openlibrary.org/books/OL36878736M",
+          "consulta": "https://openlibrary.org/isbn/9798763520798.json"
+        }
+      ]
+    },
+    {
+      "autor": "Jules Verne",
+      "consulta": "https://openlibrary.org/search.json?author=Jules+Verne&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780004226729",
+          "edicao": "https://openlibrary.org/books/OL43492183M",
+          "consulta": "https://openlibrary.org/isbn/9780004226729.json"
+        }
+      ]
+    },
+    {
+      "autor": "Gustave Flaubert",
+      "consulta": "https://openlibrary.org/search.json?author=Gustave+Flaubert&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780007420308",
+          "edicao": "https://openlibrary.org/books/OL29328607M",
+          "consulta": "https://openlibrary.org/isbn/9780007420308.json"
+        }
+      ]
+    },
+    {
+      "autor": "Émile Zola",
+      "consulta": "https://openlibrary.org/search.json?author=%C3%89mile+Zola&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780140440454",
+          "edicao": "https://openlibrary.org/books/OL7355057M",
+          "consulta": "https://openlibrary.org/isbn/9780140440454.json"
+        }
+      ]
+    },
+    {
+      "autor": "Franz Kafka",
+      "consulta": "https://openlibrary.org/search.json?author=Franz+Kafka&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788525410467",
+          "edicao": "https://openlibrary.org/books/OL32002588M",
+          "consulta": "https://openlibrary.org/isbn/9788525410467.json"
+        }
+      ]
+    },
+    {
+      "autor": "Alexandre Dumas",
+      "consulta": "https://openlibrary.org/search.json?author=Alexandre+Dumas&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788537815106",
+          "edicao": "https://openlibrary.org/books/OL47655826M",
+          "consulta": "https://openlibrary.org/isbn/9788537815106.json"
+        }
+      ]
+    },
+    {
+      "autor": "Hermann Hesse",
+      "consulta": "https://openlibrary.org/search.json?author=Hermann+Hesse&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780023305405",
+          "edicao": "https://openlibrary.org/books/OL7265806M",
+          "consulta": "https://openlibrary.org/isbn/9780023305405.json"
+        }
+      ]
+    },
+    {
+      "autor": "Thomas Mann",
+      "consulta": "https://openlibrary.org/search.json?author=Thomas+Mann&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780075536659",
+          "edicao": "https://openlibrary.org/books/OL7308490M",
+          "consulta": "https://openlibrary.org/isbn/9780075536659.json"
+        }
+      ]
+    },
+    {
+      "autor": "Fyodor Dostoevsky",
+      "consulta": "https://openlibrary.org/search.json?author=Fyodor+Dostoevsky&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780241252086",
+          "edicao": "https://openlibrary.org/books/OL49273234M",
+          "consulta": "https://openlibrary.org/isbn/9780241252086.json"
+        }
+      ]
+    },
+    {
+      "autor": "Anton Chekhov",
+      "consulta": "https://openlibrary.org/search.json?author=Anton+Chekhov&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780192811639",
+          "edicao": "https://openlibrary.org/books/OL7383535M",
+          "consulta": "https://openlibrary.org/isbn/9780192811639.json"
+        }
+      ]
+    },
+    {
+      "autor": "Gabriel García Márquez",
+      "consulta": "https://openlibrary.org/search.json?author=Gabriel+Garc%C3%ADa+M%C3%A1rquez&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788501012074",
+          "edicao": "https://openlibrary.org/books/OL9155429M",
+          "consulta": "https://openlibrary.org/isbn/9788501012074.json"
+        }
+      ]
+    },
+    {
+      "autor": "Isabel Allende",
+      "consulta": "https://openlibrary.org/search.json?author=Isabel+Allende&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780060951306",
+          "edicao": "https://openlibrary.org/books/OL7285428M",
+          "consulta": "https://openlibrary.org/isbn/9780060951306.json"
+        }
+      ]
+    },
+    {
+      "autor": "Fernando Pessoa",
+      "consulta": "https://openlibrary.org/search.json?author=Fernando+Pessoa&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9781906614096",
+          "edicao": "https://openlibrary.org/books/OL44131520M",
+          "consulta": "https://openlibrary.org/isbn/9781906614096.json"
+        }
+      ]
+    },
+    {
+      "autor": "Mario Vargas Llosa",
+      "consulta": "https://openlibrary.org/search.json?author=Mario+Vargas+Llosa&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780312420277",
+          "edicao": "https://openlibrary.org/books/OL9558769M",
+          "consulta": "https://openlibrary.org/isbn/9780312420277.json"
+        }
+      ]
+    },
+    {
+      "autor": "José Saramago",
+      "consulta": "https://openlibrary.org/search.json?author=Jos%C3%A9+Saramago&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780099573586",
+          "edicao": "https://openlibrary.org/books/OL27380882M",
+          "consulta": "https://openlibrary.org/isbn/9780099573586.json"
+        }
+      ]
+    },
+    {
+      "autor": "Mary Shelley",
+      "consulta": "https://openlibrary.org/search.json?author=Mary+Shelley&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9786558881070",
+          "edicao": "https://openlibrary.org/books/OL36634274M",
+          "consulta": "https://openlibrary.org/isbn/9786558881070.json"
+        }
+      ]
+    },
+    {
+      "autor": "Oscar Wilde",
+      "consulta": "https://openlibrary.org/search.json?author=Oscar+Wilde&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9786555980004",
+          "edicao": "https://openlibrary.org/books/OL35663860M",
+          "consulta": "https://openlibrary.org/isbn/9786555980004.json"
+        }
+      ]
+    },
+    {
+      "autor": "Eça de Queirós",
+      "consulta": "https://openlibrary.org/search.json?author=E%C3%A7a+de+Queir%C3%B3s&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780370005577",
+          "edicao": "https://openlibrary.org/books/OL9567660M",
+          "consulta": "https://openlibrary.org/isbn/9780370005577.json"
+        }
+      ]
+    },
+    {
+      "autor": "Robert Louis Stevenson",
+      "consulta": "https://openlibrary.org/search.json?author=Robert+Louis+Stevenson&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780001204041",
+          "edicao": "https://openlibrary.org/books/OL40334807M",
+          "consulta": "https://openlibrary.org/isbn/9780001204041.json"
+        }
+      ]
+    },
+    {
+      "autor": "H. G. Wells",
+      "consulta": "https://openlibrary.org/search.json?author=H.+G.+Wells&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9788537818190",
+          "edicao": "https://openlibrary.org/books/OL35664452M",
+          "consulta": "https://openlibrary.org/isbn/9788537818190.json"
+        }
+      ]
+    },
+    {
+      "autor": "Bram Stoker",
+      "consulta": "https://openlibrary.org/search.json?author=Bram+Stoker&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780141198644",
+          "edicao": "https://openlibrary.org/books/OL34592330M",
+          "consulta": "https://openlibrary.org/isbn/9780141198644.json"
+        }
+      ]
+    },
+    {
+      "autor": "Louisa May Alcott",
+      "consulta": "https://openlibrary.org/search.json?author=Louisa+May+Alcott&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780001660045",
+          "edicao": "https://openlibrary.org/books/OL46946514M",
+          "consulta": "https://openlibrary.org/isbn/9780001660045.json"
+        }
+      ]
+    },
+    {
+      "autor": "Charlotte Brontë",
+      "consulta": "https://openlibrary.org/search.json?author=Charlotte+Bront%C3%AB&fields=title%2Cisbn%2Cauthor_name%2Cauthor_key%2Ckey&limit=25",
+      "edicoes": [
+        {
+          "isbn": "9780004244327",
+          "edicao": "https://openlibrary.org/books/OL34367999M",
+          "consulta": "https://openlibrary.org/isbn/9780004244327.json"
+        }
+      ]
+    }
+  ]
+}
