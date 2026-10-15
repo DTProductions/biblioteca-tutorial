@@ -38,6 +38,7 @@ Erros: `{ error: string }`; 400 entrada inválida, 404 ausente, 409 regra/víncu
 | 20 | POST /api/emprestimos/:id/devolucao |
 | 21 | GET /api/emprestimos?leitorId=&exemplarId=&situacao=; GET /api/emprestimos/:id |
 | 22 | GET /api/reservas?leitorId=&exemplarId=&situacao=; GET /api/reservas/:id |
+| 23 | GET /api/seed; POST /api/seed; CLI bun src/seed.ts |
 
 ### Formatos
 
@@ -61,3 +62,12 @@ Erros: `{ error: string }`; 400 entrada inválida, 404 ausente, 409 regra/víncu
 ## Interface
 
 Preservar a identidade visual simples existente. Cada UC tem página acessível pelo menu com formulário/filtros, feedback e resultado. Nenhum cadastro exige digitar ID interno: seleções podem consultar endpoints de busca. Campos de ID por URL/seleção de resultado são aceitáveis para ações contextualizadas.
+
+## UC23 · Seed de demonstração
+
+O catálogo versionado contém 50 autores reais e 1–5 livros reais por autor, cada
+um com 1–10 exemplares. Os links e ISBNs estão em `backend/src/seed/catalogo.json`.
+Leitores e contatos são fictícios. A fotografia inicial tem 120 empréstimos
+devolvidos, 30 no prazo, 30 atrasados, 20 reservas ativas, 10 canceladas e 10
+expiradas. São 60 empréstimos não devolvidos no total. A carga é manual, atômica
+e idempotente, preserva dados anteriores e guarda a data de referência.

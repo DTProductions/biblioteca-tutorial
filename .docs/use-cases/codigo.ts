@@ -9,7 +9,7 @@ const id = process.argv[2]?.toLowerCase();
 const aplicar = process.argv.includes("--aplicar");
 const indiceRaiz = process.argv.indexOf("--raiz");
 const raiz = resolve(indiceRaiz >= 0 ? process.argv[indiceRaiz + 1]! : resolve(pasta, "../.."));
-if (!id || !/^uc(?:0[1-9]|1[0-9]|2[0-2])$/.test(id)) {
+if (!id || !/^uc(?:0[1-9]|1[0-9]|2[0-3])$/.test(id)) {
   console.error("Uso: bun .docs/use-cases/codigo.ts uc05 [--aplicar] [--raiz diretorio]");
   process.exit(1);
 }

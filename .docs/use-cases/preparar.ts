@@ -7,7 +7,7 @@ const pasta = dirname(fileURLToPath(import.meta.url));
 const id = process.argv[2]?.toLowerCase();
 const somenteVerificar = process.argv.includes("--verificar");
 const manifesto = JSON.parse(readFileSync(resolve(pasta, "manifesto.json"), "utf8"));
-if (!id || !/^uc(?:0[1-9]|1[0-9]|2[0-2])$/.test(id) || !manifesto.casos[id]) {
+if (!id || !/^uc(?:0[1-9]|1[0-9]|2[0-3])$/.test(id) || !manifesto.casos[id]) {
   console.error("Uso: bun .docs/use-cases/preparar.ts uc05 [--verificar]");
   process.exit(1);
 }

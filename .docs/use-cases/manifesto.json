@@ -46,6 +46,9 @@
     ],
     [
       "uc20"
+    ],
+    [
+      "uc23"
     ]
   ],
   "casos": {
@@ -378,6 +381,25 @@
         "backend/src/use-cases/uc22.ts",
         "backend/tests/uc22.test.ts",
         "frontend/src/use-cases/uc22.tsx"
+      ]
+    },
+    "uc23": {
+      "titulo": "Popular biblioteca com seed",
+      "caminho": "/livros/seed",
+      "prerequisitos": [
+        "uc18",
+        "uc20"
+      ],
+      "arquivos": [
+        "backend/src/seed/catalogo.json",
+        "backend/src/seed/modelo.ts",
+        "backend/src/seed/preparar.ts",
+        "backend/src/seed/relatorio.ts",
+        "backend/src/seed/executar.ts",
+        "backend/src/seed.ts",
+        "backend/src/use-cases/uc23.ts",
+        "backend/tests/uc23.test.ts",
+        "frontend/src/use-cases/uc23.tsx"
       ]
     }
   }
