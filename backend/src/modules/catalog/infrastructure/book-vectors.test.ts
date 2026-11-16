@@ -177,7 +177,6 @@ test("UC24: an embedding failure does not fail the book synchronization", async 
 
   const failing: Embedder = {
     ...embedder,
-    id: "failing-test-embedder",
     async embed() {
       throw new Error("Simulated embedding failure");
     },
