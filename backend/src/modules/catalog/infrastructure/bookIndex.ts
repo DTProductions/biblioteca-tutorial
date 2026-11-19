@@ -100,17 +100,26 @@ async function syncIds(ids: number[], integration: CatalogIntegration, embedder:
 }
 
 /**
+ * Atualiza o índice para estes livros e deixa a falha subir: é a versão do
+ * worker, que tenta de novo mais tarde. Repetir é seguro, porque só paga um
+ * embedding novo quando o texto do livro mudou.
+ */
+export async function indexBooks(ids: number[], integration: CatalogIntegration, embedder: Embedder | null = defaultEmbedder, client: RedisClient | null = redis): Promise<IndexResult> {
+  if (!client) return { indexed: 0, removed: 0 };
+  const { created, ...result } = await syncIds(ids, integration, embedder, client);
+  // índice novo (Redis reiniciado, modelo trocado): os outros livros também precisam entrar
+  if (created) void reconcileBookIndex(integration, embedder, client);
+  return result;
+}
+
+/**
  * Atualiza o índice para estes livros, depois do COMMIT. Nunca lança: sem Redis
  * ou sem Gemini o livro fica fora do índice até a próxima reconciliação, e a
  * escrita no Postgres, que é o que importa, já aconteceu.
  */
 export async function syncBookIndex(ids: number[], integration: CatalogIntegration, embedder: Embedder | null = defaultEmbedder, client: RedisClient | null = redis): Promise<IndexResult> {
-  if (!client) return { indexed: 0, removed: 0 };
   try {
-    const { created, ...result } = await syncIds(ids, integration, embedder, client);
-    // índice novo (Redis reiniciado, modelo trocado): os outros livros também precisam entrar
-    if (created) void reconcileBookIndex(integration, embedder, client);
-    return result;
+    return await indexBooks(ids, integration, embedder, client);
   } catch (error) {
     console.warn("Índice semântico indisponível:", (error as Error).message);
     return { indexed: 0, removed: 0 };
