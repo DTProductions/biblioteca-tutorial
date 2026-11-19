@@ -37,16 +37,20 @@
   const numbers = document.querySelector("#fila");
   const list = document.querySelector("#pedidos");
 
+  // Tudo o que vem do servidor passa por aqui antes de virar HTML: um item
+  // como "<script>" tem de aparecer como texto, e não ser executado pela página.
+  const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
   // desenha os números da fila e os últimos pedidos
   async function load() {
     const { fila, pedidos } = await (await fetch("/pedidos")).json();
     numbers.innerHTML = fila
-      ? `<div>aguardando<b>${fila.aguardando}</b></div><div>pendentes<b>${fila.pendentes}</b></div><div>mortas<b>${fila.mortas}</b></div>`
+      ? `<div>aguardando<b>${esc(fila.aguardando)}</b></div><div>pendentes<b>${esc(fila.pendentes)}</b></div><div>mortas<b>${esc(fila.mortas)}</b></div>`
       : "";
     list.innerHTML = pedidos.map((p) => `<li>
-      <b>nº ${p.senha}</b>
-      <span>${p.item} <small>${p.worker ? "· " + p.worker : ""}${p.tentativas > 1 ? " · tentativa " + p.tentativas : ""}</small></span>
-      <span class="st ${p.status.split(" ").pop()}">${p.status}</span></li>`).join("");
+      <b>nº ${esc(p.senha)}</b>
+      <span>${esc(p.item)} <small>${p.worker ? "· " + esc(p.worker) : ""}${p.tentativas > 1 ? " · tentativa " + esc(p.tentativas) : ""}</small></span>
+      <span class="st ${esc(String(p.status).split(" ").pop())}">${esc(p.status)}</span></li>`).join("");
   }
 
   // envia um pedido e mede quanto tempo a RESPOSTA demorou

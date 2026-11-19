@@ -2607,16 +2607,20 @@ async function run([id, fields]: Entry, deliveries: number) {
   const numbers = document.querySelector("#fila");
   const list = document.querySelector("#pedidos");
 
+  // Tudo o que vem do servidor passa por aqui antes de virar HTML: um item
+  // como "&lt;script&gt;" tem de aparecer como texto, e não ser executado pela página.
+  const esc = (value) =&gt; String(value ?? "").replace(/[&amp;&lt;&gt;"']/g, (c) =&gt; `&amp;#${c.charCodeAt(0)};`);
+
   // desenha os números da fila e os últimos pedidos
   async function load() {
     const { fila, pedidos } = await (await fetch("/pedidos")).json();
     numbers.innerHTML = fila
-      ? `&lt;div&gt;aguardando&lt;b&gt;${fila.aguardando}&lt;/b&gt;&lt;/div&gt;&lt;div&gt;pendentes&lt;b&gt;${fila.pendentes}&lt;/b&gt;&lt;/div&gt;&lt;div&gt;mortas&lt;b&gt;${fila.mortas}&lt;/b&gt;&lt;/div&gt;`
+      ? `&lt;div&gt;aguardando&lt;b&gt;${esc(fila.aguardando)}&lt;/b&gt;&lt;/div&gt;&lt;div&gt;pendentes&lt;b&gt;${esc(fila.pendentes)}&lt;/b&gt;&lt;/div&gt;&lt;div&gt;mortas&lt;b&gt;${esc(fila.mortas)}&lt;/b&gt;&lt;/div&gt;`
       : "";
     list.innerHTML = pedidos.map((p) =&gt; `&lt;li&gt;
-      &lt;b&gt;nº ${p.senha}&lt;/b&gt;
-      &lt;span&gt;${p.item} &lt;small&gt;${p.worker ? "· " + p.worker : ""}${p.tentativas &gt; 1 ? " · tentativa " + p.tentativas : ""}&lt;/small&gt;&lt;/span&gt;
-      &lt;span class="st ${p.status.split(" ").pop()}"&gt;${p.status}&lt;/span&gt;&lt;/li&gt;`).join("");
+      &lt;b&gt;nº ${esc(p.senha)}&lt;/b&gt;
+      &lt;span&gt;${esc(p.item)} &lt;small&gt;${p.worker ? "· " + esc(p.worker) : ""}${p.tentativas &gt; 1 ? " · tentativa " + esc(p.tentativas) : ""}&lt;/small&gt;&lt;/span&gt;
+      &lt;span class="st ${esc(String(p.status).split(" ").pop())}"&gt;${esc(p.status)}&lt;/span&gt;&lt;/li&gt;`).join("");
   }
 
   // envia um pedido e mede quanto tempo a RESPOSTA demorou
