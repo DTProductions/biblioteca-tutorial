@@ -1,13 +1,16 @@
-# Biblioteca — evolução SaaS, fase 03
+# Biblioteca — evolução SaaS, fase 04
 
 Tópicos Especiais em Engenharia de Software II · Ifes 2026.2
 
-A branch `saas-evolution/fase03` parte da `saas-evolution/fase02`, que trouxe o
-Redis 8 (cache da busca de autores e busca semântica de livros, UC24). Esta fase
-implementa a [aula de armazenamento de objetos com RustFS](.docs/saas-evolution/saas-fase03.html):
-as capas dos livros (UC25) ficam num bucket do RustFS, compatível com S3, e o
-Postgres guarda só quando cada capa mudou. Os [slides da aula](.docs/aulas/rustfs/slides-rustfs.html)
-e um [exemplo mínimo com Bun](.docs/aulas/rustfs/exemplo-rustfs/) acompanham o tutorial.
+A branch `saas-evolution/fase04` parte da `saas-evolution/fase03`, que trouxe o
+RustFS (as capas dos livros, UC25). Esta fase implementa a
+[aula de filas e workers](.docs/saas-evolution/saas-fase04.html): cadastrar, editar e
+excluir um livro (UC01, UC03 e UC04) publicam a indexação semântica numa fila do
+Redis Streams e respondem na hora; um worker, outro processo com o mesmo código,
+consome a fila e chama o Gemini fora da requisição. Os [slides da aula](.docs/aulas/filas/slides-filas.html)
+e um [exemplo com Bun](.docs/aulas/filas/exemplo-filas/) acompanham o tutorial. A
+[atividade](.docs/atividades/atividade-fila.html) leva a fila para a Circulação: o
+comprovante do empréstimo (UC19) por e-mail.
 
 ## Executar a aplicação
 
@@ -18,14 +21,29 @@ docker compose -f infra/compose.yaml up -d --build
 ```
 
 Abra <http://localhost:3000>. O `infra/Dockerfile` compila o frontend, e o backend serve
-a interface e a API no mesmo endereço. O PostgreSQL, o Redis e a API S3 do RustFS
-atendem somente na rede do Compose. Os dados ficam nos volumes `pgdata` (Postgres)
-e `rustfsdata` (as imagens). O serviço `storage-init` cria os buckets `biblioteca`
-e `biblioteca-test` e termina.
+a interface e a API no mesmo endereço. O serviço `worker` usa a mesma imagem com
+outro ponto de entrada (`bun src/worker.ts`) e não publica porta: é ele que busca
+trabalho na fila. O PostgreSQL, os dois Redis (`redis`, o cache, e `fila`) e a API
+S3 do RustFS atendem somente na rede do Compose. Os dados ficam nos volumes `pgdata`
+(Postgres), `rustfsdata` (as imagens) e `filadata` (as tarefas que ainda não foram
+feitas). O serviço `storage-init` cria os buckets `biblioteca` e `biblioteca-test`
+e termina.
+
+Para acompanhar o worker e para subir um segundo:
+
+```bash
+docker compose -f infra/compose.yaml logs -f worker
+docker compose -f infra/compose.yaml up -d --scale worker=2
+```
 
 O console do RustFS fica em <http://localhost:9011/rustfs/console/> (usuário
 `biblioteca`, senha `biblioteca-secreta`, só para desenvolvimento): ali dá para ver
 cada capa enviada, em `acervo/livros/<id>/capa`.
+
+O Mailpit, um provedor de e-mail só para desenvolvimento, mostra em
+<http://localhost:8025> cada e-mail que a aplicação envia, sem entregar nada a
+ninguém. Nesta branch, o comprovante do empréstimo ainda é o esqueleto da atividade:
+até ela ser feita, a caixa fica vazia.
 
 Para parar e preservar os dados:
 
@@ -48,6 +66,10 @@ docker compose -f infra/compose.yaml run --rm --build test
 ```
 
 Os testes de integração usam `biblioteca_test`; a aplicação usa `biblioteca`.
+A suíte roda sem `QUEUE_URL`: sem fila, cada caso de uso faz o trabalho na hora, e
+os testes da fila criam o próprio cliente com `TEST_QUEUE_URL`. Os e-mails vão para
+uma caixa de saída em memória (`EMAIL_PROVIDER=memory`); só o teste do adaptador
+fala com o Mailpit.
 Se remover o volume com `docker compose -f infra/compose.yaml down -v`, crie novamente o banco de testes.
 
 As verificações que dispensam PostgreSQL podem rodar localmente com Bun 1.4 ou
@@ -124,6 +146,8 @@ primeiros bytes do arquivo; o JSON do livro traz `capaUrl` (ou `null`). Os autor
 - `frontend/`: React, React Router, Vite e CSS.
 - `infra/`: Compose, Dockerfile e `Dockerfile.dockerignore`.
 - `.docs/saas-evolution/`: aulas da evolução SaaS.
+- `.docs/aulas/`: slides e exemplos que acompanham as aulas.
+- `.docs/atividades/`: enunciados das atividades.
 
 O tutorial original do monólito modular está nas branches
 `modular-monolith/fase01` a `modular-monolith/fase53`.
@@ -155,9 +179,10 @@ banco (tabelas, colunas e valores persistidos), as mensagens ao usuário e os co
 ```
 backend/src/
 ├── main.ts · seed.ts · import-books.ts   pontos de entrada
+├── worker.ts                             o worker da fila
 ├── server.ts · composition.ts            app Hono, preparo do banco e descoberta das fatias
-├── infrastructure/                       PostgreSQL, transação, Redis, RustFS (storage.ts) e embeddings
-├── shared/                               erros, validação, HTTP e datas
+├── infrastructure/                       PostgreSQL, transação, Redis, fila (queue.ts), RustFS (storage.ts), e-mail (email.ts) e embeddings
+├── shared/                               erros, validação, HTTP, datas e a porta de e-mail
 ├── integration/                          SQL entre módulos e o seed (UC23)
 └── modules/<módulo>/
     ├── index.ts                          API pública do módulo
@@ -198,7 +223,7 @@ a aplicação inteira.
 | UC16 | `catalog/features/delete-copy` | `DELETE /exemplares/:id` |
 | UC17 | `circulation/features/reserve-copy` | `POST /reservas` |
 | UC18 | `circulation/features/cancel-reservation` | `POST /reservas/:id/cancelamento` |
-| UC19 | `circulation/features/register-loan` | `POST /emprestimos` |
+| UC19 | `circulation/features/register-loan` | `POST /emprestimos` (o comprovante por e-mail é a [atividade da fila](.docs/atividades/atividade-fila.html): até ser implementado, nenhum e-mail sai) |
 | UC20 | `circulation/features/register-return` | `POST /emprestimos/:id/devolucao` |
 | UC21 | `circulation/features/list-loans` | `GET /emprestimos`, `GET /emprestimos/:id` |
 | UC22 | `circulation/features/list-reservations` | `GET /reservas`, `GET /reservas/:id` |

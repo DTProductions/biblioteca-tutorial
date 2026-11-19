@@ -283,6 +283,9 @@ kbd{font-family:var(--mono);font-size:.82em;background:#fff;border:1px solid #cb
 <div class="fase-head" id="passo-00"><div class="fase-n">00</div><div class="fase-t"><h2>Antes de começar</h2></div></div>
 <div class="fase-body">
 <p>Esta aula parte da branch <code>saas-evolution/fase03</code>: o monólito modular com Postgres 18, Redis 8 (cache e busca semântica) e RustFS (capas). Ao fim dela, cadastrar, editar ou excluir um livro não espera mais o Gemini: a requisição grava no Postgres, publica uma <strong>tarefa</strong> numa <strong>fila</strong> e responde. Um processo à parte, o <strong>worker</strong>, consome a fila e atualiza o índice semântico.</p>
+<div class="step "><h3>Leitura antes da aula</h3>
+<p>Se você nunca usou uma fila de mensagens, comece pelos slides <code>.docs/aulas/filas/slides-filas.html</code>: eles partem de uma lanchonete, chegam a produtor, fila e worker com Redis Streams e montam um exemplo em Bun, etapa por etapa. O exemplo está em <code>.docs/aulas/filas/exemplo-filas/</code>, com um compose próprio (a fila na porta 6400 e a página em 3300), que não conflita com o do projeto. Os dois estão na branch <code>saas-evolution/fase04</code>, junto deste tutorial.</p>
+</div>
 <div class="step "><h3>O que doeu</h3>
 <p>Abra <code>backend/src/modules/catalog/features/create-book/createBook.ts</code>. Depois do COMMIT, o caso de uso faz <code>await syncBookIndex([book.id], integration)</code>. Dentro dele, o livro vira texto, o texto vai para a API do Gemini e volta como vetor. O usuário só recebe o <code>201</code> quando o Gemini responde.</p>
 <ul>
@@ -294,9 +297,9 @@ kbd{font-family:var(--mono);font-size:.82em;background:#fff;border:1px solid #cb
 <div class="callout warn"><strong>Por que não um <code>void syncBookIndex(...)</code> sem <code>await</code>?</strong> A requisição voltaria logo, mas o trabalho continuaria no mesmo processo, sem registro em lugar nenhum. Se o contêiner reiniciar no meio, a tarefa some. Se o Gemini falhar, ninguém tenta de novo. A fila guarda a tarefa fora do processo, com volume, até alguém confirmar que ela foi feita.</div>
 </div>
 <div class="step "><h3>O código de partida</h3>
-<p>Atualize o repositório e crie uma branch sua para a aula. Esta branch, <code>saas-evolution/fase04</code>, tem o código da fase03 mais este tutorial:</p>
+<p>Atualize o repositório e crie uma branch sua para a aula:</p>
 <div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c1">copiar</button></div></div><pre class="cb-body" id="c1"><code>git fetch
-git switch saas-evolution/fase04
+git switch saas-evolution/fase03
 git pull
 git switch -c aula-fila</code></pre></div>
 </div>
@@ -1579,6 +1582,8 @@ worker-1  | Tarefa 1795105373960-0 de biblioteca:acervo:fila:indice-livros foi p
 <li><strong>Tarefas periódicas.</strong> A reconciliação do índice e a varredura de capas órfãs da fase03 cabem no worker como tarefas de horário. Com dois workers, precisam de uma trava para não rodar duas vezes.</li>
 <li><strong>A edição de autor (UC07).</strong> Renomear um autor ainda reindexa todos os livros dele dentro da requisição, pelo <code>syncAuthorBookIndex</code>. É a próxima candidata natural a passar pela fila.</li>
 </ul>
+<h3>A atividade</h3>
+<p>Agora é a sua vez: <a href="../atividades/atividade-fila.html">a atividade</a> (<code>.docs/atividades/atividade-fila.html</code>) leva a fila para a Circulação. Registrar um empréstimo (UC19) passa a mandar ao leitor um <strong>comprovante por e-mail</strong>, e quem envia é o worker. O provedor de e-mail de desenvolvimento (o Mailpit), o texto do comprovante e os testes de aceite estão prontos; publicar a tarefa, processá-la uma vez só e ligá-la ao worker ficam com você. Há um cuidado a mais: um e-mail enviado não se desfaz nem se recalcula, e a fila entrega cada mensagem pelo menos uma vez.</p>
 <p>A fila entrou ao lado do Postgres e do Redis sem tomar o lugar de nenhum deles. O Postgres continua respondendo o que existe; o índice continua sendo uma cópia que pode ser recalculada; e a fila guarda só o que ainda falta fazer, até alguém confirmar que fez.</p>
 </div>
 </main>
