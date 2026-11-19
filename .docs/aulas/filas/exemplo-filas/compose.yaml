@@ -1,0 +1,31 @@
+# Exemplo mínimo dos slides: uma fila de pedidos no Redis Streams.
+# Suba com:  docker compose -f .docs/aulas/filas/exemplo-filas/compose.yaml up -d --wait
+name: exemplo-filas
+
+services:
+  # A fila é um Redis só para ela. Num cache, perder os dados só deixa a próxima
+  # leitura mais lenta. Aqui, cada mensagem é um trabalho que ainda não foi feito.
+  fila:
+    image: redis:8
+    command:
+      - redis-server
+      # AOF: o Redis anota cada escrita num arquivo, e reiniciar não perde a fila
+      - --appendonly
+      - "yes"
+      # sem memória, recusa a mensagem nova em vez de apagar uma antiga
+      - --maxmemory-policy
+      - noeviction
+    ports:
+      # o index.ts e o worker.ts rodam no seu computador e falam com a fila por aqui
+      - "127.0.0.1:6400:6379"
+    volumes:
+      # o arquivo do AOF mora no volume: sobrevive ao contêiner
+      - dados:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  dados:

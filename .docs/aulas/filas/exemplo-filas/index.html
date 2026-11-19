@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lanchonete da fila</title>
+<link rel="icon" href="data:,">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 32px auto; padding: 0 16px; color: #111827; }
+  button { cursor: pointer; font: inherit; padding: 8px 14px; border-radius: 10px; border: 1px solid #94a3b8; background: #fff; }
+  #botoes { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; border: 1px dashed #94a3b8; border-radius: 12px; }
+  #aviso { min-height: 1.5em; font-weight: 600; }
+  #fila { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+  #fila div { border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px 14px; }
+  #fila b { display: block; font-size: 30px; }
+  ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+  li { display: grid; grid-template-columns: 70px 1fr auto; gap: 12px; align-items: center; border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px 14px; }
+  li small { color: #64748b; }
+  .st { font-weight: 700; padding: 2px 10px; border-radius: 999px; background: #e2e8f0; }
+  .st.preparo { background: #fde68a; } .st.pronto { background: #bbf7d0; } .st.falhou { background: #fecaca; }
+</style>
+</head>
+<body>
+<h1>Lanchonete da fila</h1>
+<div id="botoes">
+  <button data-item="x-burger">X-burger</button>
+  <button data-item="batata">Batata frita</button>
+  <button data-item="suco">Suco</button>
+  <button data-item="pedra">Sopa de pedra (impossível)</button>
+  <button data-item="x-burger" data-vezes="5">5 pedidos de uma vez</button>
+</div>
+<p id="aviso"></p>
+<div id="fila"></div>
+<ul id="pedidos"></ul>
+<script>
+  const notice = document.querySelector("#aviso");
+  const numbers = document.querySelector("#fila");
+  const list = document.querySelector("#pedidos");
+
+  // desenha os números da fila e os últimos pedidos
+  async function load() {
+    const { fila, pedidos } = await (await fetch("/pedidos")).json();
+    numbers.innerHTML = fila
+      ? `<div>aguardando<b>${fila.aguardando}</b></div><div>pendentes<b>${fila.pendentes}</b></div><div>mortas<b>${fila.mortas}</b></div>`
+      : "";
+    list.innerHTML = pedidos.map((p) => `<li>
+      <b>nº ${p.senha}</b>
+      <span>${p.item} <small>${p.worker ? "· " + p.worker : ""}${p.tentativas > 1 ? " · tentativa " + p.tentativas : ""}</small></span>
+      <span class="st ${p.status.split(" ").pop()}">${p.status}</span></li>`).join("");
+  }
+
+  // envia um pedido e mede quanto tempo a RESPOSTA demorou
+  async function order(item) {
+    const start = performance.now();
+    const response = await fetch("/pedidos", { method: "POST", body: JSON.stringify({ item }) });
+    const body = await response.json();
+    const ms = Math.round(performance.now() - start);
+    notice.textContent = response.ok
+      ? `Pedido nº ${body.senha}: o servidor respondeu ${response.status} em ${ms} ms`
+      : `Erro ${response.status} em ${ms} ms: ${body.error}`;
+    load();
+  }
+
+  document.querySelector("#botoes").onclick = (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
+    notice.textContent = "Esperando a resposta do servidor…";
+    for (let i = 0; i < Number(button.dataset.vezes ?? 1); i++) order(button.dataset.item);
+  };
+
+  setInterval(load, 500);
+  load();
+</script>
+</body>
+</html>
