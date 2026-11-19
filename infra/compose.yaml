@@ -32,6 +32,28 @@ services:
       storage-init:
         condition: service_completed_successfully
 
+  # O worker: a mesma imagem e o mesmo código do app, com outro ponto de entrada.
+  # Não publica porta: ninguém chama o worker, ele é quem busca trabalho na fila.
+  # docker compose -f infra/compose.yaml up -d --scale worker=2 sobe dois.
+  worker:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    command: ["bun", "src/worker.ts"]
+    environment:
+      DATABASE_URL: postgres://biblioteca:biblioteca@db:5432/biblioteca
+      REDIS_URL: redis://redis:6379
+      REDIS_PREFIX: biblioteca
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      QUEUE_URL: redis://fila:6379
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      fila:
+        condition: service_healthy
+
   # a suíte de testes, rodando dentro da rede e contra o banco de testes:
   # docker compose -f infra/compose.yaml run --rm --build test
   test:
