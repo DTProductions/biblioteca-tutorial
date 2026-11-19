@@ -13,5 +13,7 @@ if (!queue) throw new Error("QUEUE_URL não definida: o worker só existe junto 
 const consumer = process.env.HOSTNAME ?? `worker-${process.pid}`;
 console.log(`Worker ${consumer} esperando tarefas`);
 
+// TODO (atividade): registre aqui também a tarefa do comprovante do empréstimo
+// (loanReceiptJob), que chega pelo index.ts do módulo Circulação.
 await work([bookIndexJob(catalogIntegration)], { client: queue, consumer });
 process.exit(0);

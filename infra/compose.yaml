@@ -20,6 +20,8 @@ services:
       S3_BUCKET: biblioteca
       # e a fila, pelo nome fila: um Redis só para ela, separado do cache
       QUEUE_URL: redis://fila:6379
+      # e o provedor de e-mail, pelo nome mailpit (sem fila, o app envia na hora)
+      EMAIL_URL: http://mailpit:8025
     ports:
       - "3000:3000"
     depends_on:
@@ -28,6 +30,8 @@ services:
       redis:
         condition: service_healthy
       fila:
+        condition: service_healthy
+      mailpit:
         condition: service_healthy
       storage-init:
         condition: service_completed_successfully
@@ -46,12 +50,15 @@ services:
       REDIS_PREFIX: biblioteca
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       QUEUE_URL: redis://fila:6379
+      EMAIL_URL: http://mailpit:8025
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
       fila:
+        condition: service_healthy
+      mailpit:
         condition: service_healthy
 
   # a suíte de testes, rodando dentro da rede e contra o banco de testes:
@@ -77,12 +84,18 @@ services:
       # hora, e a suíte não depende de um worker rodando. Os testes da fila e do
       # worker criam o próprio cliente com este endereço:
       TEST_QUEUE_URL: redis://fila:6379
+      # e-mails vão para uma caixa de saída em memória: a suíte confere o que
+      # sairia sem mandar nada pela rede. Só o teste do adaptador fala com o Mailpit:
+      EMAIL_PROVIDER: memory
+      TEST_EMAIL_URL: http://mailpit:8025
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
       fila:
+        condition: service_healthy
+      mailpit:
         condition: service_healthy
       storage-init:
         condition: service_completed_successfully
@@ -171,6 +184,20 @@ services:
         rc alias set local http://rustfs:9000 biblioteca biblioteca-secreta
         rc bucket create --ignore-existing local/biblioteca
         rc bucket create --ignore-existing local/biblioteca-test
+
+  # Mailpit: um provedor de e-mail de mentira, só para desenvolvimento. Recebe
+  # pela API HTTP (POST /api/v1/send), como os provedores de verdade, e mostra
+  # cada mensagem numa caixa de entrada web, em http://localhost:8025, sem
+  # entregar nada a ninguém. Sem volume: reiniciar o contêiner esvazia a caixa.
+  mailpit:
+    image: axllent/mailpit:v1.34.0
+    ports:
+      - "127.0.0.1:8025:8025"
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
 
 volumes:
   pgdata:
