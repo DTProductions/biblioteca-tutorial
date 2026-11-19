@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biblioteca — Atividade: o comprovante do empréstimo pela fila</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#111827; --muted:#5b6472; --line:#e3e7ed;
+  --accent:#1d4ed8; --accent-soft:#eef3ff; --ok:#047857; --ok-soft:#ecfdf5;
+  --warn:#b45309; --warn-soft:#fffbeb; --prof:#6d28d9; --prof-soft:#f5f3ff;
+  --code-bg:#0f172a; --code-ink:#e6edf7;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --mono:"SF Mono",SFMono-Regular,ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.87em;background:#eef1f5;border:1px solid #e0e5ec;border-radius:4px;padding:.08em .34em;white-space:nowrap}
+.ref{color:var(--muted);font-style:italic}
+
+/* layout */
+.wrap{display:grid;grid-template-columns:264px minmax(0,1fr);gap:0;max-width:1400px;margin:0 auto}
+.side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--card);padding:20px 12px 60px}
+.side h2{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 8px 8px}
+.side a{display:block;padding:5px 9px;border-radius:7px;text-decoration:none;color:#374151;font-size:13.5px;line-height:1.35}
+.side a:hover{background:var(--accent-soft);color:var(--accent)}
+.side a.mk{font-weight:700}
+.side .num{display:inline-block;min-width:26px;color:#94a3b8;font-family:var(--mono);font-size:11.5px}
+main{padding:0 44px 120px;min-width:0}
+
+/* hero */
+.hero{margin:0 -44px 44px;padding:56px 44px 44px;background:linear-gradient(160deg,#0f172a 0%,#1e3a8a 100%);color:#fff}
+.hero .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.72;margin:0 0 12px}
+.hero h1{font-family:var(--serif);font-size:40px;line-height:1.15;margin:0 0 14px;font-weight:700}
+.hero p{margin:0;max-width:70ch;opacity:.9;font-size:17px}
+.hero .chips{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:5px 13px;font-size:12.5px}
+
+/* seções */
+section.doc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 34px;margin:0 0 26px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+h2.sec{font-family:var(--serif);font-size:27px;margin:0 0 6px;line-height:1.25}
+h3{font-family:var(--serif);font-size:20px;margin:26px 0 8px}
+h4{font-size:15px;margin:20px 0 6px}
+h5,h6{font-size:14px;margin:16px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 5px}
+blockquote{margin:0 0 16px;padding:2px 0 2px 16px;border-left:3px solid #cbd5e1;color:var(--muted)}
+blockquote p:last-child{margin-bottom:0}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+
+/* fase */
+article.fase{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 0 30px;margin:0 0 30px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.fase-head{padding:22px 34px 18px;border-bottom:1px solid var(--line);background:#fbfcfe;display:flex;gap:18px;align-items:flex-start}
+.fase-n{flex:0 0 auto;width:52px;height:52px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:19px;font-weight:700}
+.fase.mk .fase-n{background:#b91c1c}
+.fase-t{min-width:0}
+.fase-t h2{font-family:var(--serif);font-size:24px;margin:0 0 4px;line-height:1.25}
+.fase-t .req{font-size:12.5px;color:var(--muted);font-family:var(--mono)}
+.fase-body{padding:0 34px}
+.lead{margin:22px 0 4px;padding:16px 18px;background:var(--accent-soft);border:1px solid #d7e3ff;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;font-size:16.5px}
+.lead p{margin:0}
+
+.step{margin-top:26px}
+.step > h3{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.step.test > h3{color:var(--ok)}
+.step.commit > h3{color:var(--warn)}
+
+/* código */
+.cb{margin:0 0 16px;border:1px solid #1e293b;border-radius:10px;overflow:hidden;background:var(--code-bg)}
+.cb-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 10px 6px 14px;background:#111c31;border-bottom:1px solid #1e293b}
+.cb-lang{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8ba0c4}
+.cb-actions{display:flex;gap:6px}
+.cb button{font:inherit;font-size:11.5px;font-family:var(--sans);background:#1e293b;color:#cbd5e1;border:1px solid #33415a;border-radius:6px;padding:3px 10px;cursor:pointer}
+.cb button:hover{background:#2a3a52;color:#fff}
+.cb button.done{background:#065f46;border-color:#047857;color:#d1fae5}
+.cb-body{margin:0;padding:14px 16px;overflow-x:auto;background:var(--code-bg)}
+.cb-body code{background:none;border:0;padding:0;white-space:pre;color:var(--code-ink);font-size:13px;line-height:1.6;font-family:var(--mono)}
+.cb-out{border-color:#cbd5e1;background:#f8fafc}
+.cb-out .cb-bar{background:#eef2f7;border-bottom-color:#dde3ec}
+.cb-out .cb-lang{color:#64748b}
+.cb-fig{border-style:dashed}
+.cb-fig .cb-bar{background:#0d1626}
+.cb-note{align-self:center;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:#8ba0c4;opacity:.8}
+.ln-new{font-weight:700;color:#fde047}
+.cb-out .cb-body{background:#f8fafc}
+.cb-out .cb-body code{color:#0f172a}
+.cb-diff code{white-space:pre}
+.dl{display:block}
+.dl.add{background:rgba(16,185,129,.14);color:#a7f3d0}
+.dl.del{background:rgba(239,68,68,.14);color:#fecaca}
+
+/* tabelas */
+.tw{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f4f6f9;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+
+/* diagramas */
+figure.diagram{margin:0 0 20px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.diagram-scroll{overflow-x:auto}
+svg.dg{display:block;width:100%;height:auto;max-width:100%;min-width:520px}
+figure.diagram figcaption{margin-top:10px;font-size:13px;color:var(--muted);text-align:center}
+.diagram.missing{color:#b91c1c;font-size:13px}
+
+/* professor */
+aside.prof{margin:18px 0;padding:16px 20px;background:var(--prof-soft);border:1px solid #ddd6fe;border-left:4px solid var(--prof);border-radius:0 10px 10px 0}
+aside.prof h4{margin:0 0 8px;color:var(--prof);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+aside.prof p:last-child{margin-bottom:0}
+.conc{margin:0 0 18px;padding:0;list-style:none}
+.conc li{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;background:#f8fafc;border:1px solid var(--line);border-radius:9px;margin:0 0 7px;font-size:15px}
+.conc li::before{content:"◆";color:var(--accent);flex:0 0 auto;font-size:11px;line-height:1.7}
+.refl{padding:18px 20px;background:#fffdf5;border:1px solid #fde68a;border-left:4px solid #d97706;border-radius:0 10px 10px 0}
+.refl p:last-child{margin-bottom:0}
+
+.callout{padding:16px 20px;border-radius:10px;border:1px solid var(--line);background:#f8fafc;margin:0 0 18px}
+.callout.good{background:var(--ok-soft);border-color:#a7f3d0}
+.callout.warn{background:var(--warn-soft);border-color:#fde68a}
+.entrevista{font-family:var(--serif);font-size:17.5px;line-height:1.75;background:#fffdf7;border:1px solid #e8e0cc;border-radius:12px;padding:26px 30px;position:relative}
+.entrevista::before{content:"\201C";position:absolute;top:-6px;left:14px;font-size:72px;color:#e0d5b8;font-family:var(--serif);line-height:1}
+.entrevista p{margin:0 0 12px;padding-left:26px}
+.entrevista .quem{padding-left:26px;font-family:var(--sans);font-size:13px;color:var(--muted);font-style:normal}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 18px}
+.stat{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1;color:var(--accent)}
+.stat span{font-size:13px;color:var(--muted)}
+
+footer{padding:40px 44px 60px;color:var(--muted);font-size:13.5px;text-align:center}
+.top{position:fixed;right:22px;bottom:22px;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-size:13px;cursor:pointer;opacity:.85;font-family:var(--sans)}
+.top:hover{opacity:1}
+
+@media (max-width:1020px){
+  .wrap{grid-template-columns:1fr}
+  .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);max-height:280px}
+  main{padding:0 18px 80px}
+  .hero{margin:0 -18px 28px;padding:36px 18px 30px}
+  .hero h1{font-size:29px}
+  section.doc,.fase-head,.fase-body{padding-left:18px;padding-right:18px}
+}
+@media print{
+  .side,.top,.cb button{display:none}
+  .wrap{display:block}
+  body{background:#fff;font-size:11pt}
+  .hero{background:#fff;color:#000;margin:0;padding:0 0 20px;border-bottom:2px solid #000}
+  .hero .chip{border-color:#999;background:#f2f2f2;color:#000}
+  article.fase,section.doc{break-inside:avoid-page;box-shadow:none;border-color:#ccc}
+  .cb{border-color:#ccc}
+  .cb-bar{background:#eee}.cb-lang{color:#333}
+  .cb-note{color:#555}
+  .ln-new{font-weight:700;color:#000}
+  .cb-body,.cb-body code{background:#f7f7f7;color:#000}
+  .dl.add{background:#e6f7ee;color:#065f46}.dl.del{background:#fdeaea;color:#991b1b}
+}
+/* gerar-fases:inicio */
+/* tokens de código, pré-renderizados pelo gerador */
+.cb-body i{font-style:normal}
+.cb-body{--t-com:#64748b;--t-str:#86efac;--t-num:#fca5a5;--t-kw:#c4b5fd;
+  --t-typ:#7dd3fc;--t-fn:#fdba74;--t-pun:#94a3b8;--t-key:#93c5fd;
+  --t-cmd:#fdba74;--t-flag:#c4b5fd}
+.cb-out .cb-body{--t-com:#64748b;--t-str:#15803d;--t-num:#b91c1c;--t-kw:#6d28d9;
+  --t-typ:#0369a1;--t-fn:#b45309;--t-pun:#64748b;--t-key:#1d4ed8;
+  --t-cmd:#b45309;--t-flag:#6d28d9}
+.t-com{color:var(--t-com);font-style:italic}
+.t-str{color:var(--t-str)}
+.t-num{color:var(--t-num)}
+.t-kw{color:var(--t-kw)}
+.t-typ{color:var(--t-typ)}
+.t-fn{color:var(--t-fn)}
+.t-pun{color:var(--t-pun)}
+.t-key{color:var(--t-key)}
+.t-cmd{color:var(--t-cmd);font-weight:600}
+.t-flag{color:var(--t-flag)}
+
+/* linha que a fase acrescenta: negrito e fundo, por cima dos tokens.
+   inline-block com min-width leva o fundo até a margem direita do bloco, para a
+   marcação virar uma faixa e não um borrão do tamanho do texto */
+.ln-new{display:inline-block;min-width:100%;font-weight:700;color:inherit;
+  background:rgba(253,224,71,.13);box-shadow:inset 3px 0 0 #fde047}
+.cb-out .ln-new{background:rgba(180,83,9,.11);box-shadow:inset 3px 0 0 #b45309}
+
+/* objetivo, no lugar do lead curto da versão de sala */
+.step.objetivo > h3{color:var(--accent)}
+.step.objetivo p{margin:0 0 12px}
+.step.objetivo p:last-child{margin-bottom:0}
+/* gerar-fases:fim */.dl.ctx{color:#cbd5e1}
+kbd{font-family:var(--mono);font-size:.82em;background:#fff;border:1px solid #cbd5e1;border-bottom-width:2px;border-radius:4px;padding:.05em .4em}
+.cb-bar .cb-note{margin-left:12px;margin-right:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="side">
+<h2>Atividade</h2>
+<a href="#topo"><span class="num">•</span>Visão geral</a>
+<h2>Preparação</h2>
+<a href="#passo-00"><span class="num">00</span>Uma branch sua, no seu fork</a>
+<h2>O trabalho</h2>
+<a href="#passo-01"><span class="num">01</span>O que fazer</a>
+<a href="#passo-02"><span class="num">02</span>O que está pronto e o que é seu</a>
+<a href="#passo-03"><span class="num">03</span>Código de referência</a>
+<a href="#passo-04"><span class="num">04</span>Onde a Circulação é diferente do Acervo</a>
+<a href="#passo-05"><span class="num">05</span>Critérios de aceite</a>
+<a href="#passo-06"><span class="num">06</span>Veja o comprovante chegar</a>
+<h2>Fechamento</h2>
+<a href="#passo-07"><span class="num">07</span>Para discutir</a>
+<a href="#passo-08"><span class="num">08</span>Entrega</a>
+</nav>
+<main>
+<div class="hero">
+  <p class="kicker">Tópicos Especiais em Engenharia de Software II · IFES</p>
+  <h1>Atividade — o comprovante do empréstimo pela fila</h1>
+  <p>No roteiro da fase 04, a indexação do livro saiu da requisição: o app publica a tarefa numa fila do Redis Streams, e um worker a executa, com nova tentativa e fila de mortas. Agora é a sua vez de levar a fila para a <strong>Circulação</strong>: ao registrar um empréstimo (UC19), o leitor recebe um <strong>comprovante por e-mail</strong>, e quem envia é o worker. Desta vez o provedor de e-mail, o texto do comprovante e os testes já estão prontos; o núcleo, que decide quando o e-mail sai e quantas vezes, é seu.</p>
+  <div class="chips"><span class="chip">UC19</span><span class="chip">Redis Streams</span><span class="chip">Worker</span><span class="chip">Mailpit</span><span class="chip">Porta de e-mail</span><span class="chip">Pelo menos uma vez</span><span class="chip">Uma vez só</span><span class="chip">Depois do COMMIT</span><span class="chip">test.todo</span></div>
+</div>
+
+<div class="fase-body" id="topo">
+<div class="callout warn"><strong>Este enunciado não traz o código da solução.</strong> O provedor de e-mail, a coluna nova e as assinaturas das funções já estão no projeto, e cada função que falta tem um comentário <code>TODO (atividade)</code> com os passos em ordem. O <em>como</em> está na indexação do livro, a sua referência. As diferenças entre Acervo e Circulação são exatamente o que a atividade quer que você perceba.</div>
+<div class="tw"><table>
+<tr><th>Passo</th><th>O que acontece</th><th>Como saber que deu certo</th></tr>
+<tr><td>00</td><td>fork, branch nova e linha de base</td><td>135 testes passando e 17 em <code>todo</code></td></tr>
+<tr><td>01–04</td><td>ler o enunciado, o esqueleto, a referência e as armadilhas</td><td>você sabe dizer onde fica o COMMIT do UC19 e por onde chega o e-mail do leitor</td></tr>
+<tr><td>05</td><td>implementar e ligar os testes de aceite</td><td>144 testes passando e 8 em <code>todo</code> (os da foto do autor); fronteiras e tipos verdes</td></tr>
+<tr><td>06</td><td>ver o comprovante chegar</td><td>o e-mail na caixa do Mailpit e a linha <em>enviado</em> no log do worker</td></tr>
+<tr><td>08</td><td>entregar</td><td>a branch no seu fork, no GitHub</td></tr>
+</table></div>
+</div>
+
+<div class="fase-head" id="passo-00"><div class="fase-n">00</div><div class="fase-t"><h2>Uma branch sua, no seu fork</h2></div></div>
+<div class="fase-body">
+<p>A atividade é sua, então o código vai para o <strong>seu</strong> fork, numa branch nova, criada a partir da branch da aula no repositório do professor. Quem fala com o GitHub em seu nome é o GitHub CLI (<code>gh</code>), autenticado na <strong>sua</strong> conta.</p>
+
+<div class="step "><h3>Confira quem está autenticado</h3>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c1">copiar</button></div></div><pre class="cb-body" id="c1"><code>gh auth status</code></pre></div>
+<p>A saída mostra <em>Logged in to github.com account <strong>seu-usuario</strong></em>. Se não estiver autenticado, ou se o usuário mostrado não for o seu (computador do laboratório, conta de um colega), entre com a sua:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c2">copiar</button></div></div><pre class="cb-body" id="c2"><code>gh auth login</code></pre></div>
+<p>Escolha <em>GitHub.com</em>, <em>HTTPS</em> e <em>Login with a web browser</em>. Depois, faça o <code>git</code> usar essa mesma conta no <code>push</code>:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c3">copiar</button></div></div><pre class="cb-body" id="c3"><code>gh auth setup-git</code></pre></div>
+<div class="callout"><strong>Por que o <code>setup-git</code>?</strong> Sem ele, o <code>git push</code> pode usar outra credencial guardada no Windows (no Gerenciador de Credenciais) e enviar o código com a conta errada, ou ser recusado.</div>
+</div>
+
+<div class="step "><h3>O seu fork e os remotos</h3>
+<p>Se você <strong>ainda não tem o projeto</strong> no computador, o <code>gh</code> cria o fork na sua conta e clona numa tacada só. Ele já deixa <code>origin</code> apontando para o seu fork e <code>upstream</code> para o do professor:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c4">copiar</button></div></div><pre class="cb-body" id="c4"><code>gh repo fork maroquio/biblioteca-tutorial --clone
+cd biblioteca-tutorial</code></pre></div>
+<p>Se <strong>já tem</strong>, abra a pasta do projeto e confira os remotos:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c5">copiar</button></div></div><pre class="cb-body" id="c5"><code>git remote -v</code></pre></div>
+<div class="tw"><table>
+<tr><th>O que aparece</th><th>O que fazer</th></tr>
+<tr><td><code>origin</code> no <strong>seu</strong> usuário e <code>upstream</code> em <code>maroquio</code></td><td>Nada. Está certo.</td></tr>
+<tr><td><code>origin</code> em <code>maroquio</code> (você clonou o repositório do professor)</td><td>Rode <code>gh repo fork --remote</code>. Ele cria o seu fork, passa a chamá-lo de <code>origin</code> e guarda o do professor como <code>upstream</code>.</td></tr>
+<tr><td><code>origin</code> no seu usuário, mas <strong>sem</strong> <code>upstream</code></td><td>Rode <code>git remote add upstream https://github.com/maroquio/biblioteca-tutorial.git</code>.</td></tr>
+</table></div>
+</div>
+
+<div class="step "><h3>A branch da atividade</h3>
+<p>Antes de trocar de branch, o <code>git status</code> precisa estar limpo. Se você tem alterações da aula sem commit, faça o commit delas na branch em que estão (a <code>aula-fila</code>, em que você seguiu o roteiro da fase 04, por exemplo): elas continuam lá, intactas.</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c6">copiar</button></div></div><pre class="cb-body" id="c6"><code>git status
+git fetch upstream
+git switch -c atividade-fila-comprovante upstream/saas-evolution/fase04</code></pre></div>
+<p>A branch nasce de <code>upstream/saas-evolution/fase04</code>, e não da sua branch da aula, por dois motivos. Primeiro, todo mundo parte do mesmo ponto, com a fila e o worker prontos e iguais aos do roteiro, que são a referência desta atividade. Segundo, a <code>fase04</code> traz o <strong>esqueleto da atividade</strong>: o Mailpit no compose, a porta de e-mail, a coluna nova, as funções a implementar e os testes de aceite. A sua branch da aula não tem nada disso. E mesmo que o seu fork tenha uma <code>saas-evolution/fase04</code>, ela pode estar desatualizada: por isso o ponto de partida vem do <code>upstream</code>, o repositório do professor.</p>
+</div>
+
+<div class="step test"><h3>Confira a linha de base</h3>
+<p>Com o Docker Desktop aberto:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c7">copiar</button></div></div><pre class="cb-body" id="c7"><code>docker compose -f infra/compose.yaml up -d db redis fila mailpit rustfs
+docker compose -f infra/compose.yaml run --rm --build test</code></pre></div>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">saída esperada</span></div><pre class="cb-body" id="c8"><code> 135 pass
+ 17 todo
+ 0 fail</code></pre></div>
+<p>Os <strong>17 em <code>todo</code></strong> são de duas atividades. Nove são desta, em <code>loan-receipt-job.test.ts</code>: estão marcados com <code>test.todo</code>, e o <code>bun test</code> lista, mas não executa. O passo 05 explica como ligá-los. Os outros 8 são da foto do autor (UC26), a atividade da fase03, em <code>manage-author-photo.test.ts</code>, e continuam em <code>todo</code> até o fim desta atividade. O serviço <code>mailpit</code> é novo: na primeira vez, o Docker baixa a imagem <code>axllent/mailpit</code>.</p>
+<p>Se o banco de testes não existir (primeira vez neste computador), crie com <code>docker compose -f infra/compose.yaml exec db createdb -U biblioteca biblioteca_test</code> e rode a suíte de novo.</p>
+</div>
+</div>
+
+<div class="fase-head" id="passo-01"><div class="fase-n">01</div><div class="fase-t"><h2>O que fazer</h2></div></div>
+<div class="fase-body">
+<div class="lead"><p>Implemente o <strong>comprovante do empréstimo</strong> (UC19): ao registrar um empréstimo, o leitor recebe por e-mail o título do livro, o número do exemplar e a data de devolução. O empréstimo publica a tarefa na <strong>fila</strong>, e o <strong>worker</strong> envia; sem fila, o app envia na hora, como na indexação da aula. É a primeira tarefa da fila que não se desfaz nem se recalcula: o leitor tem de receber o comprovante <strong>uma vez só</strong>, mesmo quando a fila entrega a mesma mensagem duas vezes.</p></div>
+
+<div class="step "><h3>Dentro do escopo</h3>
+<ul class="conc">
+<li><span><code>loanReceiptJob(sender)</code> devolve a tarefa do worker: o stream dos comprovantes, com a Circulação como dona, e o <code>handle</code>, que confere a mensagem e manda o comprovante.</span></li>
+<li><span><code>sendLoanReceipt(loanId, sender)</code> manda o comprovante uma vez só: lê o empréstimo, não reenvia o que já saiu, busca o nome e o e-mail <strong>atuais</strong> do leitor, envia e marca <code>comprovante_enviado_em</code>.</span></li>
+<li><span><code>scheduleLoanReceipt(loanId, { client, sender })</code> publica <code>{ loanId }</code> na fila e volta na hora; sem fila, envia ali mesmo, e uma falha nesse envio vira um aviso no log, não um erro no empréstimo.</span></li>
+<li><span><code>POST /api/emprestimos</code> pede o comprovante <strong>depois do COMMIT</strong> e continua respondendo 201, sem esperar o e-mail.</span></li>
+<li><span>O worker passa a atender a fila dos comprovantes, ao lado da indexação.</span></li>
+<li><span>Os 9 testes de aceite saem de <code>test.todo</code>, viram <code>test</code> e passam.</span></li>
+</ul>
+</div>
+
+<div class="step "><h3>Fora do escopo</h3>
+<ul>
+<li><strong>O provedor de e-mail</strong> está pronto: o Mailpit no compose, a porta <code>EmailSender</code>, o adaptador HTTP e a caixa de saída em memória que a suíte usa. Você <strong>usa</strong> o <code>emailSender</code>; não precisa saber como ele fala com o Mailpit.</li>
+<li><strong>O texto do comprovante</strong> está pronto, em <code>receiptEmail.ts</code>: a atividade é sobre quando e quantas vezes ele sai, não sobre o que ele diz.</li>
+<li><strong>O frontend</strong> não muda: a tela do UC19 continua igual, e o comprovante aparece na caixa do Mailpit, não na tela.</li>
+<li><strong>O outbox</strong>, que gravaria a tarefa na mesma transação do empréstimo, é assunto do passo 07, não de código.</li>
+<li><strong>Reprocessar a fila de mortas</strong> também fica para a discussão.</li>
+</ul>
+</div>
+</div>
+
+<div class="fase-head" id="passo-02"><div class="fase-n">02</div><div class="fase-t"><h2>O que está pronto e o que é seu</h2></div></div>
+<div class="fase-body">
+<p>O esqueleto da atividade, na <code>fase04</code>, deixou o comprovante montado em volta do núcleo: o Mailpit está no compose, o app e o worker sabem onde ele está, a coluna existe e o texto do e-mail está pronto. As três funções do comprovante, por enquanto, só lançam <code>NotImplemented</code>, e ninguém as chama: a rota e o worker ainda não sabem delas. Por isso, hoje, registrar um empréstimo funciona como antes, e a caixa do Mailpit fica vazia.</p>
+
+<div class="step "><h3>Pronto: leia, mas não mude</h3>
+<div class="tw"><table>
+<tr><th>Arquivo</th><th>O que já faz</th></tr>
+<tr><td><code>infra/compose.yaml</code></td><td>O serviço <code>mailpit</code>, com a caixa de entrada em <code>localhost:8025</code>; o <code>EMAIL_URL</code> do app e do worker; e, na suíte, <code>EMAIL_PROVIDER: memory</code> e <code>TEST_EMAIL_URL</code>.</td></tr>
+<tr><td><code>backend/src/shared/EmailSender.ts</code></td><td>A porta: um <code>Email</code> e o <code>send</code>, que <strong>lança</strong> quando o envio falha.</td></tr>
+<tr><td><code>backend/src/infrastructure/email.ts</code></td><td>O adaptador do Mailpit (<code>POST /api/v1/send</code>, que desiste depois de 5 s), a caixa de saída em memória e o <code>emailSender</code>, escolhido pelo ambiente como o embedder: <code>null</code> quando não há provedor.</td></tr>
+<tr><td><code>backend/src/infrastructure/email.test.ts</code></td><td>Os testes do adaptador, contra o Mailpit do compose.</td></tr>
+<tr><td><code>backend/src/modules/circulation/infrastructure/schema.ts</code></td><td>A coluna <code>comprovante_enviado_em</code> em <code>emprestimos</code>, nula até o comprovante sair.</td></tr>
+<tr><td><code>backend/src/modules/circulation/infrastructure/receiptEmail.ts</code></td><td>O texto do comprovante: o assunto, o corpo e a data no formato brasileiro.</td></tr>
+</table></div>
+</div>
+
+<div class="step "><h3>Seu: o núcleo e as ligações</h3>
+<div class="tw"><table>
+<tr><th>Arquivo</th><th>O que falta</th></tr>
+<tr><td><code>backend/src/modules/circulation/infrastructure/loanReceiptJob.ts</code></td><td>As três funções: <code>sendLoanReceipt</code>, <code>scheduleLoanReceipt</code> e <code>loanReceiptJob</code>. Cada uma tem um <code>TODO (atividade)</code> com os passos.</td></tr>
+<tr><td><code>backend/src/modules/circulation/features/register-loan/route.ts</code></td><td>O <code>TODO</code> do UC19: pedir o comprovante, no lugar certo.</td></tr>
+<tr><td><code>backend/src/modules/circulation/index.ts</code><br><code>backend/src/worker.ts</code></td><td>A tarefa sai do módulo pelo <code>index.ts</code>, e o worker a registra (o <code>TODO</code> do <code>worker.ts</code>).</td></tr>
+<tr><td><code>backend/src/modules/circulation/domain/CirculationLookup.ts</code><br><code>backend/src/integration/PostgresCirculationLookup.ts</code><br><code>backend/tests/circulation-doubles.ts</code></td><td>O e-mail do leitor na porta, no adaptador e no dublê dos testes (item 2 do passo 04).</td></tr>
+<tr><td><code>backend/scripts/check-boundaries.ts</code></td><td>O dono da chave nova (item 1 do passo 04).</td></tr>
+<tr><td><code>backend/src/modules/circulation/infrastructure/loan-receipt-job.test.ts</code></td><td>Trocar cada <code>test.todo</code> por <code>test</code>, à medida que implementa. Só isso: os testes já estão escritos.</td></tr>
+</table></div>
+<div class="callout warn"><strong>As assinaturas são contrato.</strong> Os testes chamam essas funções exatamente como estão declaradas. Não mude nomes, parâmetros nem tipos de retorno, e não mude o que os testes esperam. Os parâmetros <code>client</code> e <code>sender</code> existem para os testes: <code>client: null</code> simula a aplicação sem fila, <code>sender: null</code> simula a falta de provedor, e um <code>sender</code> que lança simula o provedor fora do ar. Por isso os dois precisam chegar a <strong>toda</strong> chamada que depende deles dentro das suas funções.</div>
+</div>
+</div>
+
+<div class="fase-head" id="passo-03"><div class="fase-n">03</div><div class="fase-t"><h2>Código de referência</h2></div></div>
+<div class="fase-body">
+<p>Leia estes arquivos <strong>antes</strong> de escrever qualquer linha. Para cada um, a pergunta não é "o que eu copio?", e sim "que decisão este arquivo toma, e ela vale igual para a Circulação?".</p>
+
+<div class="step "><h3>A indexação do livro, a referência</h3>
+<div class="tw"><table>
+<tr><th>Arquivo</th><th>O que observar</th></tr>
+<tr><td><code>backend/src/infrastructure/queue.ts</code></td><td>A fila da aula: <code>enqueue</code> (que devolve <code>null</code> em vez de lançar quando não há fila), o tipo <code>Job</code>, <code>prepareGroups</code>, <code>workOnce</code> e <code>work</code>. Repare que o <code>XACK</code> só acontece quando o <code>handle</code> termina sem lançar: a falha volta 10 s depois, e a quinta entrega que falha vai para a fila de mortas. Você <strong>usa</strong> este arquivo; não precisa mudá-lo.</td></tr>
+<tr><td><code>backend/src/modules/catalog/infrastructure/bookIndexJob.ts</code></td><td><code>scheduleBookIndex</code> e <code>bookIndexJob</code>: o stream com dono, a mensagem que leva só ids, a conferência da mensagem e o caminho sem fila. Por que ele mora em <code>infrastructure</code>, e não numa fatia?</td></tr>
+<tr><td><code>…/catalog/infrastructure/bookIndex.ts</code></td><td><code>syncBookIndex</code> engole a falha; <code>indexBooks</code> deixa subir. Quem chama cada uma, e por quê?</td></tr>
+<tr><td><code>…/catalog/features/create-book/createBook.ts</code></td><td>Onde o <code>scheduleBookIndex</code> é chamado, em relação ao <code>inTransaction</code>.</td></tr>
+<tr><td><code>…/catalog/infrastructure/book-index-job.test.ts</code></td><td>Como um teste cria o próprio cliente da fila, publica, roda o worker uma volta com <code>workOnce</code> e confere a mensagem com <code>XREVRANGE</code>. Os seus testes fazem o mesmo.</td></tr>
+<tr><td><code>backend/src/worker.ts</code><br><code>backend/src/modules/catalog/index.ts</code></td><td>Como a tarefa da indexação chega ao worker: pelo <code>index.ts</code> do módulo dono.</td></tr>
+<tr><td><code>backend/scripts/check-boundaries.ts</code></td><td>As tabelas <code>TABLE_OWNERS</code> e <code>KEY_OWNERS</code>: cada tabela do Postgres e o primeiro trecho de cada <code>redisKey(...)</code> têm um módulo dono.</td></tr>
+</table></div>
+</div>
+
+<div class="step "><h3>A Circulação, onde você vai trabalhar</h3>
+<div class="tw"><table>
+<tr><th>Arquivo</th><th>O que observar</th></tr>
+<tr><td><code>backend/src/modules/circulation/features/register-loan/route.ts</code></td><td>Onde o <code>inTransaction</code> abre e fecha. O <code>RegisterLoan</code> recebe a transação pronta: quem decide o COMMIT é a rota.</td></tr>
+<tr><td><code>backend/src/modules/circulation/infrastructure/dependencies.ts</code></td><td><code>circulationDependencies(db)</code>: o repositório e a porta, ligados ao <code>db</code> que você passar.</td></tr>
+<tr><td><code>backend/src/modules/circulation/domain/CirculationLookup.ts</code><br><code>backend/src/integration/PostgresCirculationLookup.ts</code></td><td>O que a Circulação sabe de um leitor e de um exemplar, e quem responde por ela, em <code>src/integration/</code>.</td></tr>
+<tr><td><code>backend/tests/circulation-doubles.ts</code></td><td>O dublê da porta, nos testes de unidade da Circulação.</td></tr>
+</table></div>
+<p>A explicação de cada decisão está no <a href="../saas-evolution/saas-fase04.html">roteiro da fase 04</a> (a falha que sobe no passo 03, a mensagem com ids no passo 04, a fila trabalhando no passo 06) e nos <a href="../aulas/filas/slides-filas.html">slides sobre filas</a>. Para o "depois do COMMIT", volte ao <a href="../saas-evolution/saas-fase02.html#passo-02">passo 02 do roteiro da fase 02</a>.</p>
+</div>
+</div>
+
+<div class="fase-head" id="passo-04"><div class="fase-n">04</div><div class="fase-t"><h2>Onde a Circulação é diferente do Acervo</h2></div></div>
+<div class="fase-body">
+<p>Copiar a indexação do livro trocando "livro" por "empréstimo" <strong>quase</strong> funciona. Os itens abaixo são o "quase": cada um muda alguma decisão.</p>
+
+<div class="step "><h3>1. A chave tem um dono que o verificador não conhece</h3>
+<p>O stream da fila é uma chave do Redis, e o primeiro trecho de toda chave diz o módulo dono. Copie o stream da indexação e troque só o fim, e o verificador de fronteiras reclama do trecho do Acervo; o teste 1, que espera a chave completa, também falha. Com o trecho da Circulação, o verificador reclama de outra coisa:</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">bun run check-boundaries</span><span class="cb-note">trecho</span></div><pre class="cb-body" id="c9"><code>Importações que furam a fronteira de módulo:
+
+  src/modules/circulation/infrastructure/loanReceiptJob.ts
+      toca a chave Redis "circulacao:*", que pertence a nenhum módulo</code></pre></div>
+<p>Até aqui, a Circulação nunca teve uma chave no Redis, e o <code>KEY_OWNERS</code> não sabe de quem é o trecho <code>circulacao</code>. Registrar o dono, em <code>scripts/check-boundaries.ts</code>, é parte da tarefa.</p>
+<p>Repare também <strong>onde</strong> a tarefa mora: em <code>infrastructure/loanReceiptJob.ts</code>, fora da fatia. O worker precisa dela, e ela sai do módulo pelo <code>index.ts</code>, que não pode exportar nada de dentro de uma fatia.</p>
+</div>
+
+<div class="step "><h3>2. O e-mail mora em Leitores</h3>
+<p>O comprovante vai para o e-mail do leitor, e a tabela <code>leitores</code> é do módulo Leitores. Um <code>SELECT email FROM leitores</code> dentro da Circulação funciona no banco e fura a fronteira:</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">bun run check-boundaries</span><span class="cb-note">trecho</span></div><pre class="cb-body" id="c10"><code>  src/modules/circulation/infrastructure/loanReceiptJob.ts
+      toca a tabela "leitores", que pertence a readers</code></pre></div>
+<p>O caminho é a porta que a Circulação já usa para validar o empréstimo, a <code>CirculationLookup</code>. O <code>ReaderSummary</code> dela ainda não tem e-mail: acrescente o campo na porta e no <code>SELECT</code> do <code>PostgresCirculationLookup</code>. O <code>typecheck</code> aponta o terceiro lugar, o dublê dos testes de unidade:</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">bun run typecheck</span><span class="cb-note">trecho</span></div><pre class="cb-body" id="c11"><code>tests/circulation-doubles.ts(33,25): error TS2322: Type 'Promise&lt;{ id: number; name: string; cpf: string; } | null&gt;' is not assignable to type 'Promise&lt;ReaderSummary | null&gt;'.
+…
+    Property 'email' is missing in type '{ id: number; name: string; cpf: string; }' but required in type 'ReaderSummary'.</code></pre></div>
+<p>E leia o e-mail na hora de <strong>enviar</strong>, não na hora de publicar: a mensagem leva só o id do empréstimo. Se o leitor corrigir o endereço enquanto a mensagem espera na fila, o comprovante vai para o endereço novo. O teste 5 confere isso.</p>
+</div>
+
+<div class="step "><h3>3. Quem faz o COMMIT do empréstimo é a rota</h3>
+<p>No Acervo, o <code>createBook</code> abre a transação e chama <code>scheduleBookIndex</code> depois dela, tudo dentro do caso de uso. Na Circulação, quem abre a transação é a rota: o <code>RegisterLoan</code> recebe a transação pronta e não sabe quando o COMMIT acontece. Por isso o pedido do comprovante fica na rota, depois que o <code>inTransaction</code> voltou, e não dentro do caso de uso.</p>
+<div class="callout warn"><strong>Dentro da transação, o comprovante chega antes do empréstimo.</strong> Sem fila, o envio na hora lê o empréstimo pelo <code>sql</code>, por outra conexão, que ainda não enxerga o <code>INSERT</code> sem COMMIT: o resultado é "empréstimo não encontrado", e nenhum e-mail sai. O teste 2 pega esse erro (<em>Expected length: 1, Received length: 0</em>). Com fila, o erro é o mesmo, só que intermitente: o worker pode receber a mensagem antes do COMMIT, não achar o empréstimo e confirmar a mensagem, que nunca mais volta. E se a transação for desfeita, o comprovante de um empréstimo que não existe já está na fila.</div>
+</div>
+
+<div class="step "><h3>4. Um e-mail não se desfaz: uma vez só</h3>
+<p>Indexar um livro duas vezes não estraga nada: o índice fica igual. Mandar o comprovante duas vezes, sim: o leitor recebe dois e-mails. E a fila entrega cada mensagem <strong>pelo menos</strong> uma vez: o worker que cai depois de enviar e antes do <code>XACK</code> recebe a mesma mensagem de novo, 10 s depois. A coluna <code>comprovante_enviado_em</code> é a memória do que já saiu: preenchida, a tarefa devolve "já enviado" e não manda nada. O teste 4 entrega a mesma mensagem duas vezes.</p>
+<p>A outra metade é a falha. Um envio que falhou não pode deixar a coluna preenchida: senão, a nova tentativa encontra "já enviado", e o leitor nunca recebe o comprovante. Os testes 6 e 7 pegam isso.</p>
+<div class="callout warn"><strong>Marcar antes ou depois de enviar: os testes não decidem por você.</strong> Marcar depois de enviar, e marcar antes, desfazendo a marca quando o envio falha, passam nos mesmos 9 testes. A diferença aparece quando o processo morre <em>entre</em> o envio e a marca, e nenhum teste mata o processo. Escolha uma ordem e justifique na mensagem do commit (é a pergunta 1 do passo 07).</div>
+</div>
+
+<div class="step "><h3>5. O que é igual ao Acervo, e nenhum teste confere</h3>
+<p>Os 9 testes chamam as suas funções diretamente. O worker de verdade e o log eles não veem. Confira estes itens lendo o código e, depois, no passo 06:</p>
+<ul>
+<li><strong>O worker atende a fila nova.</strong> Nenhum teste sobe o <code>worker.ts</code>. Com a tarefa fora da lista do <code>work</code>, os 9 testes passam, e os comprovantes se acumulam na fila sem ninguém para enviar. O sintoma, no passo 06: nenhuma linha <code>Comprovante do empréstimo …</code> no log do worker, e o <code>XINFO GROUPS</code> dos comprovantes respondendo <code>(empty array)</code>, porque nenhum worker criou o grupo dessa fila.</li>
+<li><strong>A tarefa chega ao worker pelo <code>index.ts</code></strong> da Circulação, como a da indexação chega pelo do Acervo. O verificador de fronteiras só olha dentro de <code>src/modules</code>: um import direto do arquivo, no <code>worker.ts</code>, passa por ele.</li>
+<li><strong>O log não leva o e-mail.</strong> A linha do worker diz o id do empréstimo e o resultado; o endereço do leitor é dado pessoal e não vai para o log.</li>
+</ul>
+</div>
+</div>
+
+<div class="fase-head" id="passo-05"><div class="fase-n">05</div><div class="fase-t"><h2>Critérios de aceite</h2></div></div>
+<div class="fase-body">
+<p>Desta vez os testes já existem: são os 9 de <code>loan-receipt-job.test.ts</code>. A atividade está pronta quando todos deixaram de ser <code>test.todo</code>, viraram <code>test</code> e passam, sem que nenhuma expectativa tenha mudado.</p>
+
+<div class="step "><h3>Como funciona o <code>test.todo</code></h3>
+<div class="tw"><table>
+<tr><th>Comando</th><th>O que acontece com um <code>test.todo</code></th></tr>
+<tr><td><code>bun test</code></td><td>Aparece como <code>(todo)</code>, mas o corpo <strong>não roda</strong>. Conta na linha <code>todo</code> do resumo e nunca falha. Por isso a linha de base é 135 pass e 17 todo.</td></tr>
+<tr><td><code>bun test --todo</code>, e o teste falha</td><td>O corpo roda, o erro aparece na tela, e o teste continua marcado <code>(todo)</code>, sem contar como falha. Serve para ler o que ainda falta.</td></tr>
+<tr><td><code>bun test --todo</code>, e o teste passa</td><td>Aparece como <code>(fail)</code>, com o aviso <em>"this test is marked as todo but passes. Remove `.todo` if tested behavior now works"</em>, e o comando termina com erro. Não é defeito no seu código: é o sinal para trocar <code>test.todo</code> por <code>test</code>.</td></tr>
+</table></div>
+<p>Para rodar só os testes da atividade, com o corpo dos <code>todo</code> executando:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c12">copiar</button></div></div><pre class="cb-body" id="c12"><code>docker compose -f infra/compose.yaml run --rm --build test bun test --todo src/modules/circulation/infrastructure/loan-receipt-job.test.ts</code></pre></div>
+<p>No esqueleto, antes de você começar, a saída termina assim (o trecho é de um dos testes; cada um mostra o seu erro):</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">saída esperada</span><span class="cb-note">trecho</span></div><pre class="cb-body" id="c13"><code>error: expect(received).toHaveLength(expected)
+
+Expected length: 1
+Received length: 0
+…
+(todo) UC19 API: sem fila, o comprovante sai na hora, para o e-mail do leitor
+…
+ 0 pass
+ 9 todo
+ 0 fail</code></pre></div>
+<p>O teste 2 passa pela rota, que ainda não pede o comprovante: por isso ele mostra o e-mail que não saiu. Os outros oito chamam as suas funções e mostram o <code>NotImplemented: Comprovante (UC19) ainda não implementado: …</code> da função que falta. O <code>--build</code> reconstrói a imagem de testes com o seu código; sem ele, os testes rodam a versão anterior.</p>
+</div>
+
+<div class="step "><h3>Uma ordem que funciona</h3>
+<div class="tw"><table>
+<tr><th>Teste</th><th>O que cobre</th><th>O que precisa estar pronto</th></tr>
+<tr><td>1</td><td>o stream pertence à Circulação</td><td>o <code>stream</code> de <code>loanReceiptJob</code></td></tr>
+<tr><td>2</td><td>UC19 pela API, sem fila: o comprovante sai na hora, para o e-mail do leitor</td><td><code>sendLoanReceipt</code>, <code>scheduleLoanReceipt</code>, o e-mail na porta e o pedido na rota, depois do COMMIT</td></tr>
+<tr><td>3</td><td>com fila, só o id na mensagem, e o worker envia</td><td>o <code>handle</code> de <code>loanReceiptJob</code></td></tr>
+<tr><td>4</td><td>a mesma mensagem duas vezes, um e-mail só</td><td>a coluna conferida antes de enviar</td></tr>
+<tr><td>5</td><td>o e-mail atual do leitor</td><td>o e-mail lido na hora de enviar</td></tr>
+<tr><td>6</td><td>o provedor falha, e a nova tentativa envia</td><td>nenhuma marca depois de uma falha</td></tr>
+<tr><td>7</td><td>sem fila, a falha no envio não vira erro</td><td>o envio na hora, com o aviso no log</td></tr>
+<tr><td>8</td><td>empréstimo inexistente e mensagem sem o id</td><td>os resultados e a conferência da mensagem</td></tr>
+<tr><td>9</td><td>sem remetente, nada acontece</td><td>o <code>sender</code> nulo</td></tr>
+</table></div>
+</div>
+
+<div class="step "><h3>Comportamento</h3>
+<ul class="conc">
+<li><span>O stream dos comprovantes é exatamente o que o teste 1 espera.</span></li>
+<li><span>Registrar um empréstimo responde 201, como antes, e o leitor recebe um comprovante com o título, o número do exemplar e a data de devolução; a coluna <code>comprovante_enviado_em</code> fica preenchida.</span></li>
+<li><span>Com fila, a mensagem leva só <code>{ loanId }</code>, e quem envia é o worker.</span></li>
+<li><span>A mesma mensagem entregue duas vezes manda um e-mail só; a segunda devolve "já enviado".</span></li>
+<li><span>O comprovante vai para o e-mail que o leitor tem na hora do envio.</span></li>
+<li><span>Se o provedor falha, a tarefa lança, a coluna continua nula, e a nova tentativa envia.</span></li>
+<li><span>Sem fila, o comprovante sai na hora; se o provedor falha, o empréstimo não vira erro.</span></li>
+<li><span>Um empréstimo inexistente não manda nada nem lança; uma mensagem sem o id lança.</span></li>
+<li><span>Sem remetente, nada é enviado nem marcado.</span></li>
+</ul>
+</div>
+
+<div class="step "><h3>Arquitetura</h3>
+<ul class="conc">
+<li><span>O comprovante é pedido na rota, depois do COMMIT (o teste 2 pega o pedido dentro da transação).</span></li>
+<li><span>A Circulação não lê a tabela <code>leitores</code>: o e-mail chega pela porta <code>CirculationLookup</code>.</span></li>
+<li><span>O stream começa pelo trecho da Circulação, o dono está no <code>KEY_OWNERS</code>, e o verificador de fronteiras aceita.</span></li>
+<li><span>O worker registra <code>loanReceiptJob</code>, que sai do módulo pelo <code>index.ts</code> (confira lendo o código e no passo 06: os testes não pegam isso).</span></li>
+<li><span>O log do worker traz o id do empréstimo, não o e-mail do leitor (idem).</span></li>
+<li><span>Fora da Circulação, só mudaram <code>worker.ts</code>, <code>check-boundaries.ts</code>, <code>PostgresCirculationLookup.ts</code> e <code>circulation-doubles.ts</code>; dentro dela, só os arquivos do passo 02 marcados como seus.</span></li>
+<li><span>Nenhuma função do comprovante lança mais <code>NotImplemented</code>.</span></li>
+</ul>
+</div>
+
+<div class="step test"><h3>Verifique</h3>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c14">copiar</button></div></div><pre class="cb-body" id="c14"><code>cd backend
+bun run check-boundaries
+bun run typecheck
+cd ..
+docker compose -f infra/compose.yaml run --rm --build test</code></pre></div>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">saída esperada</span></div><pre class="cb-body" id="c15"><code>Fronteiras de módulo respeitadas.
+...
+ 144 pass
+ 8 todo
+ 0 fail</code></pre></div>
+<p>Repare que a linha <code>todo</code> <strong>não some</strong>: os 8 que ficam são os da foto do autor (UC26), da fase03, e não são seus. Se ela mostrar 17, os seus testes continuam como <code>test.todo</code> e, portanto, <strong>não rodaram</strong>: 135 pass e 17 todo depois de implementar não é atividade pronta. Os 135 testes da linha de base precisam continuar passando. Não avance com teste vermelho.</p>
+</div>
+</div>
+
+<div class="fase-head" id="passo-06"><div class="fase-n">06</div><div class="fase-t"><h2>Veja o comprovante chegar</h2></div></div>
+<div class="fase-body">
+<div class="step "><h3>Na tela e na caixa de entrada</h3>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c16">copiar</button></div></div><pre class="cb-body" id="c16"><code>docker compose -f infra/compose.yaml up -d --build</code></pre></div>
+<p>O <code>--build</code> reconstrói o app e o worker com o seu código. Em <a href="http://localhost:3000/emprestimos/registrar">localhost:3000/emprestimos/registrar</a>, registre um empréstimo. Se faltar leitor ou exemplar disponível, cadastre em <em>Leitores</em> e em <em>Exemplares</em>; o e-mail do leitor pode ser inventado, porque o Mailpit não entrega nada a ninguém. A tela responde na hora, como antes.</p>
+<p>Abra a caixa do Mailpit em <a href="http://localhost:8025">localhost:8025</a>: o comprovante está lá, de <em>Biblioteca</em> para o leitor, com o assunto <em>Comprovante de empréstimo:</em> seguido do título do livro. Aberto, ele diz:</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">o comprovante, no Mailpit</span></div><pre class="cb-body" id="c17"><code>Olá, Ana Souza.
+
+Empréstimo nº 1, registrado em 19/11/2026:
+Dom Casmurro, exemplar 2026-000001.
+
+Devolva até 03/12/2026.
+
+Biblioteca</code></pre></div>
+<p>Quem enviou foi o worker. Acompanhe o log dele (<kbd>Ctrl</kbd>+<kbd>C</kbd> para de acompanhar, sem parar o worker):</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c18">copiar</button></div></div><pre class="cb-body" id="c18"><code>docker compose -f infra/compose.yaml logs -f worker</code></pre></div>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">log do worker (trecho)</span></div><pre class="cb-body" id="c19"><code>worker-1  | Worker fd6989bf096f esperando tarefas
+worker-1  | Comprovante do empréstimo 1: enviado</code></pre></div>
+</div>
+
+<div class="step "><h3>Sem o worker, o comprovante espera</h3>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c20">copiar</button></div></div><pre class="cb-body" id="c20"><code>docker compose -f infra/compose.yaml stop worker</code></pre></div>
+<p>Registre outro empréstimo. A tela responde na hora, e a caixa do Mailpit não recebe nada. A tarefa está guardada na fila:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c21">copiar</button></div></div><pre class="cb-body" id="c21"><code>docker compose -f infra/compose.yaml exec fila redis-cli XINFO GROUPS biblioteca:circulacao:fila:comprovantes</code></pre></div>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">saída (trecho; os ids mudam)</span></div><pre class="cb-body" id="c22"><code>1)  1) "name"
+    2) "workers"
+    3) "consumers"
+    4) (integer) 1
+    5) "pending"
+    6) (integer) 0
+    7) "last-delivered-id"
+    8) "1795108512027-0"
+    9) "entries-read"
+   10) (integer) 4
+   11) "lag"
+   12) (integer) 1</code></pre></div>
+<p><code>lag</code> 1: uma mensagem publicada e ainda não entregue a ninguém. Suba o worker de novo com <code>docker compose -f infra/compose.yaml start worker</code>: em segundos, o log mostra o envio, e o comprovante chega. Se o <code>XINFO GROUPS</code> responder <code>(empty array)</code>, nenhum worker conhece essa fila: releia o item 5 do passo 04.</p>
+</div>
+
+<div class="step "><h3>O provedor fora do ar</h3>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c23">copiar</button></div></div><pre class="cb-body" id="c23"><code>docker compose -f infra/compose.yaml stop mailpit</code></pre></div>
+<p>Registre outro empréstimo e acompanhe o log do worker:</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">log do worker (trecho; a mensagem do erro pode variar)</span></div><pre class="cb-body" id="c24"><code>worker-1  | Tarefa 1795108465679-0 de biblioteca:circulacao:fila:comprovantes falhou na tentativa 1: The operation timed out.</code></pre></div>
+<p>O envio desiste em 5 s, o prazo do adaptador, e a mensagem fica pendente, sem <code>XACK</code>. A fila a entrega de novo 10 s depois de cada entrega. Suba o Mailpit em até 30 s:</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c25">copiar</button></div></div><pre class="cb-body" id="c25"><code>docker compose -f infra/compose.yaml start mailpit</code></pre></div>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">log do worker (trecho)</span></div><pre class="cb-body" id="c26"><code>worker-1  | Tarefa 1795108465679-0 de biblioteca:circulacao:fila:comprovantes falhou na tentativa 2: The operation timed out.
+worker-1  | Comprovante do empréstimo 2: enviado</code></pre></div>
+<p>Repare na caixa: o comprovante novo chegou, e os de antes sumiram. O Mailpit não tem volume, e parar o contêiner esvazia a caixa.</p>
+<div class="callout warn"><strong>Passou de 40 s?</strong> A quinta tentativa começa uns 40 s depois do empréstimo. Se ela também falhar, a mensagem vai para <code>biblioteca:circulacao:fila:comprovantes:mortas</code>, e o comprovante não sai mais sozinho. Veja a mensagem lá com <code>XRANGE biblioteca:circulacao:fila:comprovantes:mortas - +</code>, como no passo 06 do roteiro. Reprocessá-la é a pergunta 4 do passo 07.</div>
+</div>
+
+<div class="step "><h3>A mesma mensagem duas vezes</h3>
+<p>Publique à mão, de novo, a mensagem de um empréstimo cujo comprovante já saiu (troque o 1 pelo id dele):</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c27">copiar</button></div></div><pre class="cb-body" id="c27"><code>echo '{"loanId":1}' | docker compose -f infra/compose.yaml exec -T fila redis-cli -x XADD biblioteca:circulacao:fila:comprovantes '*' dados</code></pre></div>
+<p>O <code>-x</code> faz o <code>redis-cli</code> ler o último argumento, a mensagem, da entrada padrão, e o <code>-T</code> deixa o <code>docker compose</code> repassá-la. Pela entrada padrão, as aspas do JSON chegam intactas; como argumento, o Windows PowerShell 5 as engoliria.</p>
+<div class="cb cb-out"><div class="cb-bar"><span class="cb-lang">log do worker</span></div><pre class="cb-body" id="c28"><code>worker-1  | Comprovante do empréstimo 1: já enviado</code></pre></div>
+<p>Nenhum e-mail novo na caixa. É o que acontece quando a fila entrega uma mensagem pela segunda vez, depois que um worker caiu entre o envio e o <code>XACK</code>.</p>
+</div>
+</div>
+
+<div class="fase-head" id="passo-07"><div class="fase-n">07</div><div class="fase-t"><h2>Para discutir</h2></div></div>
+<div class="fase-body">
+<div class="step "><h3>Responda no fim do arquivo de testes, em comentário, ou leve para a discussão em sala</h3>
+<div class="refl">
+<p><strong>1. Marcar antes ou depois.</strong> Na sua implementação, o que o leitor recebe se o processo morrer entre o envio do e-mail e a gravação de <code>comprovante_enviado_em</code>? E na ordem inversa? Para um comprovante, o que é pior: um e-mail repetido ou nenhum? A resposta mudaria se, em vez de um comprovante, a tarefa fosse uma cobrança no cartão?</p>
+<p><strong>2. O outbox.</strong> Em <em>O que ficou de fora</em>, o <a href="../saas-evolution/saas-fase04.html#fechamento">roteiro da fase 04</a> diz que o outbox entra "quando aparecer a primeira tarefa que não dá para recalcular, como um e-mail". O comprovante é essa tarefa. Se a aplicação cair entre o COMMIT do empréstimo e o <code>XADD</code>, o que acontece? A coluna <code>comprovante_enviado_em</code>, nula, ajudaria a achar esses empréstimos? Como seria uma varredura que republica os comprovantes que faltam, e que cuidado ela precisa ter com os empréstimos registrados antes desta atividade, que também têm a coluna nula?</p>
+<p><strong>3. Dois workers, a mesma mensagem.</strong> Com <code>--scale worker=2</code>, o grupo entrega cada mensagem a um worker só. Mas a fila entrega de novo a mensagem que ficou 10 s sem <code>XACK</code>, mesmo que o primeiro worker ainda esteja trabalhando nela. O que impede dois e-mails, na sua implementação, quando o provedor demora mais de 10 s? Por que o adaptador do Mailpit desiste em 5 s? Um <code>UPDATE … WHERE comprovante_enviado_em IS NULL RETURNING id</code> antes do envio resolveria? O que ele custa quando o envio falha?</p>
+<p><strong>4. A fila de mortas.</strong> O Mailpit ficou fora do ar por dois minutos, e três comprovantes foram para <code>…:mortas</code>. Como você os reprocessaria, e por que é seguro reprocessar? E a mensagem <code>{"loanId":"7"}</code>: faz sentido reprocessá-la? Quem deveria saber que a fila de mortas cresceu, e como (pense no "vigie o <code>lag</code> e a fila de mortas" do roteiro)?</p>
+<p><strong>5. O e-mail é dado pessoal.</strong> O log do worker traz o id do empréstimo, e não o endereço. Por onde mais o e-mail do leitor passa neste fluxo, e onde ele fica guardado depois (pense na fila, na fila de mortas, no Mailpit, num provedor de verdade e nos backups)? Além de evitar o endereço desatualizado do item 2 do passo 04, o que a mensagem com só o id protege?</p>
+</div>
+</div>
+</div>
+
+<div class="fase-head" id="passo-08"><div class="fase-n">08</div><div class="fase-t"><h2>Entrega</h2></div></div>
+<div class="fase-body">
+<div class="step commit"><h3>Commit e push</h3>
+<p>Na raiz do projeto. Confira no <code>git status</code> que só entram os arquivos da atividade. No segundo <code>-m</code>, troque o texto pela sua justificativa da ordem entre enviar e marcar (item 4 do passo 04):</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c29">copiar</button></div></div><pre class="cb-body" id="c29"><code>git status
+git add -A
+git commit -m "feat: mandar o comprovante do empréstimo pela fila (UC19)" -m "A ordem entre enviar e marcar, e por quê."
+git push -u origin atividade-fila-comprovante</code></pre></div>
+<p>Se o <code>push</code> for negado, volte ao passo 00: provavelmente o <code>gh auth status</code> mostra outra conta, ou o <code>origin</code> ainda aponta para o repositório do professor.</p>
+</div>
+
+<div class="step "><h3>O link da entrega</h3>
+<p>Gere o endereço da branch no seu fork (troque <code>seu-usuario</code> pelo usuário que o <code>gh auth status</code> mostrou):</p>
+<div class="cb"><div class="cb-bar"><span class="cb-lang">terminal</span><span class="cb-note">PowerShell</span><div class="cb-actions"><button class="cp" data-code="c30">copiar</button></div></div><pre class="cb-body" id="c30"><code>gh browse --no-browser --repo seu-usuario/biblioteca-tutorial --branch atividade-fila-comprovante</code></pre></div>
+<p>Abra o link para conferir que o código está lá e envie-o ao professor.</p>
+</div>
+
+<div class="step "><h3>Problemas comuns</h3>
+<div class="tw"><table>
+<tr><th>Sintoma</th><th>Causa e solução</th></tr>
+<tr><td><code>fatal: 'upstream' does not appear to be a git repository</code></td><td>Falta o remoto <code>upstream</code>. Veja a tabela do passo 00.</td></tr>
+<tr><td><code>fatal: invalid reference: upstream/saas-evolution/fase04</code></td><td>Faltou o <code>git fetch upstream</code> antes do <code>git switch</code>.</td></tr>
+<tr><td><code>error: Your local changes … would be overwritten</code> no <code>git switch</code></td><td>Há alterações sem commit. Faça o commit delas na branch atual e tente de novo.</td></tr>
+<tr><td><code>toca a chave Redis "acervo:*", que pertence a catalog</code></td><td>O stream, copiado da indexação, ainda começa pelo trecho do Acervo. Releia o item 1 do passo 04.</td></tr>
+<tr><td><code>toca a chave Redis "circulacao:*", que pertence a nenhum módulo</code></td><td>O <code>KEY_OWNERS</code> ainda não conhece o dono da chave nova. Releia o item 1 do passo 04.</td></tr>
+<tr><td><code>toca a tabela "leitores", que pertence a readers</code></td><td>A Circulação leu o e-mail direto da tabela de Leitores. Releia o item 2 do passo 04.</td></tr>
+<tr><td><code>Property 'email' is missing in type … 'ReaderSummary'</code></td><td>O dublê em <code>tests/circulation-doubles.ts</code> ainda não tem o e-mail. Releia o item 2 do passo 04.</td></tr>
+<tr><td><code>NotImplemented: Comprovante (UC19) ainda não implementado: …</code></td><td>A função citada ainda lança o erro do esqueleto. Troque o <code>throw</code> pela implementação.</td></tr>
+<tr><td><code>this test is marked as todo but passes</code></td><td>Com <code>--todo</code>, o teste já passa. Troque <code>test.todo</code> por <code>test</code>.</td></tr>
+<tr><td>135 pass e 17 todo depois de implementar</td><td>Os testes continuam como <code>test.todo</code>, e por isso não rodaram. Veja o passo 05.</td></tr>
+<tr><td>Teste 2: <code>Expected length: 1</code> e <code>Received length: 0</code></td><td>A rota não pede o comprovante, ou pede dentro do <code>inTransaction</code>, antes do COMMIT. Releia o item 3 do passo 04.</td></tr>
+<tr><td>Testes 6 ou 7: uma data em <code>Received</code>, onde se esperava <code>null</code></td><td>Um envio que falhou deixou a coluna preenchida. Releia o item 4 do passo 04.</td></tr>
+<tr><td>O comprovante não chega, e o log do worker não mostra <code>Comprovante do empréstimo …</code></td><td>O worker não atende a fila nova (item 5 do passo 04), ou o app e o worker rodam a versão anterior: refaça o <code>docker compose -f infra/compose.yaml up -d --build</code>.</td></tr>
+<tr><td>O comprovante não chegou nem depois de o Mailpit voltar</td><td>Passaram as 5 tentativas, e a mensagem foi para a fila de mortas. Veja o passo 06.</td></tr>
+<tr><td>A caixa do Mailpit esvaziou</td><td>O Mailpit foi parado ou recriado: ele não tem volume.</td></tr>
+<tr><td>O <code>up</code> falha dizendo que a porta 8025 está ocupada</td><td>Outro programa usa a porta 8025 (outro Mailpit, por exemplo). Feche-o, ou troque o 8025 da esquerda em <code>ports</code>, no serviço <code>mailpit</code> do compose, e abra a caixa na porta nova.</td></tr>
+<tr><td>Testes de módulos que você não tocou falham com <code>[5000ms]</code> (tempo esgotado)</td><td>Outra execução da suíte usando o mesmo banco de testes ao mesmo tempo, ou o computador sobrecarregado (o primeiro <code>--build</code> pesa). Espere terminar e rode de novo, uma suíte por vez.</td></tr>
+<tr><td><code>error during connect</code> / <code>Cannot connect to the Docker daemon</code></td><td>O Docker Desktop não está aberto.</td></tr>
+</table></div>
+</div>
+</div>
+</main>
+</div>
+<script>
+document.addEventListener("click", (e) => {
+  const cp = e.target.closest(".cp");
+  if (cp) {
+    const el = document.getElementById(cp.dataset.code);
+    navigator.clipboard.writeText(el.innerText).then(() => {
+      const t = cp.textContent; cp.textContent = "copiado!"; cp.classList.add("done");
+      setTimeout(() => { cp.textContent = t; cp.classList.remove("done"); }, 1400);
+    });
+  }
+});
+</script>
+</body>
+</html>
